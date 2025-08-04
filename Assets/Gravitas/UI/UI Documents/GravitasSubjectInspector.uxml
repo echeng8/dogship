@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Gravitas/UI/Styles/GravitasSubjectInspector.uss?fileID=7433441132597879392&amp;guid=bad1b7bcb80c5c4b89fb0794aea8ae71&amp;type=3#GravitasSubjectInspector" />
+    <Style src="project://database/Assets/Gravitas/UI/Styles/InspectorWarning.uss?fileID=7433441132597879392&amp;guid=79c531256a9e45b71986227eeaff8215&amp;type=3#InspectorWarning" />
+    <ui:VisualElement name="gravitas-subject-inspector-content" style="flex-grow: 1; margin-left: 5px; margin-right: 5px;">
+        <ui:Foldout name="inspector-warning-content-foldout" view-data-key="gravitas-field-warning-foldout" style="display: none;">
+            <ui:VisualElement name="inspector-warning-content-element" style="flex-direction: row; background-color: rgb(41, 41, 41); border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgb(36, 36, 36); border-bottom-color: rgb(36, 36, 36); margin-left: -16px; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: space-between;">
+                <ui:VisualElement name="warning-icon-element" class="warning-icon_warning" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="warning-text-label" style="-unity-text-align: middle-left; flex-grow: 1; white-space: normal; padding-right: 0; padding-left: 0; flex-shrink: 1;" />
+            </ui:VisualElement>
+        </ui:Foldout>
+        <uie:FloatField label="Field Change Delay" value="42.2" name="field-change-delay-field" binding-path="fieldChangeDelay" tabindex="0" style="padding-top: 8px; padding-bottom: 12px;" />
+        <ui:Foldout text="Orientation Settings" name="orientation-settings-foldout" view-data-key="gravitas-subject-orientation-settings-foldout" style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; background-color: rgb(64, 64, 64);">
+            <ui:Toggle label="Will Re-Orient" name="will-reorient-toggle" tooltip="If enabled, will attempt to return the subject to the global up axis after a defined delay" binding-path="willReorient" />
+            <uie:FloatField label="Reorient Delay" value="42.2" binding-path="reorientDelay" name="reorient-delay-field" style="margin-left: 20px; margin-right: 10px;" />
+            <ui:Toggle label="Auto-Orient" name="auto-orient-toggle" tooltip="If enabled, will attempt to orient the subject to the force acting on it" binding-path="autoOrient" />
+            <uie:FloatField label="Orient Speed" value="42.2" name="orient-speed-field" tooltip="Controls how quickly the subject orients in both auto-orienting and re-orienting" binding-path="orientSpeed" style="margin-left: 20px; margin-right: 10px;" />
+        </ui:Foldout>
+    </ui:VisualElement>
+</ui:UXML>

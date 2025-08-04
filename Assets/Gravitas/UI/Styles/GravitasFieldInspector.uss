@@ -1,0 +1,19 @@
+.boundary-collider-field {
+    flex-direction: column;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.boundary-collider-field > .unity-label {
+    -unity-text-align: middle-center;
+    font-size: 12px;
+    -unity-font-style: bold;
+    margin-bottom: 5px;
+}
+
+.unity-foldout__text {
+    font-size: 12px;
+    -unity-font-style: bold;
+}

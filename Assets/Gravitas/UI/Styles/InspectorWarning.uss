@@ -1,0 +1,21 @@
+.warning-icon_error {
+    background-image: url("../Styles/Icons/Error Icon.png");
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.warning-icon_warning {
+    background-image: url("../Styles/Icons/Warning Icon.png");
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}

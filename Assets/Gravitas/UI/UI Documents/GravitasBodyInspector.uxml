@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Gravitas/UI/Styles/GravitasSubjectInspector.uss?fileID=7433441132597879392&amp;guid=bad1b7bcb80c5c4b89fb0794aea8ae71&amp;type=3#GravitasSubjectInspector" />
+    <Style src="project://database/Assets/Gravitas/UI/Styles/InspectorWarning.uss?fileID=7433441132597879392&amp;guid=79c531256a9e45b71986227eeaff8215&amp;type=3#InspectorWarning" />
+    <ui:VisualElement name="gravitas-body-inspector-content" style="flex-grow: 1; margin-left: 5px; margin-right: 5px;">
+        <ui:Foldout name="inspector-warning-content-foldout" view-data-key="gravitas-field-warning-foldout" style="display: none;">
+            <ui:VisualElement name="inspector-warning-content-element" style="flex-direction: row; background-color: rgb(41, 41, 41); border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgb(36, 36, 36); border-bottom-color: rgb(36, 36, 36); margin-left: -16px; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: space-between;">
+                <ui:VisualElement name="warning-icon-element" class="warning-icon_warning" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="warning-text-label" style="-unity-text-align: middle-left; flex-grow: 1; white-space: normal; padding-right: 0; padding-left: 0; flex-shrink: 1;" />
+            </ui:VisualElement>
+        </ui:Foldout>
+        <uie:ObjectField label="Body Rigidbody" name="body-rigidbody-field" type="UnityEngine.Rigidbody, UnityEngine" tooltip="Required reference to the rigidbody driving this body." binding-path="gravitasBodyRigidbody" class="subject-rigidbody-field" style="background-color: rgb(64, 64, 64); border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; margin-left: 0; margin-right: 0; margin-bottom: 5px;" />
+        <ui:VisualElement name="body-colliders-content">
+            <ui:ListView focusable="true" name="body-colliders-list-view" show-bound-collection-size="false" show-add-remove-footer="true" reorderable="true" reorder-mode="Animated" header-title="Body Colliders" show-foldout-header="true" show-border="true" tooltip="A collection of colliders that should be created as part of this body when proxied." binding-path="bodyColliders" view-data-key="gravitas-subject-colliders-list-view" style="margin-top: 5px; margin-bottom: 5px;" />
+            <ui:Button text="Auto-Find" display-tooltip-when-elided="true" name="auto-find-colliders-button" style="position: absolute; left: 70%; top: 2px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Gravitas/UI/Styles/GravitasFieldInspector.uss?fileID=7433441132597879392&amp;guid=801a755b7555f35a5a8b977144ad2e2e&amp;type=3#GravitasFieldInspector" />
+    <Style src="project://database/Assets/Gravitas/UI/Styles/InspectorWarning.uss?fileID=7433441132597879392&amp;guid=79c531256a9e45b71986227eeaff8215&amp;type=3#InspectorWarning" />
+    <ui:VisualElement name="gravitas-field-inspector-content" style="flex-grow: 1; margin-left: 5px; margin-right: 5px;">
+        <ui:Foldout name="inspector-warning-content-foldout" view-data-key="gravitas-field-warning-foldout" style="display: none;">
+            <ui:VisualElement name="inspector-warning-content-element" style="flex-direction: row; background-color: rgb(41, 41, 41); border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgb(36, 36, 36); border-bottom-color: rgb(36, 36, 36); margin-left: -16px; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: space-between;">
+                <ui:VisualElement name="warning-icon-element" class="warning-icon_warning" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="warning-text-label" style="-unity-text-align: middle-left; flex-grow: 1; white-space: normal; padding-right: 4px; padding-left: 4px; flex-shrink: 1; padding-top: 4px; padding-bottom: 4px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+            </ui:VisualElement>
+        </ui:Foldout>
+        <uie:ObjectField label="Boundary Collider" name="boundary-collider-field" type="UnityEngine.Collider, UnityEngine" tooltip="Defines the boundaries of the field that registers subject collisions" binding-path="boundaryCollider" class="boundary-collider-field" style="margin-bottom: 10px; background-color: rgb(64, 64, 64); border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; margin-left: 5px; margin-right: 5px;" />
+        <ui:Foldout text="Field Settings" name="field-settings-foldout" tooltip="gravitas-field-settings-foldout" style="background-color: rgb(64, 64, 64); margin-bottom: 5px;">
+            <ui:Toggle label="Add Child Colliders" name="add-child-colliders-toggle" tooltip="Controls if colliders that are a child of this field are added when the physics scene is created" binding-path="addChildColliders" />
+            <uie:LayerMaskField label="Field LayerMask" name="field-layermask-field" tooltip="Controls which layers this field will interact with" binding-path="fieldLayerMask" />
+            <uie:IntegerField label="Field Priority" value="42" name="field-priority-field" tooltip="The importance of simulating this field in relation to other fields" binding-path="priority" />
+            <uie:FloatField label="Physics Scene Boundary Scale Factor" value="42.2" binding-path="physicsSceneBoundaryScaleFactor" name="boundary-scale-factor-field" />
+        </ui:Foldout>
+        <ui:Foldout text="Gravity Settings" name="gravity-settings-foldout" view-data-key="gravitas-gravity-settings-foldout" style="flex-grow: 0; margin-top: 5px; background-color: rgb(64, 64, 64); border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+            <uie:FloatField label="Acceleration" value="42.2" name="field-acceleration-field" tooltip="Controls the magnitude of the force vectors applied to subjects" binding-path="acceleration" />
+            <uie:CurveField label="Distance Falloff" name="field-distance-falloff-curve" tooltip="&quot;Controls the factor of distance from the field center affects the resulting force&quot;" binding-path="distanceFalloffCurve" />
+            <uie:EnumField label="Fixed Direction" value="None" name="fixed-direction-field" type="Gravitas.FixedDirection, gravitas-main" tooltip="Specifies a fixed direction overriding all forces applied to subjects" binding-path="fixedDirection" />
+        </ui:Foldout>
+    </ui:VisualElement>
+</ui:UXML>
