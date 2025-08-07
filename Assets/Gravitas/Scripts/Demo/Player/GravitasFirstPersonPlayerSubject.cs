@@ -42,19 +42,32 @@ namespace Gravitas.Demo
             gravitasBody.AngularVelocity = Vector3.zero;
         }
 
+        private bool isCursorLocked = true;
+
         protected override void OnSubjectAwake()
         {
             base.OnSubjectAwake();
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
+            SetCursorState(true);
             Input.ResetInputAxes();
+        }
+
+        private void SetCursorState(bool locked)
+        {
+            isCursorLocked = locked;
+            Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !locked;
         }
 
         protected override void OnSubjectUpdate()
         {
             base.OnSubjectUpdate();
+
+            // Toggle cursor lock with Tab
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                SetCursorState(!isCursorLocked);
+            }
 
             // Reload scene control
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.R))
@@ -66,37 +79,47 @@ namespace Gravitas.Demo
 
             Transform t = gravitasBody.CurrentTransform; // Reference to either the player or the player's proxy transform
 
-            // Movement input processing
-            keyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-            // Player rotating
-            Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-            t.rotation *= Quaternion.AngleAxis(mouseInput.x * turnSpeed, Vector3.up);
-
-            // Camera pitching
-            angleX += -mouseInput.y * turnSpeed;
-
-            if (gravitasBody.IsLanded)
+            if (isCursorLocked)
             {
-                angleX = Mathf.Clamp(angleX, -90f, 90f);
+                // Movement input processing
+                keyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-                if (Input.GetKeyDown(KeyCode.Space)) // Jump input
-                    gravitasBody.Velocity += t.up * jumpForce;
+                // Player rotating
+                Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+                t.rotation *= Quaternion.AngleAxis(mouseInput.x * turnSpeed, Vector3.up);
+
+                // Camera pitching
+                angleX += -mouseInput.y * turnSpeed;
+
+                if (gravitasBody.IsLanded)
+                {
+                    angleX = Mathf.Clamp(angleX, -90f, 90f);
+
+                    if (Input.GetKeyDown(KeyCode.Space)) // Jump input
+                        gravitasBody.Velocity += t.up * jumpForce;
+                }
+
+                playerCamera.transform.localRotation = Quaternion.Euler(angleX, 0, 0);
+
+                // Vertical input
+                if (Input.GetKey(KeyCode.LeftShift))
+                    verticalInput = 1; // Up
+                else if (Input.GetKey(KeyCode.LeftControl))
+                    verticalInput = -1; // Down
+                else
+                    verticalInput = 0; // None
+
+                // Interaction input
+                if (!interact)
+                    interact = Input.GetKeyDown(KeyCode.E);
             }
-
-            playerCamera.transform.localRotation = Quaternion.Euler(angleX, 0, 0);
-
-            // Vertical input
-            if (Input.GetKey(KeyCode.LeftShift))
-                verticalInput = 1; // Up
-            else if (Input.GetKey(KeyCode.LeftControl))
-                verticalInput = -1; // Down
             else
-                verticalInput = 0; // None
-
-            // Interaction input
-            if (!interact)
-                interact = Input.GetKeyDown(KeyCode.E);
+            {
+                // Reset inputs when cursor is not locked
+                keyInput = Vector2.zero;
+                verticalInput = 0;
+                interact = false;
+            }
         }
 
         protected override void OnSubjectFixedUpdate()
@@ -142,10 +165,10 @@ namespace Gravitas.Demo
                     {
                         if (interact)
                         {
-                            #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
                             if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
                                 GravitasDebugLogger.Log($"Taking control of spaceship {spaceshipControls.SpaceshipName}");
-                            #endif
+#endif
 
                             spaceshipControls.InteractWithSpaceshipControls(this);
                             OnInteractionTargetEvent?.Invoke(string.Empty);
@@ -160,10 +183,10 @@ namespace Gravitas.Demo
                     {
                         if (interact)
                         {
-                            #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
                             if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
                                 GravitasDebugLogger.Log($"Switching field direction to {fieldDirectionControl.DirectionName}");
-                            #endif
+#endif
 
                             fieldDirectionControl.SwitchGravity();
                         }
@@ -177,10 +200,10 @@ namespace Gravitas.Demo
                     {
                         if (interact)
                         {
-                            #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
                             if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
                                 GravitasDebugLogger.Log("Resetting spaceship");
-                            #endif
+#endif
 
                             spaceshipResetButton.ResetSpaceship();
                         }
