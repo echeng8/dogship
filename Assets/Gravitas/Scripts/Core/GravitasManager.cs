@@ -101,10 +101,10 @@ namespace Gravitas
                 {
                     fieldsToUpdate.Add(field);
 
-                    #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
                     if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.FieldStartScan))
                         GravitasDebugLogger.Log($"Start scanning field \"{field.name}\"...");
-                    #endif
+#endif
 
                     field.StartScan();
                 }

@@ -1,7 +1,10 @@
 {
     "name": "gravitas-main",
     "rootNamespace": "Gravitas",
-    "references": [],
+    "references": [
+        "GUID:6fca9c0eaa6a14b189136e4611780b56",
+        "GUID:ee1999ff30d5b4c34a4832b9af6201de"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

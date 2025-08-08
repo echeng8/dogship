@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Coherence.Toolkit;
 
 namespace Gravitas
 {
@@ -11,6 +12,8 @@ namespace Gravitas
         public Rigidbody CurrentRigidbody => IsProxied ? currentProxy.ProxyRigidbody : gravitasBodyRigidbody;
         public Rigidbody Rigidbody => gravitasBodyRigidbody;
         public Transform CurrentTransform => IsProxied ? currentProxy.transform : transform;
+        private CoherenceSync _sync;
+
         public Vector3 AngularVelocity
         {
             get
@@ -144,6 +147,8 @@ namespace Gravitas
         /// </summary>
         public virtual void UpdatePosition(Transform fieldTransform)
         {
+            if (!_sync || !_sync.HasStateAuthority) return;
+
             if (IsProxied && fieldTransform)
             {
                 Transform proxyTransform = currentProxy.transform;
@@ -164,7 +169,7 @@ namespace Gravitas
             return bodyColliders?.ToArray();
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         public int CheckBodyErrors(out string errorMessage)
         {
             // 0 = No error
@@ -216,11 +221,12 @@ namespace Gravitas
                 return false;
             }
         }
-        #endif
+#endif
 
         protected void Awake()
         {
             //TODO: error if no rigidbody
+            _sync = GetComponent<CoherenceSync>();
 
             // Warnings against required fields not being assigned
             if (bodyColliders == null || bodyColliders.Count == 0)
