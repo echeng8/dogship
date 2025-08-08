@@ -25,6 +25,17 @@ namespace Gravitas.Demo
         [SerializeField] private float turnSpeed = 5f;
         private bool interact;
 
+        void Start()
+        {
+            Debug.Log($"Initializing player camera. Current camera: {(playerCamera != null ? playerCamera.name : "null")}");
+            if (playerCamera == null)
+            {
+                playerCamera = Camera.main;
+                Debug.Log($"Using main camera: {(playerCamera != null ? playerCamera.name : "null")}");
+                playerCamera.transform.SetParent(transform);
+            }
+        }
+
         /// <summary>
         /// Convenience method to instantly set player position, orientation, and stop all velocity.
         /// </summary>
