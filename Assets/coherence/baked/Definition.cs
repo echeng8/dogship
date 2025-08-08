@@ -20,7 +20,7 @@ namespace Coherence.Generated
 
     public class Definition : IDefinition
     {
-        public const string schemaId = "2df6c3f5be4b05afc407f017cd497d8af3b7185d";
+        public const string schemaId = "6bbe4701fdf4ab226cf1150f9f597d0b8ee71d1a";
         public const uint InternalWorldPosition = 0;
         public const uint InternalWorldOrientation = 1;
         public const uint InternalLocalUserComponent = 2;
@@ -39,6 +39,8 @@ namespace Coherence.Generated
         public const uint InternalScene = 15;
         public const uint InternalAssetId = 16;
         public const uint InternalGenericScale = 17;
+        public const uint Internal_090aa92f766769348b4882a9d6b148e2_3543296725183664748 = 18;
+        public const uint Internal_090aa92f766769348b4882a9d6b148e2_3543296725183664751 = 19;
         public const uint InternalAuthorityRequest = 0;
         public const uint InternalAuthorityTransfer = 1;
         public const uint InternalQuerySynced = 2;
@@ -66,6 +68,8 @@ namespace Coherence.Generated
             { 15, "Scene" },
             { 16, "AssetId" },
             { 17, "GenericScale" },
+            { 18, "_090aa92f766769348b4882a9d6b148e2_3543296725183664748" },
+            { 19, "_090aa92f766769348b4882a9d6b148e2_3543296725183664751" },
         };
 
         public static string ComponentNameForTypeId(uint typeId)
@@ -133,6 +137,10 @@ namespace Coherence.Generated
                     return AssetId.Deserialize(referenceSimulationFrame, inProtocolStream);
                 case InternalGenericScale:
                     return GenericScale.Deserialize(referenceSimulationFrame, inProtocolStream);
+                case Internal_090aa92f766769348b4882a9d6b148e2_3543296725183664748:
+                    return _090aa92f766769348b4882a9d6b148e2_3543296725183664748.Deserialize(referenceSimulationFrame, inProtocolStream);
+                case Internal_090aa92f766769348b4882a9d6b148e2_3543296725183664751:
+                    return _090aa92f766769348b4882a9d6b148e2_3543296725183664751.Deserialize(referenceSimulationFrame, inProtocolStream);
                 default:
                     throw new System.ArgumentOutOfRangeException(nameof(componentType),
                         $"Missing serialization implementation for a component: {componentType}");
@@ -180,6 +188,10 @@ namespace Coherence.Generated
                     return AssetId.Serialize((AssetId)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
                 case InternalGenericScale:
                     return GenericScale.Serialize((GenericScale)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
+                case Internal_090aa92f766769348b4882a9d6b148e2_3543296725183664748:
+                    return _090aa92f766769348b4882a9d6b148e2_3543296725183664748.Serialize((_090aa92f766769348b4882a9d6b148e2_3543296725183664748)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
+                case Internal_090aa92f766769348b4882a9d6b148e2_3543296725183664751:
+                    return _090aa92f766769348b4882a9d6b148e2_3543296725183664751.Serialize((_090aa92f766769348b4882a9d6b148e2_3543296725183664751)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
                 default:
                     logger.Error(Coherence.Log.Error.DefinitionMissingComponentImplementation, ("component", data.GetComponentType()));
                     return 0;

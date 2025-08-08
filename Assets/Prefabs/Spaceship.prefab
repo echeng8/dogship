@@ -608,8 +608,8 @@ MonoBehaviour:
     - component: {fileID: 7282666807106044328}
       lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
-  interpolationLocation: 1
-  RigidbodyUpdateMode: 0
+  interpolationLocation: -1
+  RigidbodyUpdateMode: 1
   bakedScriptType: Coherence.Generated.CoherenceSync_006c748d7f8085f4691d554734b27fe0,
     Assembly-CSharp
   isGlobal: 0

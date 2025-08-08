@@ -1,0 +1,10 @@
+component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "18"]
+  AngularVelocity Vector3 [compression "None"]
+  Velocity Vector3 [compression "None"]
+  IsLanded Bool [bits "1"]
+  enabled Bool [bits "1"]
+
+component _090aa92f766769348b4882a9d6b148e2_3543296725183664751 [id "19"]
+  velocity Vector3 [compression "None"]
+  angularVelocity Vector3 [compression "None"]
+

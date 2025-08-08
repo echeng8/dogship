@@ -344,8 +344,8 @@ MonoBehaviour:
     - component: {fileID: 3136628078279194171}
       lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
-  interpolationLocation: 1
-  RigidbodyUpdateMode: 0
+  interpolationLocation: -1
+  RigidbodyUpdateMode: 1
   bakedScriptType: Coherence.Generated.CoherenceSync_4d7f86b504afd6f419f3d65f80c82f8f,
     Assembly-CSharp
   isGlobal: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   assetVersion: 
   coherenceTag: 
   componentActions:
-  - rid: 8677872618237329511
+  - rid: 8677872632528109568
   floatingOriginMode: 0
   floatingOriginParentedMode: 1
   references:
@@ -464,7 +464,7 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 8677872618237329511
+    - rid: 8677872632528109568
       type: {class: KinematicRigidbodyComponentAction, ns: Coherence.Toolkit.ComponentActions, asm: Coherence.Toolkit}
       data:
         component: {fileID: 3136628078399885760}

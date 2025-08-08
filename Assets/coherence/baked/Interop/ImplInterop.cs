@@ -42,6 +42,8 @@ namespace Coherence.Generated
                 case 15: return Scene.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 16: return AssetId.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 17: return GenericScale.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 18: return _090aa92f766769348b4882a9d6b148e2_3543296725183664748.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 19: return _090aa92f766769348b4882a9d6b148e2_3543296725183664751.FromInterop(data, dataSize, simFrames, simFramesCount);
             }
 
             throw new ArgumentException($"Unkown component type {type}", nameof(type));
@@ -251,6 +253,32 @@ namespace Coherence.Generated
                     val.value = orig.value;
 
                     updater.UpdateComponent(entity, componentType, val, 12, component.FieldsMask, component.StoppedMask, frames);
+
+                    return;
+                }
+                case 18:
+                {
+                    var orig = (_090aa92f766769348b4882a9d6b148e2_3543296725183664748)component;
+                    var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664748.Interop();
+
+                    val.AngularVelocity = orig.AngularVelocity;
+                    val.Velocity = orig.Velocity;
+                    val.IsLanded = orig.IsLanded ? (System.Byte)1 : (System.Byte)0;
+                    val.enabled = orig.enabled ? (System.Byte)1 : (System.Byte)0;
+
+                    updater.UpdateComponent(entity, componentType, val, 26, component.FieldsMask, component.StoppedMask, frames);
+
+                    return;
+                }
+                case 19:
+                {
+                    var orig = (_090aa92f766769348b4882a9d6b148e2_3543296725183664751)component;
+                    var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664751.Interop();
+
+                    val.velocity = orig.velocity;
+                    val.angularVelocity = orig.angularVelocity;
+
+                    updater.UpdateComponent(entity, componentType, val, 24, component.FieldsMask, component.StoppedMask, frames);
 
                     return;
                 }
