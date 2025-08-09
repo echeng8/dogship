@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using Coherence.Toolkit;
 namespace Gravitas.Demo
 {
     /// <summary>Implementation of a first person player controller that interacts with Gravitas systems.</summary>
@@ -24,11 +24,12 @@ namespace Gravitas.Demo
         [SerializeField] private float moveSpeed = 20f;
         [SerializeField] private float turnSpeed = 5f;
         private bool interact;
+        private CoherenceSync _sync;
 
         void Start()
         {
             Debug.Log($"Initializing player camera. Current camera: {(playerCamera != null ? playerCamera.name : "null")}");
-            if (playerCamera == null)
+            if (playerCamera == null && _sync.HasInputAuthority)
             {
                 playerCamera = Camera.main;
                 Debug.Log($"Using main camera: {(playerCamera != null ? playerCamera.name : "null")}");
@@ -57,10 +58,15 @@ namespace Gravitas.Demo
 
         protected override void OnSubjectAwake()
         {
+            _sync = GetComponent<CoherenceSync>();
+
             base.OnSubjectAwake();
 
-            SetCursorState(true);
-            Input.ResetInputAxes();
+            if (_sync.HasInputAuthority)
+            {
+                SetCursorState(true);
+                Input.ResetInputAxes();
+            }
         }
 
         private void SetCursorState(bool locked)
@@ -73,6 +79,9 @@ namespace Gravitas.Demo
         protected override void OnSubjectUpdate()
         {
             base.OnSubjectUpdate();
+
+            if (!_sync.HasInputAuthority)
+                return;
 
             // Toggle cursor lock with Tab
             if (Input.GetKeyDown(KeyCode.Tab))
@@ -136,6 +145,9 @@ namespace Gravitas.Demo
         protected override void OnSubjectFixedUpdate()
         {
             base.OnSubjectFixedUpdate();
+
+            if (!_sync.HasInputAuthority)
+                return;
 
             Transform t = gravitasBody.CurrentTransform;
 

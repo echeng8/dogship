@@ -5143,8 +5143,7 @@ MonoBehaviour:
   coherenceUUID: 
   assetVersion: 
   coherenceTag: 
-  componentActions:
-  - rid: 8677872618237329432
+  componentActions: []
   floatingOriginMode: 0
   floatingOriginParentedMode: 1
   references:
@@ -5197,10 +5196,6 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 8677872618237329432
-      type: {class: DisableBehaviourComponentAction, ns: Coherence.Toolkit.ComponentActions, asm: Coherence.Toolkit}
-      data:
-        component: {fileID: 3543296725183664750}
     - rid: 8677872618237329433
       type: {class: RotationBinding, ns: Coherence.Toolkit.Bindings.TransformBindings, asm: Coherence.Toolkit}
       data:

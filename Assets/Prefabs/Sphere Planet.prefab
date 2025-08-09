@@ -365,8 +365,7 @@ MonoBehaviour:
   coherenceUUID: 
   assetVersion: 
   coherenceTag: 
-  componentActions:
-  - rid: 8677872632528109568
+  componentActions: []
   floatingOriginMode: 0
   floatingOriginParentedMode: 1
   references:
@@ -464,9 +463,3 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 8677872632528109568
-      type: {class: KinematicRigidbodyComponentAction, ns: Coherence.Toolkit.ComponentActions, asm: Coherence.Toolkit}
-      data:
-        component: {fileID: 3136628078399885760}
-        enableOnRemote: 1
-        disableOnAuthority: 1
