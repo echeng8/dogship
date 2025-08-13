@@ -42,12 +42,12 @@ namespace Coherence.Generated
         {
             if (dataSize != 28) {
                 throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 28) " +
-                    "for component with ID 19");
+                    "for component with ID 21");
             }
 
             if (simFramesCount != 0) {
                 throw new Exception($"Given simFrames size is not equal to the expected length. ({simFramesCount} != 0) " +
-                    "for component with ID 19");
+                    "for component with ID 21");
             }
 
             var orig = new _006c748d7f8085f4691d554734b27fe0_8445149378463969736();
@@ -70,7 +70,7 @@ namespace Coherence.Generated
 
         public uint FieldsMask { get; set; }
         public uint StoppedMask { get; set; }
-        public uint GetComponentType() => 19;
+        public uint GetComponentType() => 21;
         public int PriorityLevel() => 100;
         public const int order = 0;
         public uint InitialFieldsMask() => 0b00000000000000000000000000000011;

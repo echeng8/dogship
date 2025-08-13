@@ -1,11 +1,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Coherence.Toolkit;
 
 namespace Gravitas
 {
-    /// <summary>Implementation of a subject that can enter and exit Gravitas fields.</summary>
-        [AddComponentMenu("Gravitas/Gravitas Subject")]
+    /// <summary>
+    /// Implementation of a subject that can enter and exit Gravitas fields.
+    /// 
+    /// NETWORKING:
+    /// This class supports Coherence networking to synchronize the current field across all clients.
+    /// - The client with authority over the subject controls which field it's in
+    /// - Field changes are synchronized via the [Sync] networkedCurrentFieldId property
+    /// - Non-authoritative clients will automatically match their subject's field to the networked field
+    /// - Requires a CoherenceSync component on the GameObject for networking support
+    /// </summary>
+    [AddComponentMenu("Gravitas/Gravitas Subject")]
     [DisallowMultipleComponent]
     public class GravitasSubject : MonoBehaviour, IGravitasSubject
     {
@@ -27,8 +37,13 @@ namespace Gravitas
 
         protected IGravitasBody gravitasBody;
 
+        // Networking: Coherence sync for current field
+        private CoherenceSync coherenceSync;
+        [Sync] public string networkedCurrentFieldId = "";
+
         private readonly HashSet<GravitasFieldChangeRequest> fieldChangeRequests = new HashSet<GravitasFieldChangeRequest>();
-        [SerializeField] private float
+        [SerializeField]
+        private float
             fieldChangeDelay = 0.5f,
             orientSpeed = 80f,
             reorientDelay = 2f;
@@ -51,27 +66,34 @@ namespace Gravitas
         {
             if (field == null) { return; }
 
-            #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
             if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.SubjectEnterExitVelocity))
                 GravitasDebugLogger.Log($"\"{name}\" Enter Velocity: {gravitasBody.Velocity} Enter Angular Velocity: {gravitasBody.AngularVelocity}");
-            #endif
+#endif
 
             CurrentField = field;
+            willReorient = autoOrient && CurrentField.FixedDirection != FixedDirection.None;
 
             OnEnterField?.Invoke(field);
 
             isChangingField = false;
             fieldChangeTimer = 0;
+
+            // Update networked field if we have authority
+            if (HasAuthorityOverSubject())
+            {
+                UpdateNetworkedField();
+            }
         }
 
         public virtual void ExitField(IGravitasField field)
         {
             if (field == null) { return; }
 
-            #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
             if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.SubjectEnterExitVelocity))
                 GravitasDebugLogger.Log($"\"{name}\" Exit Velocity: {gravitasBody.Velocity} Exit Angular Velocity: {gravitasBody.AngularVelocity}");
-            #endif
+#endif
 
             bool foundNewField = CheckPositionForNewField(out IGravitasField newField);
 
@@ -81,6 +103,12 @@ namespace Gravitas
 
             isChangingField = false;
             fieldChangeTimer = 0;
+
+            // Update networked field if we have authority
+            if (HasAuthorityOverSubject())
+            {
+                UpdateNetworkedField();
+            }
 
             // Attempt move to different field
             if (foundNewField && !fieldChangeRequests.Contains(new GravitasFieldChangeRequest(newField)))
@@ -101,6 +129,12 @@ namespace Gravitas
 
                 return;
             }
+
+            // Get CoherenceSync component for networking
+            if (!TryGetComponent(out coherenceSync))
+            {
+                Debug.LogWarning($@"Gravitas: No CoherenceSync component found on subject ""{gameObject.name}"". Field changes will not be networked.");
+            }
         }
 
         protected virtual void OnSubjectUpdate()
@@ -114,9 +148,12 @@ namespace Gravitas
                 gravitasBody.Orient(Vector3.up, orientSpeed);
             }
 
+            // Update networked field if we have authority and field has changed
+            UpdateNetworkedField();
+
             if (!isChangingField)
             {
-                if (!CanChangeField) // Updating field change timer
+                if (!CanChangeField)
                 {
                     fieldChangeTimer += Time.deltaTime;
                 }
@@ -129,6 +166,104 @@ namespace Gravitas
         }
 
         protected virtual void OnSubjectFixedUpdate() { }
+
+        /// <summary>
+        /// Updates the networked field ID if this client has authority over the subject
+        /// </summary>
+        protected virtual void UpdateNetworkedField()
+        {
+            // Only the client with authority can update the field
+            if (coherenceSync != null && HasAuthorityOverSubject())
+            {
+                string currentFieldId = GetCurrentFieldId();
+                if (networkedCurrentFieldId != currentFieldId)
+                {
+                    networkedCurrentFieldId = currentFieldId;
+                }
+            }
+            else
+            {
+                // If we don't have authority, apply the networked field from the authoritative client
+                ApplyNetworkedField();
+            }
+        }
+
+        /// <summary>
+        /// Checks if this client has authority over the subject
+        /// </summary>
+        protected virtual bool HasAuthorityOverSubject()
+        {
+            if (coherenceSync == null) return true; // No networking, assume local authority
+
+            // In coherence, check if we have state authority over this entity
+            return coherenceSync.HasStateAuthority;
+        }
+
+        /// <summary>
+        /// Gets the unique ID of the current field, or empty string if no field
+        /// </summary>
+        protected virtual string GetCurrentFieldId()
+        {
+            if (CurrentField?.GameObject == null) return "";
+
+            // Try to get the CoherenceSync component from the field
+            if (CurrentField.GameObject.TryGetComponent<CoherenceSync>(out var fieldSync))
+            {
+                // Use the entity ID from coherence as the unique identifier
+                // In Coherence, each networked object has a unique entity ID
+                return fieldSync.ManualUniqueId;
+            }
+
+            // Fallback to instance ID if no CoherenceSync found
+            print("Error: No CoherenceSync found on field");
+            return CurrentField.GameObject.GetInstanceID().ToString();
+        }
+
+        /// <summary>
+        /// Applies the field from the network if we don't have authority
+        /// </summary>
+        protected virtual void ApplyNetworkedField()
+        {
+            if (string.IsNullOrEmpty(networkedCurrentFieldId))
+            {
+                // No field set over network
+                if (CurrentField != null)
+                {
+                    // Exit current field
+                    CurrentField.DestroySubjectFromField(this);
+                }
+                return;
+            }
+
+            // Find the field with the networked ID
+            IGravitasField targetField = FindFieldByNetworkId(networkedCurrentFieldId);
+
+            if (targetField != null && targetField != CurrentField)
+            {
+                // Switch to the networked field
+                targetField.EnqueueSubjectChange(this, true);
+            }
+        }
+
+        /// <summary>
+        /// Finds a field by its network ID (CoherenceSync UUID or instance ID)
+        /// </summary>
+        protected virtual IGravitasField FindFieldByNetworkId(string networkId)
+        {
+            // Search all active GravitasField components for matching ID
+            foreach (var field in FindObjectsOfType<GravitasField>())
+            {
+                if (field.GameObject.TryGetComponent<CoherenceSync>(out var fieldSync))
+                {
+                    // Compare using the same approach as GetCurrentFieldId()
+                    if (fieldSync.ManualUniqueId == networkId)
+                        return field;
+                }
+            }
+
+            Debug.LogError($"No field found with network ID: {networkId}");
+            return null;
+        }
 
         protected virtual void ProcessFieldChangeRequests(in HashSet<GravitasFieldChangeRequest> requests)
         {
@@ -149,11 +284,25 @@ namespace Gravitas
                 }
 
                 IGravitasField newField = selectedRequest.field;
+
+                // Only process field changes if we have authority
                 if (newField != null && (CurrentField == null || newField.Priority > CurrentField.Priority))
                 {
-                    newField.EnqueueSubjectChange(this, true);
-
-                    isChangingField = true;
+                    // Check authority before changing fields
+                    if (HasAuthorityOverSubject())
+                    {
+                        newField.EnqueueSubjectChange(this, true);
+                        isChangingField = true;
+                    }
+                    else
+                    {
+                        // If we don't have authority, don't change fields locally
+                        // The authoritative client will handle the change and sync it
+#if GRAVITAS_LOGGING
+                        if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.FieldChanging))
+                            GravitasDebugLogger.Log($"Subject \"{gameObject.name}\" attempted field change without authority - ignoring");
+#endif
+                    }
                 }
             }
         }

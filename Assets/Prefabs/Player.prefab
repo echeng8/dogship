@@ -5016,6 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1bbecc8f370129c92b2b03a3790293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkedCurrentFieldId: 
   fieldChangeDelay: 0.5
   orientSpeed: 80
   reorientDelay: 2.5
@@ -5141,6 +5142,7 @@ MonoBehaviour:
   - rid: 8677872632528109589
   - rid: 8677872723473727626
   - rid: 8677872723473727627
+  - rid: 8677872745804464162
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -5600,6 +5602,51 @@ MonoBehaviour:
           rid: -2
         bindingType:
           assemblyQualifiedName: Coherence.Toolkit.Bindings.ValueBindings.QuaternionBinding,
+            Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
+    - rid: 8677872745804464162
+      type: {class: StringBinding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8677872745804464163
+        routing: 0
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: 32c78821c88448b6816ce292ef521c5c
+        archetypeData:
+          type: 5
+          minRange: 0
+          maxRange: 0
+          sampleRate: 20
+          floatCompression: 0
+          fields:
+          - type: 5
+            bits: 6
+            precision: 0
+            floatCompression: 0
+        unityComponent: {fileID: 3543296725183664750}
+        coherenceSync: {fileID: 2683227246358131983}
+        interpolationSettings: {fileID: 0}
+    - rid: 8677872745804464163
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: networkedCurrentFieldId
+        monoAssemblyType: System.String, mscorlib
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 1
+        valueSyncCallbackName: 
+        memberType: 4
+        parameterAssemblyTypes: []
+        ownerType:
+          assemblyQualifiedName: Gravitas.Demo.GravitasFirstPersonPlayerSubject,
+            gravitas-main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.ValueBindings.StringBinding,
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []

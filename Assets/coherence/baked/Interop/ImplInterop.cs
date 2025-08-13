@@ -43,13 +43,19 @@ namespace Coherence.Generated
                 case 16: return AssetId.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 17: return GenericScale.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 18: return _002e0f0727244a041abfd9d124ef5bce_3087197899905382071.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 19: return _006c748d7f8085f4691d554734b27fe0_8445149378463969736.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 20: return _090aa92f766769348b4882a9d6b148e2_3543296725183664748.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 21: return _090aa92f766769348b4882a9d6b148e2_3543296725183664751.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 22: return _362fd1a7edeb85c48bb39119604133c5_7385481098666009951.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 23: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 24: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 25: return _76ed9974a395ce54087bcb395f26407a_6959148627032638734.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 19: return _002e0f0727244a041abfd9d124ef5bce_3087197899905382075.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 20: return _006c748d7f8085f4691d554734b27fe0_8362810714748207749.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 21: return _006c748d7f8085f4691d554734b27fe0_8445149378463969736.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 22: return _090aa92f766769348b4882a9d6b148e2_3543296725183664748.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 23: return _090aa92f766769348b4882a9d6b148e2_3543296725183664750.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 24: return _090aa92f766769348b4882a9d6b148e2_3543296725183664751.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 25: return _362fd1a7edeb85c48bb39119604133c5_7385481098666009946.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 26: return _362fd1a7edeb85c48bb39119604133c5_7385481098666009951.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 27: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 28: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 29: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 30: return _76ed9974a395ce54087bcb395f26407a_6959148627032638732.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 31: return _76ed9974a395ce54087bcb395f26407a_6959148627032638734.FromInterop(data, dataSize, simFrames, simFramesCount);
             }
 
             throw new ArgumentException($"Unkown component type {type}", nameof(type));
@@ -276,6 +282,28 @@ namespace Coherence.Generated
                 }
                 case 19:
                 {
+                    var orig = (_002e0f0727244a041abfd9d124ef5bce_3087197899905382075)component;
+                    var val = new _002e0f0727244a041abfd9d124ef5bce_3087197899905382075.Interop();
+
+                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+
+                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+
+}                    return;
+                }
+                case 20:
+                {
+                    var orig = (_006c748d7f8085f4691d554734b27fe0_8362810714748207749)component;
+                    var val = new _006c748d7f8085f4691d554734b27fe0_8362810714748207749.Interop();
+
+                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+
+                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+
+}                    return;
+                }
+                case 21:
+                {
                     var orig = (_006c748d7f8085f4691d554734b27fe0_8445149378463969736)component;
                     var val = new _006c748d7f8085f4691d554734b27fe0_8445149378463969736.Interop();
 
@@ -286,7 +314,7 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 20:
+                case 22:
                 {
                     var orig = (_090aa92f766769348b4882a9d6b148e2_3543296725183664748)component;
                     var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664748.Interop();
@@ -302,7 +330,18 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 21:
+                case 23:
+                {
+                    var orig = (_090aa92f766769348b4882a9d6b148e2_3543296725183664750)component;
+                    var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664750.Interop();
+
+                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+
+                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+
+}                    return;
+                }
+                case 24:
                 {
                     var orig = (_090aa92f766769348b4882a9d6b148e2_3543296725183664751)component;
                     var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664751.Interop();
@@ -314,7 +353,18 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 22:
+                case 25:
+                {
+                    var orig = (_362fd1a7edeb85c48bb39119604133c5_7385481098666009946)component;
+                    var val = new _362fd1a7edeb85c48bb39119604133c5_7385481098666009946.Interop();
+
+                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+
+                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+
+}                    return;
+                }
+                case 26:
                 {
                     var orig = (_362fd1a7edeb85c48bb39119604133c5_7385481098666009951)component;
                     var val = new _362fd1a7edeb85c48bb39119604133c5_7385481098666009951.Interop();
@@ -326,7 +376,7 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 23:
+                case 27:
                 {
                     var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760)component;
                     var val = new _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760.Interop();
@@ -338,7 +388,18 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 24:
+                case 28:
+                {
+                    var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761)component;
+                    var val = new _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.Interop();
+
+                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+
+                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+
+}                    return;
+                }
+                case 29:
                 {
                     var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762)component;
                     var val = new _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762.Interop();
@@ -352,7 +413,18 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 25:
+                case 30:
+                {
+                    var orig = (_76ed9974a395ce54087bcb395f26407a_6959148627032638732)component;
+                    var val = new _76ed9974a395ce54087bcb395f26407a_6959148627032638732.Interop();
+
+                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+
+                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+
+}                    return;
+                }
+                case 31:
                 {
                     var orig = (_76ed9974a395ce54087bcb395f26407a_6959148627032638734)component;
                     var val = new _76ed9974a395ce54087bcb395f26407a_6959148627032638734.Interop();

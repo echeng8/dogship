@@ -2,11 +2,17 @@ component _002e0f0727244a041abfd9d124ef5bce_3087197899905382071 [id "18"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _006c748d7f8085f4691d554734b27fe0_8445149378463969736 [id "19"]
+component _002e0f0727244a041abfd9d124ef5bce_3087197899905382075 [id "19"]
+  networkedCurrentFieldId String [bits "6"]
+
+component _006c748d7f8085f4691d554734b27fe0_8362810714748207749 [id "20"]
+  networkedCurrentFieldId String [bits "6"]
+
+component _006c748d7f8085f4691d554734b27fe0_8445149378463969736 [id "21"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "20"]
+component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "22"]
   AngularVelocity Vector3 [compression "None"]
   Velocity Vector3 [compression "None"]
   IsLanded Bool [bits "1"]
@@ -14,25 +20,37 @@ component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "20"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _090aa92f766769348b4882a9d6b148e2_3543296725183664751 [id "21"]
+component _090aa92f766769348b4882a9d6b148e2_3543296725183664750 [id "23"]
+  networkedCurrentFieldId String [bits "6"]
+
+component _090aa92f766769348b4882a9d6b148e2_3543296725183664751 [id "24"]
   velocity Vector3 [compression "None"]
   angularVelocity Vector3 [compression "None"]
 
-component _362fd1a7edeb85c48bb39119604133c5_7385481098666009951 [id "22"]
+component _362fd1a7edeb85c48bb39119604133c5_7385481098666009946 [id "25"]
+  networkedCurrentFieldId String [bits "6"]
+
+component _362fd1a7edeb85c48bb39119604133c5_7385481098666009951 [id "26"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760 [id "23"]
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760 [id "27"]
   velocity Vector3 [compression "None"]
   angularVelocity Vector3 [compression "None"]
 
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 [id "24"]
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761 [id "28"]
+  networkedCurrentFieldId String [bits "6"]
+
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 [id "29"]
   AngularVelocity Vector3 [compression "None"]
   Velocity Vector3 [compression "None"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "25"]
+component _76ed9974a395ce54087bcb395f26407a_6959148627032638732 [id "30"]
+  networkedCurrentFieldId String [bits "6"]
+
+component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "31"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
