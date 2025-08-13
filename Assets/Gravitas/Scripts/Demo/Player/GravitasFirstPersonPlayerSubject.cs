@@ -183,11 +183,15 @@ namespace Gravitas.Demo
                     )
                 )
                 {
+                    Debug.Log($"Hit object: {hitInfo.collider.name}");
+
                     // Interact with spaceship controls
                     if (hitInfo.collider.TryGetComponent(out GravitasSpaceshipControls spaceshipControls) && spaceshipControls.CanActivate)
                     {
-                        if (interact)
+                        if (interact && _sync.HasInputAuthority)
                         {
+                            Debug.Log($"Attempting to interact with spaceship: {spaceshipControls.SpaceshipName}");
+
 #if GRAVITAS_LOGGING
                             if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
                                 GravitasDebugLogger.Log($"Taking control of spaceship {spaceshipControls.SpaceshipName}");
@@ -196,11 +200,16 @@ namespace Gravitas.Demo
                             spaceshipControls.InteractWithSpaceshipControls(this);
                             OnInteractionTargetEvent?.Invoke(string.Empty);
                         }
-                        else
+                        else if (_sync.HasInputAuthority)
                         {
                             OnInteractionTargetEvent?.Invoke(spaceshipControls.SpaceshipName);
                         }
                     }
+                    else if (hitInfo.collider.TryGetComponent(out GravitasSpaceshipControls controls))
+                    {
+                        Debug.Log($"Found spaceship controls but CanActivate is false. IsControlled: {controls.CanActivate}");
+                    }
+
                     // Interact with field direction control
                     else if (hitInfo.collider.TryGetComponent(out GravitasFieldDirectionControl fieldDirectionControl))
                     {

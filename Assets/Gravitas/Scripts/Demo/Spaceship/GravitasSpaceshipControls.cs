@@ -1,16 +1,23 @@
 using UnityEngine;
+using Coherence.Toolkit;
 
 namespace Gravitas.Demo
 {
-    internal class GravitasSpaceshipControls : MonoBehaviour
+    public class GravitasSpaceshipControls : MonoBehaviour
     {
         public string SpaceshipName => name;
-        public bool CanActivate => spaceshipSubject && !spaceshipSubject.PlayerSubject && activeTimer >= ACTIVE_TIME;
+        public bool CanActivate => spaceshipSubject && !spaceshipSubject.IsControlled && activeTimer >= ACTIVE_TIME;
 
         private const float ACTIVE_TIME = 0.5f;
 
         [SerializeField] private GravitasSpaceshipSubject spaceshipSubject;
-        private float activeTimer = ACTIVE_TIME; // A time tracking if the spaceship controls can be activated yet
+        private float activeTimer = ACTIVE_TIME;
+        private CoherenceSync _sync;
+
+        private void Awake()
+        {
+            _sync = GetComponentInParent<CoherenceSync>();
+        }
 
         /// <summary>
         /// Point of entry for spaceship controlling, as activated by a player controller.
@@ -18,15 +25,28 @@ namespace Gravitas.Demo
         /// <param name="player">The player interacting with the spaceship controls</param>
         public void InteractWithSpaceshipControls(GravitasFirstPersonPlayerSubject player)
         {
-            if (CanActivate && spaceshipSubject)
+            Debug.Log($"InteractWithSpaceshipControls called. CanActivate: {CanActivate}");
+
+            if (CanActivate && spaceshipSubject && player)
             {
-                spaceshipSubject.SetPlayerController(player, transform.localPosition);
+                var playerSync = player.GetComponent<CoherenceSync>();
+                Debug.Log($"Player sync found: {playerSync != null}, Has input authority: {playerSync?.HasInputAuthority}");
+
+                if (playerSync && playerSync.HasInputAuthority)
+                {
+                    Debug.Log("Calling SetPlayerController on spaceship");
+                    spaceshipSubject.SetPlayerController(player, transform.localPosition);
+                }
+            }
+            else
+            {
+                Debug.Log($"Cannot activate spaceship. CanActivate: {CanActivate}, spaceshipSubject: {spaceshipSubject != null}, player: {player != null}");
             }
         }
 
         private void LateUpdate()
         {
-            if (spaceshipSubject.PlayerSubject) // If spaceship is controlled
+            if (spaceshipSubject.IsControlled) // If spaceship is controlled
             {
                 activeTimer = 0;
             }

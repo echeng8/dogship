@@ -36,3 +36,9 @@ component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "25"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
+command _006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7 [id "6", routing "All"]
+  playerID String 
+  localPos Vector3 [compression "None"]
+
+command _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0 [id "7", routing "All"]
+
