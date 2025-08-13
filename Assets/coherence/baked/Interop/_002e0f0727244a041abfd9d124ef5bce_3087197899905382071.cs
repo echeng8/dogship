@@ -19,58 +19,58 @@ namespace Coherence.Generated
     using Logger = Coherence.Log.Logger;
     using UnityEngine;
     using Coherence.Toolkit;
-    public struct _090aa92f766769348b4882a9d6b148e2_3543296725183664751 : ICoherenceComponentData
+    public struct _002e0f0727244a041abfd9d124ef5bce_3087197899905382071 : ICoherenceComponentData
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
         {
             [FieldOffset(0)]
-            public Vector3 velocity;
+            public Vector3 SyncedProxyPosition;
             [FieldOffset(12)]
-            public Vector3 angularVelocity;
+            public Quaternion SyncedProxyRotation;
         }
 
         public void ResetFrame(AbsoluteSimulationFrame frame)
         {
-            FieldsMask |= _090aa92f766769348b4882a9d6b148e2_3543296725183664751.velocityMask;
-            velocitySimulationFrame = frame;
-            FieldsMask |= _090aa92f766769348b4882a9d6b148e2_3543296725183664751.angularVelocityMask;
-            angularVelocitySimulationFrame = frame;
+            FieldsMask |= _002e0f0727244a041abfd9d124ef5bce_3087197899905382071.SyncedProxyPositionMask;
+            SyncedProxyPositionSimulationFrame = frame;
+            FieldsMask |= _002e0f0727244a041abfd9d124ef5bce_3087197899905382071.SyncedProxyRotationMask;
+            SyncedProxyRotationSimulationFrame = frame;
         }
 
-        public static unsafe _090aa92f766769348b4882a9d6b148e2_3543296725183664751 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
+        public static unsafe _002e0f0727244a041abfd9d124ef5bce_3087197899905382071 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
         {
-            if (dataSize != 24) {
-                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 24) " +
-                    "for component with ID 21");
+            if (dataSize != 28) {
+                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 28) " +
+                    "for component with ID 18");
             }
 
             if (simFramesCount != 0) {
                 throw new Exception($"Given simFrames size is not equal to the expected length. ({simFramesCount} != 0) " +
-                    "for component with ID 21");
+                    "for component with ID 18");
             }
 
-            var orig = new _090aa92f766769348b4882a9d6b148e2_3543296725183664751();
+            var orig = new _002e0f0727244a041abfd9d124ef5bce_3087197899905382071();
 
             var comp = (Interop*)data;
 
-            orig.velocity = comp->velocity;
-            orig.angularVelocity = comp->angularVelocity;
+            orig.SyncedProxyPosition = comp->SyncedProxyPosition;
+            orig.SyncedProxyRotation = comp->SyncedProxyRotation;
 
             return orig;
         }
 
 
-        public static uint velocityMask => 0b00000000000000000000000000000001;
-        public AbsoluteSimulationFrame velocitySimulationFrame;
-        public Vector3 velocity;
-        public static uint angularVelocityMask => 0b00000000000000000000000000000010;
-        public AbsoluteSimulationFrame angularVelocitySimulationFrame;
-        public Vector3 angularVelocity;
+        public static uint SyncedProxyPositionMask => 0b00000000000000000000000000000001;
+        public AbsoluteSimulationFrame SyncedProxyPositionSimulationFrame;
+        public Vector3 SyncedProxyPosition;
+        public static uint SyncedProxyRotationMask => 0b00000000000000000000000000000010;
+        public AbsoluteSimulationFrame SyncedProxyRotationSimulationFrame;
+        public Quaternion SyncedProxyRotation;
 
         public uint FieldsMask { get; set; }
         public uint StoppedMask { get; set; }
-        public uint GetComponentType() => 21;
+        public uint GetComponentType() => 18;
         public int PriorityLevel() => 100;
         public const int order = 0;
         public uint InitialFieldsMask() => 0b00000000000000000000000000000011;
@@ -121,7 +121,7 @@ namespace Coherence.Generated
 
         public ICoherenceComponentData MergeWith(ICoherenceComponentData data)
         {
-            var other = (_090aa92f766769348b4882a9d6b148e2_3543296725183664751)data;
+            var other = (_002e0f0727244a041abfd9d124ef5bce_3087197899905382071)data;
             var otherMask = other.FieldsMask;
 
             FieldsMask |= otherMask;
@@ -129,15 +129,15 @@ namespace Coherence.Generated
 
             if ((otherMask & 0x01) != 0)
             {
-                this.velocitySimulationFrame = other.velocitySimulationFrame;
-                this.velocity = other.velocity;
+                this.SyncedProxyPositionSimulationFrame = other.SyncedProxyPositionSimulationFrame;
+                this.SyncedProxyPosition = other.SyncedProxyPosition;
             }
 
             otherMask >>= 1;
             if ((otherMask & 0x01) != 0)
             {
-                this.angularVelocitySimulationFrame = other.angularVelocitySimulationFrame;
-                this.angularVelocity = other.angularVelocity;
+                this.SyncedProxyRotationSimulationFrame = other.SyncedProxyRotationSimulationFrame;
+                this.SyncedProxyRotation = other.SyncedProxyRotation;
             }
 
             otherMask >>= 1;
@@ -151,7 +151,7 @@ namespace Coherence.Generated
             throw new System.NotSupportedException($"{nameof(DiffWith)} is not supported in Unity");
         }
 
-        public static uint Serialize(_090aa92f766769348b4882a9d6b148e2_3543296725183664751 data, bool isRefSimFrameValid, AbsoluteSimulationFrame referenceSimulationFrame, IOutProtocolBitStream bitStream, Logger logger)
+        public static uint Serialize(_002e0f0727244a041abfd9d124ef5bce_3087197899905382071 data, bool isRefSimFrameValid, AbsoluteSimulationFrame referenceSimulationFrame, IOutProtocolBitStream bitStream, Logger logger)
         {
             if (bitStream.WriteMask(data.StoppedMask != 0))
             {
@@ -164,7 +164,7 @@ namespace Coherence.Generated
             {
 
 
-                var fieldValue = (data.velocity.ToCoreVector3());
+                var fieldValue = (data.SyncedProxyPosition.ToCoreVector3());
 
 
 
@@ -176,11 +176,11 @@ namespace Coherence.Generated
             {
 
 
-                var fieldValue = (data.angularVelocity.ToCoreVector3());
+                var fieldValue = (data.SyncedProxyRotation.ToCoreQuaternion());
 
 
 
-                bitStream.WriteVector3(fieldValue, FloatMeta.NoCompression());
+                bitStream.WriteQuaternion(fieldValue, 32);
             }
 
             mask >>= 1;
@@ -188,7 +188,7 @@ namespace Coherence.Generated
             return mask;
         }
 
-        public static _090aa92f766769348b4882a9d6b148e2_3543296725183664751 Deserialize(AbsoluteSimulationFrame referenceSimulationFrame, InProtocolBitStream bitStream)
+        public static _002e0f0727244a041abfd9d124ef5bce_3087197899905382071 Deserialize(AbsoluteSimulationFrame referenceSimulationFrame, InProtocolBitStream bitStream)
         {
             var stoppedMask = (uint)0;
             if (bitStream.ReadMask())
@@ -196,18 +196,18 @@ namespace Coherence.Generated
                 stoppedMask = bitStream.ReadMaskBits(2);
             }
 
-            var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664751();
+            var val = new _002e0f0727244a041abfd9d124ef5bce_3087197899905382071();
             if (bitStream.ReadMask())
             {
 
-                val.velocity = bitStream.ReadVector3(FloatMeta.NoCompression()).ToUnityVector3();
-                val.FieldsMask |= _090aa92f766769348b4882a9d6b148e2_3543296725183664751.velocityMask;
+                val.SyncedProxyPosition = bitStream.ReadVector3(FloatMeta.NoCompression()).ToUnityVector3();
+                val.FieldsMask |= _002e0f0727244a041abfd9d124ef5bce_3087197899905382071.SyncedProxyPositionMask;
             }
             if (bitStream.ReadMask())
             {
 
-                val.angularVelocity = bitStream.ReadVector3(FloatMeta.NoCompression()).ToUnityVector3();
-                val.FieldsMask |= _090aa92f766769348b4882a9d6b148e2_3543296725183664751.angularVelocityMask;
+                val.SyncedProxyRotation = bitStream.ReadQuaternion(32).ToUnityQuaternion();
+                val.FieldsMask |= _002e0f0727244a041abfd9d124ef5bce_3087197899905382071.SyncedProxyRotationMask;
             }
 
             val.StoppedMask = stoppedMask;
@@ -218,9 +218,9 @@ namespace Coherence.Generated
 
         public override string ToString()
         {
-            return $"_090aa92f766769348b4882a9d6b148e2_3543296725183664751(" +
-                $" velocity: { this.velocity }" +
-                $" angularVelocity: { this.angularVelocity }" +
+            return $"_002e0f0727244a041abfd9d124ef5bce_3087197899905382071(" +
+                $" SyncedProxyPosition: { this.SyncedProxyPosition }" +
+                $" SyncedProxyRotation: { this.SyncedProxyRotation }" +
                 $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(2, '0') }, " +
                 $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(2, '0') })";
         }

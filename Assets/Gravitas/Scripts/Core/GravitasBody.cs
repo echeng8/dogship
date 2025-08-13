@@ -56,6 +56,9 @@ namespace Gravitas
         }
         public bool IsProxied => (bool)currentProxy;
 
+        [Sync] public Vector3 SyncedProxyPosition { get; set; }
+        [Sync] public Quaternion SyncedProxyRotation { get; set; }
+
         protected GravitasSubjectProxy currentProxy;
 
         private RigidbodySettings previousRigidbodySettings;
@@ -147,11 +150,23 @@ namespace Gravitas
         /// </summary>
         public virtual void UpdatePosition(Transform fieldTransform)
         {
-            if (!_sync || !_sync.HasStateAuthority) return;
-
             if (IsProxied && fieldTransform)
             {
                 Transform proxyTransform = currentProxy.transform;
+
+                // Synchronize proxy transform if we have authority
+                if (_sync && _sync.HasStateAuthority)
+                {
+                    SyncedProxyPosition = proxyTransform.localPosition;
+                    SyncedProxyRotation = proxyTransform.localRotation;
+                }
+                // Apply synced transform if we don't have authority
+                else if (_sync && !_sync.HasStateAuthority)
+                {
+                    proxyTransform.localPosition = SyncedProxyPosition;
+                    proxyTransform.localRotation = SyncedProxyRotation;
+                }
+
                 transform.SetPositionAndRotation
                 (
                     fieldTransform.TransformPointUnscaled(proxyTransform.localPosition),
