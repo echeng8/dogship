@@ -20,7 +20,7 @@ namespace Coherence.Generated
 
     public class Definition : IDefinition
     {
-        public const string schemaId = "789191a9a4bd2e27500fb3c36e6a1856576050d7";
+        public const string schemaId = "a4cab52ff619b347e7a7fca03969271822518e5e";
         public const uint InternalWorldPosition = 0;
         public const uint InternalWorldOrientation = 1;
         public const uint InternalLocalUserComponent = 2;
@@ -59,7 +59,7 @@ namespace Coherence.Generated
         public const uint InternalAdoptOrphan = 3;
         public const uint InternalPersistenceReady = 4;
         public const uint InternalSceneIndexChanged = 5;
-        public const uint Internal_006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7 = 6;
+        public const uint Internal_006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 = 6;
         public const uint Internal_006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0 = 7;
 
         private static readonly Dictionary<uint, string> componentNamesForTypeIds = new Dictionary<uint, string>()
@@ -118,7 +118,7 @@ namespace Coherence.Generated
             { Definition.InternalAdoptOrphan , MessageTarget.All },
             { Definition.InternalPersistenceReady , MessageTarget.All },
             { Definition.InternalSceneIndexChanged , MessageTarget.All },
-            { Definition.Internal_006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7 , MessageTarget.All },
+            { Definition.Internal_006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 , MessageTarget.All },
             { Definition.Internal_006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0 , MessageTarget.All },
         };
 
@@ -290,8 +290,8 @@ namespace Coherence.Generated
                     return PersistenceReady.Deserialize(bitStream, entity, target);
                 case Definition.InternalSceneIndexChanged:
                     return SceneIndexChanged.Deserialize(bitStream, entity, target);
-                case Definition.Internal_006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7:
-                    return _006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7.Deserialize(bitStream, entity, target);
+                case Definition.Internal_006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64:
+                    return _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64.Deserialize(bitStream, entity, target);
                 case Definition.Internal_006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0:
                     return _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0.Deserialize(bitStream, entity, target);
                 default:
@@ -381,8 +381,8 @@ namespace Coherence.Generated
                 case Definition.InternalSceneIndexChanged:
                     SceneIndexChanged.Serialize((SceneIndexChanged)data, bitStream);
                     break;
-                case Definition.Internal_006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7:
-                    _006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7.Serialize((_006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7)data, bitStream);
+                case Definition.Internal_006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64:
+                    _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64.Serialize((_006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64)data, bitStream);
                     break;
                 case Definition.Internal_006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0:
                     _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0.Serialize((_006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0)data, bitStream);

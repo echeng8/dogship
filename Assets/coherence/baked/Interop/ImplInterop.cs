@@ -451,7 +451,7 @@ namespace Coherence.Generated
                   case 3: return AdoptOrphan.FromInterop(data, dataSize);
                   case 4: return PersistenceReady.FromInterop(data, dataSize);
                   case 5: return SceneIndexChanged.FromInterop(data, dataSize);
-                  case 6: return _006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7.FromInterop(data, dataSize);
+                  case 6: return _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64.FromInterop(data, dataSize);
                   case 7: return _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0.FromInterop(data, dataSize);
             }
 
@@ -532,15 +532,15 @@ namespace Coherence.Generated
                 }
                 case 6:
                 {
-                    var orig = (_006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7)command;
-                    var val = new _006c748d7f8085f4691d554734b27fe0_b2e9ab4a4afa4a9b8f7d207ac3140fa7.Interop();
+                    var orig = (_006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64)command;
+                    var val = new _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64.Interop();
 
-                    var pinnedplayerID = orig.playerID != null ? Encoding.UTF8.GetBytes(orig.playerID) : null; fixed (void* pinnedPtrplayerID = pinnedplayerID) { val.playerID = new ByteArray { Data = pinnedPtrplayerID, Length =  pinnedplayerID?.Length ?? 0 };
+                    val.playerGameObject = orig.playerGameObject;
                     val.localPos = orig.localPos;
 
-                    return sender.SendCommand(entity, target, type, val, 28);
+                    return sender.SendCommand(entity, target, type, val, 16);
 
-}                }
+                }
                 case 7:
                 {
                     var orig = (_006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0)command;

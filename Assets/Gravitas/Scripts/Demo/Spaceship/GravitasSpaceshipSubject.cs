@@ -14,7 +14,7 @@ namespace Gravitas.Demo
         public bool IsControlled => PlayerSubject != null;
 
         [Sync] public bool NetworkIsControlled { get; private set; }
-        [Sync] public string ControllingPlayerID { get; private set; } = "";
+        [Sync] public GameObject ControllingPlayerGameObject { get; private set; }
 
         [SerializeField] private ParticleSystem[] spaceshipParticles;
         private Quaternion previousCameraRotation;
@@ -41,20 +41,20 @@ namespace Gravitas.Demo
         }
 
         [Command]
-        public void NetworkSetPlayerController(string playerID, Vector3 localPos)
+        public void NetworkSetPlayerController(GameObject playerGameObject, Vector3 localPos)
         {
-            Debug.Log($"NetworkSetPlayerController received. PlayerID: {playerID}, NetworkIsControlled: {NetworkIsControlled}");
+            Debug.Log($"NetworkSetPlayerController received. PlayerGameObject: {playerGameObject?.name}, NetworkIsControlled: {NetworkIsControlled}");
 
-            if (!NetworkIsControlled && !string.IsNullOrEmpty(playerID))
+            if (!NetworkIsControlled && playerGameObject != null)
             {
-                var player = FindPlayerByID(playerID);
-                Debug.Log($"Found player by ID: {player?.name}");
-
+                var player = playerGameObject.GetComponent<GravitasFirstPersonPlayerSubject>();
                 if (player != null)
                 {
+                    Debug.Log($"Found player component: {player.name}");
+
                     SetPlayerControllerInternal(player, localPos);
                     NetworkIsControlled = true;
-                    ControllingPlayerID = playerID;
+                    ControllingPlayerGameObject = playerGameObject;
                     Debug.Log($"Successfully set player controller for {player.name}");
                 }
             }
@@ -67,7 +67,7 @@ namespace Gravitas.Demo
             {
                 ExitSpaceshipInternal();
                 NetworkIsControlled = false;
-                ControllingPlayerID = "";
+                ControllingPlayerGameObject = null;
             }
         }
 
@@ -77,31 +77,21 @@ namespace Gravitas.Demo
 
             if (player && _sync)
             {
-                var playerSync = player.GetComponent<CoherenceSync>();
-                string playerID = playerSync?.ManualUniqueId ?? "";
+                Debug.Log($"Player: {player.name}, Sync component: {_sync != null}");
 
-                Debug.Log($"Player ID: {playerID}, Sync component: {_sync != null}");
+                Debug.Log("Sending NetworkSetPlayerController command");
 
-                if (!string.IsNullOrEmpty(playerID))
-                {
-                    Debug.Log("Sending NetworkSetPlayerController command");
+                // Send command to authority to set player controller
+                _sync.SendCommand<GravitasSpaceshipSubject>(
+                    nameof(NetworkSetPlayerController),
+                    MessageTarget.AuthorityOnly,
+                    player.gameObject,
+                    localPos
+                );
 
-                    // Send command to authority to set player controller
-                    _sync.SendCommand<GravitasSpaceshipSubject>(
-                        nameof(NetworkSetPlayerController),
-                        MessageTarget.AuthorityOnly,
-                        playerID,
-                        localPos
-                    );
-
-                    // Request authority transfer after setting controller
-                    Debug.Log("Requesting authority transfer");
-                    _sync.RequestAuthority(AuthorityType.Full);
-                }
-                else
-                {
-                    Debug.LogError("Player ID is null or empty!");
-                }
+                // Request authority transfer after setting controller
+                Debug.Log("Requesting authority transfer");
+                _sync.RequestAuthority(AuthorityType.Full);
             }
             else
             {
@@ -172,10 +162,13 @@ namespace Gravitas.Demo
             // Sync local player state with network state
             if (NetworkIsControlled && !IsControlled)
             {
-                var controllingPlayer = FindPlayerByID(ControllingPlayerID);
-                if (controllingPlayer)
+                if (ControllingPlayerGameObject)
                 {
-                    SetPlayerControllerInternal(controllingPlayer, Vector3.zero);
+                    var controllingPlayer = ControllingPlayerGameObject.GetComponent<GravitasFirstPersonPlayerSubject>();
+                    if (controllingPlayer)
+                    {
+                        SetPlayerControllerInternal(controllingPlayer, Vector3.zero);
+                    }
                 }
             }
             else if (!NetworkIsControlled && IsControlled)
@@ -249,20 +242,6 @@ namespace Gravitas.Demo
                     }
                 }
             }
-        }
-
-        private GravitasFirstPersonPlayerSubject FindPlayerByID(string uniqueId)
-        {
-            var allPlayers = FindObjectsOfType<GravitasFirstPersonPlayerSubject>();
-            foreach (var player in allPlayers)
-            {
-                var sync = player.GetComponent<CoherenceSync>();
-                if (sync && sync.ManualUniqueId == uniqueId)
-                {
-                    return player;
-                }
-            }
-            return null;
         }
 
         private void OnGainedAuthority()
