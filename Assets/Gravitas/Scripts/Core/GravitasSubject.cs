@@ -11,7 +11,7 @@ namespace Gravitas
     /// NETWORKING:
     /// This class supports Coherence networking to synchronize the current field across all clients.
     /// - The client with authority over the subject controls which field it's in
-    /// - Field changes are synchronized via the [Sync] networkedCurrentFieldId property
+    /// - Field changes are synchronized via the [Sync] networkedCurrentFieldTransform property
     /// - Non-authoritative clients will automatically match their subject's field to the networked field
     /// - Requires a CoherenceSync component on the GameObject for networking support
     /// </summary>
@@ -39,7 +39,7 @@ namespace Gravitas
 
         // Networking: Coherence sync for current field
         private CoherenceSync coherenceSync;
-        [Sync] public string networkedCurrentFieldId = "";
+        [Sync] public Transform networkedCurrentFieldTransform;
 
         private readonly HashSet<GravitasFieldChangeRequest> fieldChangeRequests = new HashSet<GravitasFieldChangeRequest>();
         [SerializeField]
@@ -168,17 +168,17 @@ namespace Gravitas
         protected virtual void OnSubjectFixedUpdate() { }
 
         /// <summary>
-        /// Updates the networked field ID if this client has authority over the subject
+        /// Updates the networked field Transform if this client has authority over the subject
         /// </summary>
         protected virtual void UpdateNetworkedField()
         {
             // Only the client with authority can update the field
             if (coherenceSync != null && HasAuthorityOverSubject())
             {
-                string currentFieldId = GetCurrentFieldId();
-                if (networkedCurrentFieldId != currentFieldId)
+                Transform currentFieldTransform = GetCurrentFieldTransform();
+                if (networkedCurrentFieldTransform != currentFieldTransform)
                 {
-                    networkedCurrentFieldId = currentFieldId;
+                    networkedCurrentFieldTransform = currentFieldTransform;
                 }
             }
             else
@@ -200,23 +200,11 @@ namespace Gravitas
         }
 
         /// <summary>
-        /// Gets the unique ID of the current field, or empty string if no field
+        /// Gets the Transform of the current field, or null if no field
         /// </summary>
-        protected virtual string GetCurrentFieldId()
+        protected virtual Transform GetCurrentFieldTransform()
         {
-            if (CurrentField?.GameObject == null) return "";
-
-            // Try to get the CoherenceSync component from the field
-            if (CurrentField.GameObject.TryGetComponent<CoherenceSync>(out var fieldSync))
-            {
-                // Use the entity ID from coherence as the unique identifier
-                // In Coherence, each networked object has a unique entity ID
-                return fieldSync.ManualUniqueId;
-            }
-
-            // Fallback to instance ID if no CoherenceSync found
-            print("Error: No CoherenceSync found on field");
-            return CurrentField.GameObject.GetInstanceID().ToString();
+            return CurrentField?.GameObject?.transform;
         }
 
         /// <summary>
@@ -224,7 +212,7 @@ namespace Gravitas
         /// </summary>
         protected virtual void ApplyNetworkedField()
         {
-            if (string.IsNullOrEmpty(networkedCurrentFieldId))
+            if (networkedCurrentFieldTransform == null)
             {
                 // No field set over network
                 if (CurrentField != null)
@@ -235,8 +223,8 @@ namespace Gravitas
                 return;
             }
 
-            // Find the field with the networked ID
-            IGravitasField targetField = FindFieldByNetworkId(networkedCurrentFieldId);
+            // Find the field with the networked Transform
+            IGravitasField targetField = FindFieldByTransform(networkedCurrentFieldTransform);
 
             if (targetField != null && targetField != CurrentField)
             {
@@ -246,22 +234,28 @@ namespace Gravitas
         }
 
         /// <summary>
-        /// Finds a field by its network ID (CoherenceSync UUID or instance ID)
+        /// Finds a field by its Transform
         /// </summary>
-        protected virtual IGravitasField FindFieldByNetworkId(string networkId)
+        protected virtual IGravitasField FindFieldByTransform(Transform fieldTransform)
         {
-            // Search all active GravitasField components for matching ID
-            foreach (var field in FindObjectsOfType<GravitasField>())
+            if (fieldTransform == null) return null;
+
+            // Try to get the GravitasField component directly from the Transform
+            if (fieldTransform.TryGetComponent<GravitasField>(out var field))
             {
-                if (field.GameObject.TryGetComponent<CoherenceSync>(out var fieldSync))
+                return field;
+            }
+
+            // Search all active GravitasField components for matching Transform
+            foreach (var gravField in FindObjectsOfType<GravitasField>())
+            {
+                if (gravField.GameObject.transform == fieldTransform)
                 {
-                    // Compare using the same approach as GetCurrentFieldId()
-                    if (fieldSync.ManualUniqueId == networkId)
-                        return field;
+                    return gravField;
                 }
             }
 
-            Debug.LogError($"No field found with network ID: {networkId}");
+            Debug.LogError($"No field found with Transform: {fieldTransform.name}");
             return null;
         }
 

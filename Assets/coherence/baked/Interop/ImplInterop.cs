@@ -285,22 +285,22 @@ namespace Coherence.Generated
                     var orig = (_002e0f0727244a041abfd9d124ef5bce_3087197899905382075)component;
                     var val = new _002e0f0727244a041abfd9d124ef5bce_3087197899905382075.Interop();
 
-                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
 
-                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
-}                    return;
+                    return;
                 }
                 case 20:
                 {
                     var orig = (_006c748d7f8085f4691d554734b27fe0_8362810714748207749)component;
                     var val = new _006c748d7f8085f4691d554734b27fe0_8362810714748207749.Interop();
 
-                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
 
-                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
-}                    return;
+                    return;
                 }
                 case 21:
                 {
@@ -335,11 +335,11 @@ namespace Coherence.Generated
                     var orig = (_090aa92f766769348b4882a9d6b148e2_3543296725183664750)component;
                     var val = new _090aa92f766769348b4882a9d6b148e2_3543296725183664750.Interop();
 
-                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
 
-                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
-}                    return;
+                    return;
                 }
                 case 24:
                 {
@@ -358,11 +358,11 @@ namespace Coherence.Generated
                     var orig = (_362fd1a7edeb85c48bb39119604133c5_7385481098666009946)component;
                     var val = new _362fd1a7edeb85c48bb39119604133c5_7385481098666009946.Interop();
 
-                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
 
-                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
-}                    return;
+                    return;
                 }
                 case 26:
                 {
@@ -393,11 +393,11 @@ namespace Coherence.Generated
                     var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761)component;
                     var val = new _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.Interop();
 
-                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
 
-                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
-}                    return;
+                    return;
                 }
                 case 29:
                 {
@@ -418,11 +418,11 @@ namespace Coherence.Generated
                     var orig = (_76ed9974a395ce54087bcb395f26407a_6959148627032638732)component;
                     var val = new _76ed9974a395ce54087bcb395f26407a_6959148627032638732.Interop();
 
-                    var pinnednetworkedCurrentFieldId = orig.networkedCurrentFieldId != null ? Encoding.UTF8.GetBytes(orig.networkedCurrentFieldId) : null; fixed (void* pinnedPtrnetworkedCurrentFieldId = pinnednetworkedCurrentFieldId) { val.networkedCurrentFieldId = new ByteArray { Data = pinnedPtrnetworkedCurrentFieldId, Length =  pinnednetworkedCurrentFieldId?.Length ?? 0 };
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
 
-                    updater.UpdateComponent(entity, componentType, val, 16, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
-}                    return;
+                    return;
                 }
                 case 31:
                 {

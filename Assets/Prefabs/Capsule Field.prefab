@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474c0b1c5f1b6acdd989f02c621ee227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkedCurrentFieldId: 
+  networkedCurrentFieldTransform: {fileID: 0}
   fieldChangeDelay: 0.5
   orientSpeed: 100
   reorientDelay: 1.5
@@ -366,7 +366,7 @@ MonoBehaviour:
   - rid: 8677872618237329478
   - rid: 8677872723473727618
   - rid: 8677872723473727619
-  - rid: 8677872745804464168
+  - rid: 8677872745804464256
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -566,35 +566,35 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 8677872745804464168
-      type: {class: StringBinding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
+    - rid: 8677872745804464256
+      type: {class: ReferenceBinding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
       data:
         descriptor:
-          rid: 8677872745804464169
+          rid: 8677872745804464257
         routing: 0
         syncMode: 0
         isPredicted: 0
         predictionMode: 0
-        guid: 3d2c63862ef84e93838e6eeaddef4367
+        guid: 35774b4f62584bb89a34970587c55120
         archetypeData:
-          type: 5
+          type: 9
           minRange: 0
           maxRange: 0
           sampleRate: 20
           floatCompression: 0
           fields:
-          - type: 5
-            bits: 6
+          - type: 9
+            bits: 20
             precision: 0
             floatCompression: 0
         unityComponent: {fileID: 6959148627032638732}
         coherenceSync: {fileID: 8526707822761403274}
         interpolationSettings: {fileID: 0}
-    - rid: 8677872745804464169
+    - rid: 8677872745804464257
       type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
-        name: networkedCurrentFieldId
-        monoAssemblyType: System.String, mscorlib
+        name: networkedCurrentFieldTransform
+        monoAssemblyType: UnityEngine.Transform, UnityEngine
         required: 1
         enforcesLODingWhenFieldsOverriden: 1
         valueSyncCallbackName: 
@@ -607,7 +607,7 @@ MonoBehaviour:
         CustomData:
           rid: -2
         bindingType:
-          assemblyQualifiedName: Coherence.Toolkit.Bindings.ValueBindings.StringBinding,
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.ValueBindings.ReferenceBinding,
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []

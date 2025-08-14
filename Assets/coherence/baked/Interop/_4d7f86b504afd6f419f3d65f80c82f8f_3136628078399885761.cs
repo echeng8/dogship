@@ -25,19 +25,19 @@ namespace Coherence.Generated
         public struct Interop
         {
             [FieldOffset(0)]
-            public ByteArray networkedCurrentFieldId;
+            public Entity networkedCurrentFieldTransform;
         }
 
         public void ResetFrame(AbsoluteSimulationFrame frame)
         {
-            FieldsMask |= _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.networkedCurrentFieldIdMask;
-            networkedCurrentFieldIdSimulationFrame = frame;
+            FieldsMask |= _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.networkedCurrentFieldTransformMask;
+            networkedCurrentFieldTransformSimulationFrame = frame;
         }
 
         public static unsafe _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
         {
-            if (dataSize != 16) {
-                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 16) " +
+            if (dataSize != 4) {
+                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 4) " +
                     "for component with ID 28");
             }
 
@@ -50,15 +50,15 @@ namespace Coherence.Generated
 
             var comp = (Interop*)data;
 
-            orig.networkedCurrentFieldId = comp->networkedCurrentFieldId.Data != null ? System.Text.Encoding.UTF8.GetString((byte*)comp->networkedCurrentFieldId.Data, (int)comp->networkedCurrentFieldId.Length) : null;
+            orig.networkedCurrentFieldTransform = comp->networkedCurrentFieldTransform;
 
             return orig;
         }
 
 
-        public static uint networkedCurrentFieldIdMask => 0b00000000000000000000000000000001;
-        public AbsoluteSimulationFrame networkedCurrentFieldIdSimulationFrame;
-        public System.String networkedCurrentFieldId;
+        public static uint networkedCurrentFieldTransformMask => 0b00000000000000000000000000000001;
+        public AbsoluteSimulationFrame networkedCurrentFieldTransformSimulationFrame;
+        public Entity networkedCurrentFieldTransform;
 
         public uint FieldsMask { get; set; }
         public uint StoppedMask { get; set; }
@@ -67,7 +67,7 @@ namespace Coherence.Generated
         public const int order = 0;
         public uint InitialFieldsMask() => 0b00000000000000000000000000000001;
         public bool HasFields() => true;
-        public bool HasRefFields() => false;
+        public bool HasRefFields() => true;
 
 
         public long[] GetSimulationFrames() {
@@ -80,21 +80,60 @@ namespace Coherence.Generated
         
         public HashSet<Entity> GetEntityRefs()
         {
-            return default;
+            return new HashSet<Entity>()
+            {
+                this.networkedCurrentFieldTransform,
+            };
         }
 
         public uint ReplaceReferences(Entity fromEntity, Entity toEntity)
         {
-            return 0;
+            uint refsMask = 0;
+
+            if (this.networkedCurrentFieldTransform == fromEntity)
+            {
+                this.networkedCurrentFieldTransform = toEntity;
+                refsMask |= 1 << 0;
+            }
+
+            FieldsMask |= refsMask;
+
+            return refsMask;
         }
         
         public IEntityMapper.Error MapToAbsolute(IEntityMapper mapper)
         {
+            Entity absoluteEntity;
+            IEntityMapper.Error err;
+            err = mapper.MapToAbsoluteEntity(this.networkedCurrentFieldTransform, false, out absoluteEntity);
+
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+
+            this.networkedCurrentFieldTransform = absoluteEntity;
             return IEntityMapper.Error.None;
         }
 
         public IEntityMapper.Error MapToRelative(IEntityMapper mapper)
         {
+            Entity relativeEntity;
+            IEntityMapper.Error err;
+            // We assume that the inConnection held changes with unresolved references, so the 'createMapping=true' is
+            // there only because there's a chance that the parent creation change will be processed after this one
+            // meaning there's no mapping for the parent yet. This wouldn't be necessary if mapping creation would happen
+            // in the clientWorld via create/destroy requests while here we would only check whether mapping exists or not.
+            var createParentMapping_networkedCurrentFieldTransform = true;
+            err = mapper.MapToRelativeEntity(this.networkedCurrentFieldTransform, createParentMapping_networkedCurrentFieldTransform,
+             out relativeEntity);
+
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+
+            this.networkedCurrentFieldTransform = relativeEntity;
             return IEntityMapper.Error.None;
         }
 
@@ -121,8 +160,8 @@ namespace Coherence.Generated
 
             if ((otherMask & 0x01) != 0)
             {
-                this.networkedCurrentFieldIdSimulationFrame = other.networkedCurrentFieldIdSimulationFrame;
-                this.networkedCurrentFieldId = other.networkedCurrentFieldId;
+                this.networkedCurrentFieldTransformSimulationFrame = other.networkedCurrentFieldTransformSimulationFrame;
+                this.networkedCurrentFieldTransform = other.networkedCurrentFieldTransform;
             }
 
             otherMask >>= 1;
@@ -149,11 +188,11 @@ namespace Coherence.Generated
             {
 
 
-                var fieldValue = data.networkedCurrentFieldId;
+                var fieldValue = data.networkedCurrentFieldTransform;
 
 
 
-                bitStream.WriteShortString(fieldValue);
+                bitStream.WriteEntity(fieldValue);
             }
 
             mask >>= 1;
@@ -173,8 +212,8 @@ namespace Coherence.Generated
             if (bitStream.ReadMask())
             {
 
-                val.networkedCurrentFieldId = bitStream.ReadShortString();
-                val.FieldsMask |= _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.networkedCurrentFieldIdMask;
+                val.networkedCurrentFieldTransform = bitStream.ReadEntity();
+                val.FieldsMask |= _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761.networkedCurrentFieldTransformMask;
             }
 
             val.StoppedMask = stoppedMask;
@@ -186,7 +225,7 @@ namespace Coherence.Generated
         public override string ToString()
         {
             return $"_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761(" +
-                $" networkedCurrentFieldId: { this.networkedCurrentFieldId }" +
+                $" networkedCurrentFieldTransform: { this.networkedCurrentFieldTransform }" +
                 $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(1, '0') }, " +
                 $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(1, '0') })";
         }
