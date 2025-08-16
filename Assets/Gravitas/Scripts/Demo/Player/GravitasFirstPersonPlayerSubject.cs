@@ -188,7 +188,8 @@ namespace Gravitas.Demo
             gravitasBody.Velocity = Vector3.zero;
 
             // Setting rotation and stopping angular velocity
-            playerCamera.transform.localRotation = Quaternion.identity;
+            if (playerCamera != null)
+                playerCamera.transform.localRotation = Quaternion.identity;
             //SetProxyLookRotation(forward);
             gravitasBody.AngularVelocity = Vector3.zero;
         }

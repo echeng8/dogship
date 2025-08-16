@@ -13,8 +13,8 @@ namespace Gravitas.Demo
         public GravitasFirstPersonPlayerSubject PlayerSubject { get; private set; }
         public bool IsControlled => PlayerSubject != null;
 
-        [Sync] public bool NetworkIsControlled { get; private set; }
-        [Sync] public GameObject ControllingPlayerGameObject { get; private set; }
+        [Sync] public bool NetworkIsControlled;
+        [Sync] public GameObject ControllingPlayerGameObject;
 
         [SerializeField] private ParticleSystem[] spaceshipParticles;
         private Quaternion previousCameraRotation;
@@ -116,7 +116,8 @@ namespace Gravitas.Demo
             PlayerSubject.SetPlayerSubjectPositionAndRotation(localPos + new Vector3(0, 0.5f, -1f), Vector3.forward);
             PlayerSubject.enabled = false;
 
-            if (spaceshipCameraPosition)
+            // Only handle camera for local player (PlayerCamera will be null on remote players)
+            if (spaceshipCameraPosition && PlayerSubject.PlayerCamera != null)
             {
                 playerCameraTransform = PlayerSubject.PlayerCamera.transform;
                 playerCameraTransform.GetLocalPositionAndRotation(out previousCameraPosition, out previousCameraRotation);
@@ -133,7 +134,8 @@ namespace Gravitas.Demo
             {
                 PlayerSubject.enabled = true;
 
-                if (playerCameraTransform)
+                // Only restore camera if we had moved it (local player only)
+                if (playerCameraTransform && PlayerSubject.PlayerCamera != null)
                 {
                     playerCameraTransform.SetParent(PlayerSubject.transform);
                     playerCameraTransform.SetLocalPositionAndRotation(previousCameraPosition, previousCameraRotation);

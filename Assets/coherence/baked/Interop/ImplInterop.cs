@@ -297,8 +297,10 @@ namespace Coherence.Generated
                     var val = new _006c748d7f8085f4691d554734b27fe0_8362810714748207749.Interop();
 
                     val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
+                    val.NetworkIsControlled = orig.NetworkIsControlled ? (System.Byte)1 : (System.Byte)0;
+                    val.ControllingPlayerGameObject = orig.ControllingPlayerGameObject;
 
-                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 9, component.FieldsMask, component.StoppedMask, frames);
 
                     return;
                 }

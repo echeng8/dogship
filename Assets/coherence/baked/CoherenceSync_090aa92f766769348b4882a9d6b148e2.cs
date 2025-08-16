@@ -433,7 +433,7 @@ namespace Coherence.Generated
         }    
     }
     [UnityEngine.Scripting.Preserve]
-    public class Binding_090aa92f766769348b4882a9d6b148e2_d9b812b2119b4d97b21ba7632f329159 : Vector3Binding
+    public class Binding_090aa92f766769348b4882a9d6b148e2_bdcb35cae30542e28735d0e0b60230bb : Vector3Binding
     {   
         private global::Gravitas.GravitasBody CastedUnityComponent;
 
@@ -484,7 +484,7 @@ namespace Coherence.Generated
         }    
     }
     [UnityEngine.Scripting.Preserve]
-    public class Binding_090aa92f766769348b4882a9d6b148e2_7463614228944f7791fe9a2f4bb67dc0 : QuaternionBinding
+    public class Binding_090aa92f766769348b4882a9d6b148e2_6eee3db03ff64eed9312c26bcec9732e : QuaternionBinding
     {   
         private global::Gravitas.GravitasBody CastedUnityComponent;
 
@@ -607,8 +607,8 @@ namespace Coherence.Generated
 			["ebb35f6b6b5c493e9629772c349e36bc"] = new Binding_090aa92f766769348b4882a9d6b148e2_ebb35f6b6b5c493e9629772c349e36bc(),
 			["3d39b6683906472997bd0f12c783f807"] = new Binding_090aa92f766769348b4882a9d6b148e2_3d39b6683906472997bd0f12c783f807(),
 			["88576139efd24c548b5d1ba4a8f5c5a3"] = new Binding_090aa92f766769348b4882a9d6b148e2_88576139efd24c548b5d1ba4a8f5c5a3(),
-			["d9b812b2119b4d97b21ba7632f329159"] = new Binding_090aa92f766769348b4882a9d6b148e2_d9b812b2119b4d97b21ba7632f329159(),
-			["7463614228944f7791fe9a2f4bb67dc0"] = new Binding_090aa92f766769348b4882a9d6b148e2_7463614228944f7791fe9a2f4bb67dc0(),
+			["bdcb35cae30542e28735d0e0b60230bb"] = new Binding_090aa92f766769348b4882a9d6b148e2_bdcb35cae30542e28735d0e0b60230bb(),
+			["6eee3db03ff64eed9312c26bcec9732e"] = new Binding_090aa92f766769348b4882a9d6b148e2_6eee3db03ff64eed9312c26bcec9732e(),
 			["0238d4cf3fb64301a9bced3fc4eb1171"] = new Binding_090aa92f766769348b4882a9d6b148e2_0238d4cf3fb64301a9bced3fc4eb1171(),
         };
         

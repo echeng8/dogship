@@ -26,18 +26,26 @@ namespace Coherence.Generated
         {
             [FieldOffset(0)]
             public Entity networkedCurrentFieldTransform;
+            [FieldOffset(4)]
+            public System.Byte NetworkIsControlled;
+            [FieldOffset(5)]
+            public Entity ControllingPlayerGameObject;
         }
 
         public void ResetFrame(AbsoluteSimulationFrame frame)
         {
             FieldsMask |= _006c748d7f8085f4691d554734b27fe0_8362810714748207749.networkedCurrentFieldTransformMask;
             networkedCurrentFieldTransformSimulationFrame = frame;
+            FieldsMask |= _006c748d7f8085f4691d554734b27fe0_8362810714748207749.NetworkIsControlledMask;
+            NetworkIsControlledSimulationFrame = frame;
+            FieldsMask |= _006c748d7f8085f4691d554734b27fe0_8362810714748207749.ControllingPlayerGameObjectMask;
+            ControllingPlayerGameObjectSimulationFrame = frame;
         }
 
         public static unsafe _006c748d7f8085f4691d554734b27fe0_8362810714748207749 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
         {
-            if (dataSize != 4) {
-                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 4) " +
+            if (dataSize != 9) {
+                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 9) " +
                     "for component with ID 20");
             }
 
@@ -51,6 +59,8 @@ namespace Coherence.Generated
             var comp = (Interop*)data;
 
             orig.networkedCurrentFieldTransform = comp->networkedCurrentFieldTransform;
+            orig.NetworkIsControlled = comp->NetworkIsControlled != 0;
+            orig.ControllingPlayerGameObject = comp->ControllingPlayerGameObject;
 
             return orig;
         }
@@ -59,13 +69,19 @@ namespace Coherence.Generated
         public static uint networkedCurrentFieldTransformMask => 0b00000000000000000000000000000001;
         public AbsoluteSimulationFrame networkedCurrentFieldTransformSimulationFrame;
         public Entity networkedCurrentFieldTransform;
+        public static uint NetworkIsControlledMask => 0b00000000000000000000000000000010;
+        public AbsoluteSimulationFrame NetworkIsControlledSimulationFrame;
+        public System.Boolean NetworkIsControlled;
+        public static uint ControllingPlayerGameObjectMask => 0b00000000000000000000000000000100;
+        public AbsoluteSimulationFrame ControllingPlayerGameObjectSimulationFrame;
+        public Entity ControllingPlayerGameObject;
 
         public uint FieldsMask { get; set; }
         public uint StoppedMask { get; set; }
         public uint GetComponentType() => 20;
         public int PriorityLevel() => 100;
         public const int order = 0;
-        public uint InitialFieldsMask() => 0b00000000000000000000000000000001;
+        public uint InitialFieldsMask() => 0b00000000000000000000000000000111;
         public bool HasFields() => true;
         public bool HasRefFields() => true;
 
@@ -74,7 +90,7 @@ namespace Coherence.Generated
             return null;
         }
 
-        public int GetFieldCount() => 1;
+        public int GetFieldCount() => 3;
 
 
         
@@ -83,6 +99,7 @@ namespace Coherence.Generated
             return new HashSet<Entity>()
             {
                 this.networkedCurrentFieldTransform,
+                this.ControllingPlayerGameObject,
             };
         }
 
@@ -94,6 +111,11 @@ namespace Coherence.Generated
             {
                 this.networkedCurrentFieldTransform = toEntity;
                 refsMask |= 1 << 0;
+            }
+            if (this.ControllingPlayerGameObject == fromEntity)
+            {
+                this.ControllingPlayerGameObject = toEntity;
+                refsMask |= 1 << 2;
             }
 
             FieldsMask |= refsMask;
@@ -113,6 +135,14 @@ namespace Coherence.Generated
             }
 
             this.networkedCurrentFieldTransform = absoluteEntity;
+            err = mapper.MapToAbsoluteEntity(this.ControllingPlayerGameObject, false, out absoluteEntity);
+
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+
+            this.ControllingPlayerGameObject = absoluteEntity;
             return IEntityMapper.Error.None;
         }
 
@@ -134,6 +164,20 @@ namespace Coherence.Generated
             }
 
             this.networkedCurrentFieldTransform = relativeEntity;
+            // We assume that the inConnection held changes with unresolved references, so the 'createMapping=true' is
+            // there only because there's a chance that the parent creation change will be processed after this one
+            // meaning there's no mapping for the parent yet. This wouldn't be necessary if mapping creation would happen
+            // in the clientWorld via create/destroy requests while here we would only check whether mapping exists or not.
+            var createParentMapping_ControllingPlayerGameObject = true;
+            err = mapper.MapToRelativeEntity(this.ControllingPlayerGameObject, createParentMapping_ControllingPlayerGameObject,
+             out relativeEntity);
+
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+
+            this.ControllingPlayerGameObject = relativeEntity;
             return IEntityMapper.Error.None;
         }
 
@@ -165,6 +209,20 @@ namespace Coherence.Generated
             }
 
             otherMask >>= 1;
+            if ((otherMask & 0x01) != 0)
+            {
+                this.NetworkIsControlledSimulationFrame = other.NetworkIsControlledSimulationFrame;
+                this.NetworkIsControlled = other.NetworkIsControlled;
+            }
+
+            otherMask >>= 1;
+            if ((otherMask & 0x01) != 0)
+            {
+                this.ControllingPlayerGameObjectSimulationFrame = other.ControllingPlayerGameObjectSimulationFrame;
+                this.ControllingPlayerGameObject = other.ControllingPlayerGameObject;
+            }
+
+            otherMask >>= 1;
             StoppedMask |= other.StoppedMask;
 
             return this;
@@ -179,7 +237,7 @@ namespace Coherence.Generated
         {
             if (bitStream.WriteMask(data.StoppedMask != 0))
             {
-                bitStream.WriteMaskBits(data.StoppedMask, 1);
+                bitStream.WriteMaskBits(data.StoppedMask, 3);
             }
 
             var mask = data.FieldsMask;
@@ -196,6 +254,30 @@ namespace Coherence.Generated
             }
 
             mask >>= 1;
+            if (bitStream.WriteMask((mask & 0x01) != 0))
+            {
+
+
+                var fieldValue = data.NetworkIsControlled;
+
+
+
+                bitStream.WriteBool(fieldValue);
+            }
+
+            mask >>= 1;
+            if (bitStream.WriteMask((mask & 0x01) != 0))
+            {
+
+
+                var fieldValue = data.ControllingPlayerGameObject;
+
+
+
+                bitStream.WriteEntity(fieldValue);
+            }
+
+            mask >>= 1;
 
             return mask;
         }
@@ -205,7 +287,7 @@ namespace Coherence.Generated
             var stoppedMask = (uint)0;
             if (bitStream.ReadMask())
             {
-                stoppedMask = bitStream.ReadMaskBits(1);
+                stoppedMask = bitStream.ReadMaskBits(3);
             }
 
             var val = new _006c748d7f8085f4691d554734b27fe0_8362810714748207749();
@@ -214,6 +296,18 @@ namespace Coherence.Generated
 
                 val.networkedCurrentFieldTransform = bitStream.ReadEntity();
                 val.FieldsMask |= _006c748d7f8085f4691d554734b27fe0_8362810714748207749.networkedCurrentFieldTransformMask;
+            }
+            if (bitStream.ReadMask())
+            {
+
+                val.NetworkIsControlled = bitStream.ReadBool();
+                val.FieldsMask |= _006c748d7f8085f4691d554734b27fe0_8362810714748207749.NetworkIsControlledMask;
+            }
+            if (bitStream.ReadMask())
+            {
+
+                val.ControllingPlayerGameObject = bitStream.ReadEntity();
+                val.FieldsMask |= _006c748d7f8085f4691d554734b27fe0_8362810714748207749.ControllingPlayerGameObjectMask;
             }
 
             val.StoppedMask = stoppedMask;
@@ -226,8 +320,10 @@ namespace Coherence.Generated
         {
             return $"_006c748d7f8085f4691d554734b27fe0_8362810714748207749(" +
                 $" networkedCurrentFieldTransform: { this.networkedCurrentFieldTransform }" +
-                $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(1, '0') }, " +
-                $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(1, '0') })";
+                $" NetworkIsControlled: { this.NetworkIsControlled }" +
+                $" ControllingPlayerGameObject: { this.ControllingPlayerGameObject }" +
+                $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(3, '0') }, " +
+                $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(3, '0') })";
         }
     }
 

@@ -56,8 +56,8 @@ namespace Gravitas
         }
         public bool IsProxied => (bool)currentProxy;
 
-        [Sync] public Vector3 SyncedProxyPosition { get; set; }
-        [Sync] public Quaternion SyncedProxyRotation { get; set; }
+        [Sync] public Vector3 SyncedProxyPosition;
+        [Sync] public Quaternion SyncedProxyRotation;
 
         protected GravitasSubjectProxy currentProxy;
 

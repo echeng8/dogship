@@ -43,7 +43,7 @@ public class WebGLBuilder
         var startInfo = new ProcessStartInfo
         {
             FileName = BUTLER_PATH,
-            Arguments = "whoami",
+            Arguments = "login",
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true,

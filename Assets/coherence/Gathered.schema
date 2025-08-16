@@ -7,6 +7,8 @@ component _002e0f0727244a041abfd9d124ef5bce_3087197899905382075 [id "19"]
 
 component _006c748d7f8085f4691d554734b27fe0_8362810714748207749 [id "20"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
+  NetworkIsControlled Bool [bits "1"]
+  ControllingPlayerGameObject Entity [bits "20", client-type "GameObject"]
 
 component _006c748d7f8085f4691d554734b27fe0_8445149378463969736 [id "21"]
   SyncedProxyPosition Vector3 [compression "None"]
