@@ -120,7 +120,7 @@ namespace Gravitas
             if (ProxyRigidbody)
             {
                 Gizmos.color = Color.white;
-                Gizmos.DrawLine(transform.position, transform.position + ProxyRigidbody.velocity);
+                Gizmos.DrawLine(transform.position, transform.position + ProxyRigidbody.linearVelocity);
             }
         }
         #endif

@@ -123,10 +123,10 @@ namespace Gravitas
             if (!go.TryGetComponent(out Rigidbody newRb))
                 newRb = go.AddComponent<Rigidbody>();
 
-            newRb.angularDrag = rb.angularDrag;
+            newRb.angularDamping = rb.angularDamping;
             newRb.collisionDetectionMode = rb.collisionDetectionMode;
             newRb.constraints = rb.constraints;
-            newRb.drag = rb.drag;
+            newRb.linearDamping = rb.linearDamping;
             newRb.isKinematic = isKinematic && rb.isKinematic;
             newRb.mass = rb.mass;
             newRb.useGravity = useGravity && rb.useGravity;

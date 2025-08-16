@@ -27,11 +27,11 @@ namespace Gravitas
         {
             if (!rigidbody) { return; }
 
-            angularDrag = rigidbody.angularDrag;
+            angularDrag = rigidbody.angularDamping;
             collisionDetectionMode = rigidbody.collisionDetectionMode;
             constraints = rigidbody.constraints;
             detectCollisions = rigidbody.detectCollisions;
-            drag = rigidbody.drag;
+            drag = rigidbody.linearDamping;
             freezeRotation = rigidbody.freezeRotation;
             interpolation = rigidbody.interpolation;
             isKinematic = rigidbody.isKinematic;
@@ -50,10 +50,10 @@ namespace Gravitas
 
             rigidbody.isKinematic = isKinematic;
 
-            rigidbody.angularDrag = angularDrag;
+            rigidbody.angularDamping = angularDrag;
             rigidbody.collisionDetectionMode = collisionDetectionMode;
             rigidbody.detectCollisions = detectCollisions;
-            rigidbody.drag = drag;
+            rigidbody.linearDamping = drag;
             rigidbody.freezeRotation = freezeRotation;
             rigidbody.interpolation = interpolation;
             rigidbody.mass = mass;

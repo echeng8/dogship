@@ -13,6 +13,9 @@ component _006c748d7f8085f4691d554734b27fe0_8362810714748207749 [id "20"]
 component _006c748d7f8085f4691d554734b27fe0_8445149378463969736 [id "21"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
+  AngularVelocity Vector3 [compression "None"]
+  Velocity Vector3 [compression "None"]
+  IsLanded Bool [bits "1"]
 
 component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "22"]
   AngularVelocity Vector3 [compression "None"]
@@ -25,34 +28,30 @@ component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "22"]
 component _090aa92f766769348b4882a9d6b148e2_3543296725183664750 [id "23"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
-component _090aa92f766769348b4882a9d6b148e2_3543296725183664751 [id "24"]
-  velocity Vector3 [compression "None"]
-  angularVelocity Vector3 [compression "None"]
-
-component _362fd1a7edeb85c48bb39119604133c5_7385481098666009946 [id "25"]
+component _362fd1a7edeb85c48bb39119604133c5_7385481098666009946 [id "24"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
-component _362fd1a7edeb85c48bb39119604133c5_7385481098666009951 [id "26"]
+component _362fd1a7edeb85c48bb39119604133c5_7385481098666009951 [id "25"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760 [id "27"]
-  velocity Vector3 [compression "None"]
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885760 [id "26"]
   angularVelocity Vector3 [compression "None"]
+  linearVelocity Vector3 [compression "None"]
 
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761 [id "28"]
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761 [id "27"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 [id "29"]
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 [id "28"]
   AngularVelocity Vector3 [compression "None"]
   Velocity Vector3 [compression "None"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _76ed9974a395ce54087bcb395f26407a_6959148627032638732 [id "30"]
+component _76ed9974a395ce54087bcb395f26407a_6959148627032638732 [id "29"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
-component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "31"]
+component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "30"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 

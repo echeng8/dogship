@@ -22,7 +22,7 @@ namespace Gravitas.Demo
             else if (TryGetComponent(out Rigidbody rb)) // Set velocity directly to rigidbody
             {
                 rb.angularVelocity = initialAngularVelocity;
-                rb.velocity = initialVelocity;
+                rb.linearVelocity = initialVelocity;
             }
 
             Destroy(this);

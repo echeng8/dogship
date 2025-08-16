@@ -38,7 +38,7 @@ namespace Gravitas
             {
                 Rigidbody rb = CurrentRigidbody;
                 if (rb)
-                    return rb.velocity;
+                    return rb.linearVelocity;
 
                 return Vector3.zero;
             }
@@ -46,7 +46,7 @@ namespace Gravitas
             {
                 Rigidbody rb = CurrentRigidbody;
                 if (rb)
-                    rb.velocity = value;
+                    rb.linearVelocity = value;
             }
         }
         public bool IsLanded

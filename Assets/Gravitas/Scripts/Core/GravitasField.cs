@@ -84,17 +84,17 @@ namespace Gravitas
 
                     Rigidbody proxyRb = proxy.ProxyRigidbody;
                     proxyRb.angularVelocity = angularVelocity - fieldAngularVelocity;
-                    proxyRb.velocity = transform.InverseTransformDirection(velocity - fieldVelocity);
+                    proxyRb.linearVelocity = transform.InverseTransformDirection(velocity - fieldVelocity);
 
                     subjects.Add(subject);
                     OnSubjectAdded?.Invoke(subject);
 
                     subject.EnterField(this);
 
-                    #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
                     if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.FieldChanging))
                         GravitasDebugLogger.Log($"Added subject \"{subject.GameObject.name}\" to field \"{name}\"");
-                    #endif
+#endif
                 }
             }
         }
@@ -106,22 +106,25 @@ namespace Gravitas
                 subjects.Remove(subject);
                 OnSubjectRemoved?.Invoke(subject);
 
-                #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
                 if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.FieldChanging))
                     GravitasDebugLogger.Log($"Removing subject \"{subject.GameObject.name}\" from field \"{name}\"");
-                #endif
+#endif
 
                 Rigidbody
                     bodyRb = subject.GravitasBody.Rigidbody,
                     proxyRb = subject.GravitasBody.CurrentRigidbody;
 
-                bodyRb.WakeUp();
-
-                // Carrying on the velocity and angular velocity of the proxy
-                bodyRb.angularVelocity = FieldAbsoluteAngularVelocity + proxyRb.angularVelocity;
-                bodyRb.velocity = FieldAbsoluteVelocity + transform.TransformDirection(proxyRb.velocity);
+                // Store velocities before destroying proxy
+                Vector3 finalAngularVelocity = FieldAbsoluteAngularVelocity + proxyRb.angularVelocity;
+                Vector3 finalLinearVelocity = FieldAbsoluteVelocity + transform.TransformDirection(proxyRb.linearVelocity);
 
                 subject.GravitasBody.DestroyProxy();
+
+                // Apply velocities after proxy destruction (when rigidbody is no longer kinematic)
+                bodyRb.WakeUp();
+                bodyRb.angularVelocity = finalAngularVelocity;
+                bodyRb.linearVelocity = finalLinearVelocity;
 
                 subject.ExitField(this);
 
@@ -197,10 +200,10 @@ namespace Gravitas
                 }
             }
 
-            #if GRAVITAS_LOGGING
+#if GRAVITAS_LOGGING
             if (startAddedSubjects > 0 && GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.FieldStartScan))
                 GravitasDebugLogger.Log($"Field \"{name}\"  added {startAddedSubjects} subjects on startup");
-            #endif
+#endif
         }
 
         public void UnloadPhysicsScene()
@@ -335,7 +338,7 @@ namespace Gravitas
                 subjects.Contains(subject);
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         /// <summary>Checks and reports any issues with this field for display in the inspector.</summary>
         /// <param name="errorMessage">The error message result.</param>
         /// <returns><c>int</c> The returned error code, indicating the error severity. </returns>
@@ -363,7 +366,7 @@ namespace Gravitas
 
             return 0;
         }
-        #endif
+#endif
 
         protected void Awake()
         {
