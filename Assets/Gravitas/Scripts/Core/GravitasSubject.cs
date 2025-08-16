@@ -195,6 +195,10 @@ namespace Gravitas
         {
             if (coherenceSync == null) return true; // No networking, assume local authority
 
+            // If not connected, assume local authority
+            if (!coherenceSync.CoherenceBridge.IsConnected)
+                return true;
+
             // In coherence, check if we have state authority over this entity
             return coherenceSync.HasStateAuthority;
         }

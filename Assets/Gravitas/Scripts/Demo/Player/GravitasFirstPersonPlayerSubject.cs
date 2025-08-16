@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Coherence.Toolkit;
+using IngameDebugConsole;
 
 namespace Gravitas.Demo
 {
@@ -79,7 +80,8 @@ namespace Gravitas.Demo
 
             HandleControlInputs();
 
-            if (isCursorLocked)
+            if (isCursorLocked &&
+               (!DebugLogManager.Instance?.IsLogWindowVisible ?? true))
             {
                 ProcessMovementInput();
                 ProcessMouseLookInput();

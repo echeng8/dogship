@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using System.IO.Compression;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System;
@@ -42,9 +43,10 @@ public class WebGLBuilder
         var startInfo = new ProcessStartInfo
         {
             FileName = BUTLER_PATH,
-            Arguments = "version",  // Changed from "whoami" to "version"
+            Arguments = "whoami",
             UseShellExecute = false,
             RedirectStandardOutput = true,
+            RedirectStandardError = true,
             CreateNoWindow = true
         };
 
@@ -53,13 +55,16 @@ public class WebGLBuilder
             using (var process = Process.Start(startInfo))
             {
                 string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
                 process.WaitForExit();
 
-                if (process.ExitCode != 0)  // Simplified check - if butler works, we're good
+                if (process.ExitCode != 0)
                 {
-                    Debug.LogError("Butler is not working correctly. Please check your installation");
+                    Debug.LogError($"Butler authentication failed: {error}");
                     return false;
                 }
+
+                Debug.Log($"Butler authenticated as: {output.Trim()}");
             }
             return true;
         }
@@ -102,7 +107,7 @@ public class WebGLBuilder
         if (File.Exists(zipPath))
             File.Delete(zipPath);
 
-        System.IO.Compression.ZipFile.CreateFromDirectory(buildPath, zipPath);
+        ZipFile.CreateFromDirectory(buildPath, zipPath);
         Debug.Log("Build zipped to: " + zipPath);
     }
 
@@ -117,7 +122,7 @@ public class WebGLBuilder
             Arguments = arguments,
             UseShellExecute = false,
             RedirectStandardOutput = true,
-            RedirectStandardError = true,    // Add error redirection
+            RedirectStandardError = true,
             CreateNoWindow = true
         };
 
@@ -125,18 +130,14 @@ public class WebGLBuilder
         {
             using (Process process = Process.Start(startInfo))
             {
-                // Read both output and error streams
-                while (!process.StandardOutput.EndOfStream || !process.StandardError.EndOfStream)
-                {
-                    string output = process.StandardOutput.ReadLine();
-                    string error = process.StandardError.ReadLine();
-
-                    if (!string.IsNullOrEmpty(output))
-                        Debug.Log("Butler: " + output);
-                    if (!string.IsNullOrEmpty(error))
-                        Debug.LogError("Butler Error: " + error);
-                }
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
                 process.WaitForExit();
+
+                if (!string.IsNullOrEmpty(output))
+                    Debug.Log("Butler: " + output);
+                if (!string.IsNullOrEmpty(error))
+                    Debug.LogError("Butler Error: " + error);
 
                 if (process.ExitCode != 0)
                 {
