@@ -251,7 +251,7 @@ namespace Gravitas.Demo
                 interactableLayers,
                 QueryTriggerInteraction.Ignore))
             {
-                Debug.Log($"Hit object: {hitInfo.collider.name}");
+                //Debug.Log($"Hit object: {hitInfo.collider.name}");
                 HandleInteractableObject(hitInfo.collider);
             }
             else

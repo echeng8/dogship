@@ -5163,13 +5163,13 @@ MonoBehaviour:
   fieldChangeDelay: 0.5
   orientSpeed: 80
   reorientDelay: 2.5
-  autoOrient: 0
+  autoOrient: 1
   willReorient: 1
   playerCamera: {fileID: 0}
   playerParticleSystem: {fileID: 3543296724503700690}
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   jetpackForce: 20
   jumpForce: 10
   moveSpeed: 20
