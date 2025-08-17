@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3136628078279194173}
   - component: {fileID: 3136628078279194170}
   - component: {fileID: 3136628078279194171}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 3136628078399885761}
   - component: {fileID: 3136628078399885763}
   - component: {fileID: 4501518518765730058}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere Planet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3136628078399885818}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -64, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   - rid: 8677872797709238378
   - rid: 8677872797709238379
   - rid: 6818957093645320454
-  scenePrefabInstanceUUID: 
+  scenePrefabInstanceUUID: 22106
   coherenceUUID: 
   assetVersion: 
   coherenceTag: 
