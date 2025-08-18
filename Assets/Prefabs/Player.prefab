@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 3543296724503700691}
   - component: {fileID: 3543296724503700690}
   - component: {fileID: 3543296724503700693}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Jetpack Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5000,7 +5000,7 @@ GameObject:
   - component: {fileID: 3543296725183664748}
   - component: {fileID: 3543296725183664750}
   - component: {fileID: 2683227246358131983}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
