@@ -94,7 +94,7 @@ public class WebGLBuilder
             scenes,
             path,
             BuildTarget.WebGL,
-            BuildOptions.None
+            BuildOptions.Development // Ensure development build is ON
         );
         Debug.Log("WebGL build completed!");
     }

@@ -5161,8 +5161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   networkedCurrentFieldTransform: {fileID: 0}
   fieldChangeDelay: 0.5
-  orientSpeed: 80
-  reorientDelay: 2.5
+  orientSpeed: 160
+  reorientDelay: 0
   autoOrient: 1
   willReorient: 1
   playerCamera: {fileID: 0}
