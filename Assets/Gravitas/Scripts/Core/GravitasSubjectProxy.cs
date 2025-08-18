@@ -80,10 +80,17 @@ namespace Gravitas
                                 bodyGO.transform.InverseTransformPoint(col.transform.position),
                                 Quaternion.Inverse(bodyGO.transform.rotation) * col.transform.rotation
                             );
-                            childInstance.transform.localScale = bodyGO.transform.InverseTransformVector
-                            (
-                                col.transform.localToWorldMatrix * col.transform.localScale
+
+                            // Calculate the proper relative scale using world scales
+                            Vector3 colWorldScale = col.transform.lossyScale;
+                            Vector3 bodyWorldScale = bodyGO.transform.lossyScale;
+                            Vector3 relativeScale = new Vector3(
+                                colWorldScale.x / bodyWorldScale.x,
+                                colWorldScale.y / bodyWorldScale.y,
+                                colWorldScale.z / bodyWorldScale.z
                             );
+
+                            childInstance.transform.localScale = relativeScale;
 
                             childInstance.CopyCollider(col);
                         }
@@ -114,7 +121,7 @@ namespace Gravitas
                 outOfBoundsMap[col] = isOutOfBounds;
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             if (ProxyRigidbody)
@@ -123,6 +130,6 @@ namespace Gravitas
                 Gizmos.DrawLine(transform.position, transform.position + ProxyRigidbody.linearVelocity);
             }
         }
-        #endif
+#endif
     }
 }
