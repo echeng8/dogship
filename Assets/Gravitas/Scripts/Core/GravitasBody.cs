@@ -136,12 +136,15 @@ namespace Gravitas
         {
             Transform currentTransform = CurrentTransform;
             float angle = Vector3.Angle(transform.up, up);
+
             if (angle > 0.05f)
             {
                 Quaternion
                     currentRotation = currentTransform.rotation,
                     rot = Quaternion.FromToRotation(currentTransform.up, up) * currentRotation;
                 currentTransform.rotation = Quaternion.RotateTowards(currentRotation, rot, orientSpeed * Time.deltaTime);
+
+
             }
         }
 

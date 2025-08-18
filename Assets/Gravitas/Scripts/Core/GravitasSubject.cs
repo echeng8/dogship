@@ -72,7 +72,6 @@ namespace Gravitas
 #endif
 
             CurrentField = field;
-            willReorient = autoOrient && CurrentField.FixedDirection != FixedDirection.None;
 
             OnEnterField?.Invoke(field);
 

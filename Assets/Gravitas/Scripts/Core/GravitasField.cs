@@ -272,10 +272,12 @@ namespace Gravitas
 
                     subjectBody.AddForce(force, ForceMode.Acceleration);
 
+                    Debug.Log($"Object: {subject.GameObject.name}, IsLanded: {isLanded}, WillReorient: {subject.WillReorient}, AutoOrient: {subject.AutoOrient}");
+
                     // Orientation processing
                     if (isLanded)
                     {
-                        //Debug.Log($"GameObject '{subject.GameObject.name}' landed on '{hitInfo.collider.gameObject.name}'");
+                        Debug.Log($"GameObject '{subject.GameObject.name}' landed on '{hitInfo.collider.gameObject.name}' - normal: {hitInfo.normal}");
                         if (subject.WillReorient) // Orient to surface normal if re-orientable and landed
                         {
                             subjectBody.Orient(hitInfo.normal, subject.OrientSpeed);
@@ -286,6 +288,7 @@ namespace Gravitas
                     }
                     else if (subject.AutoOrient)
                     {
+                        Debug.Log($"GameObject '{subject.GameObject.name}' auto-orienting to force direction: {-force.normalized}");
                         subjectBody.Orient(-force.normalized, subject.OrientSpeed);
                         subject.SetReorientTimer(0);
                     }
