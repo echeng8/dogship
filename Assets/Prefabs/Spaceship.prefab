@@ -319,7 +319,7 @@ MonoBehaviour:
   fixedDirection: 4
   fieldLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 4294967295
   acceleration: 10
   physicsSceneBoundaryScaleFactor: 1.1
   addChildColliders: 1
