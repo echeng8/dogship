@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 983e4636ae10b4609b3cf2244fb724db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Scripts/CharacterBubbleAnchor.cs
+  uploadId: 767937

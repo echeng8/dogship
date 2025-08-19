@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c0c8b3a7dc42a420ab644c2624b6ccab
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Examples/2D Sidescroller/Bubble
+    Prefabs/Emoji/Capsmoji.asset
+  uploadId: 767937

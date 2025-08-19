@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 06c379b65993c45abaf81fc4b5c74732
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Prefabs/Fonts/EBGaramond-Medium
+    SDF.asset
+  uploadId: 767937

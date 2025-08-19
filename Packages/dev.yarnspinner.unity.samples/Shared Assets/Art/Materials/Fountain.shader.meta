@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 81b942130538c4cbc8990cedf0a515ca
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Materials/Fountain.shader
+  uploadId: 767937

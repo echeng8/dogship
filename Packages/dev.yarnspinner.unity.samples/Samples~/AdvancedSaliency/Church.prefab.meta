@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f740bfbb73f684700a6248c762092729
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/AdvancedSaliency/Church.prefab
+  uploadId: 767937

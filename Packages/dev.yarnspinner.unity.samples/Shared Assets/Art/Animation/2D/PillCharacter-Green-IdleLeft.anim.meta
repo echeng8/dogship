@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3a0bc070cb908461b9455be3a6cb2189
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/2D/PillCharacter-Green-IdleLeft.anim
+  uploadId: 767937

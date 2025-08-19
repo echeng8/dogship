@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 00a7d26d04a3f4dda90169aa1caff06c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/2D/PillCharacter-Blue-WalkLeft.anim
+  uploadId: 767937

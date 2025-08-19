@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 39c0ea86788634ac891ec94edd9e11b8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Examples/3D Top-Down/3D Top Down/LightingData.asset
+  uploadId: 767937

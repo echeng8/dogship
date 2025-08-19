@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 356f9e6dadacf42e9b6b137e3b1f4886
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/2D/PillCharacter-SkyBlue-IdleRight.anim
+  uploadId: 767937

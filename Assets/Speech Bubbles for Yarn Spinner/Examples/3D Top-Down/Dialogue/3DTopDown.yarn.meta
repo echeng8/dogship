@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: faaf54a78d5fb4ab8820b454ebabe18f
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Examples/3D Top-Down/Dialogue/3DTopDown.yarn
+  uploadId: 767937

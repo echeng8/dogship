@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0644bdaec768a40acaf8f960e1db9b93
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/PhoneChat/Prefabs/Option
+    Button.prefab
+  uploadId: 767937

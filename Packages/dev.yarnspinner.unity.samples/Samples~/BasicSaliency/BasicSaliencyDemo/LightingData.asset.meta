@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ad1fd694d256b4dfa86ad75c16997afb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/BasicSaliency/BasicSaliencyDemo/LightingData.asset
+  uploadId: 767937

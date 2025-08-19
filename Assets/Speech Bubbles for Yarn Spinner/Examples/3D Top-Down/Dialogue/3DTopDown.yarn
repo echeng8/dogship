@@ -1,0 +1,21 @@
+﻿title: Orc1
+target: orc1
+---
+Orc1: Ahh! I'm a monster!
+Player: Because you're an orc?
+Orc1: What? No!
+Orc1: I stole my buddy Kevin's parking spot!
+
+===
+title: Orc2
+target: orc2
+---
+Orc2: This is my barrel!
+Orc2: You can't have it!
+-> Is it a good barrel?
+    Orc2: Yes! 
+    Orc2: I mean, no! 
+    Orc2: No gold in this barrel!
+-> Why?
+    Orc2: There's such a thing as personal property!
+===

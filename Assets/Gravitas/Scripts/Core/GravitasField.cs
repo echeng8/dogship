@@ -277,7 +277,7 @@ namespace Gravitas
                     // Orientation processing
                     if (isLanded)
                     {
-                        //Debug.Log($"GameObject '{subject.GameObject.name}' landed on '{hitInfo.collider.gameObject.name}' - normal: {hitInfo.normal}");
+                        Debug.Log($"GameObject '{subject.GameObject.name}' landed on '{hitInfo.collider.gameObject.name}' - normal: {hitInfo.normal}");
                         if (subject.WillReorient) // Orient to surface normal if re-orientable and landed
                         {
                             subjectBody.Orient(hitInfo.normal, subject.OrientSpeed);

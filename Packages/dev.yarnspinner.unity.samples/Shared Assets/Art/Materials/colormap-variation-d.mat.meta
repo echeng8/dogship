@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 172cb8cf7c2bb4d1aa47248abc6f36cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Materials/colormap-variation-d.mat
+  uploadId: 767937

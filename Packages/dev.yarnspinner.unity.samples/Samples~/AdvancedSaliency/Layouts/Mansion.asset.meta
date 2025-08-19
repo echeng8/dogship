@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 90eacb2a2618a4fedb8058fce19d63e2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/AdvancedSaliency/Layouts/Mansion.asset
+  uploadId: 767937

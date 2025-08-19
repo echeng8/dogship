@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8de5c02b68e66467d9babadb3122270c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/AdvancedSaliency/The
+    Room/LightingData.asset
+  uploadId: 767937

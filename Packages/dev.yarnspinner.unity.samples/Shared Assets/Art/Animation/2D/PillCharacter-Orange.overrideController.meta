@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b888680c459114fc5b7078274a0f8bbd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 22100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/2D/PillCharacter-Orange.overrideController
+  uploadId: 767937

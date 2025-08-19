@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2df185947cdb84394a4d41332396ad70
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/Switch
+    (3-Way).controller
+  uploadId: 767937

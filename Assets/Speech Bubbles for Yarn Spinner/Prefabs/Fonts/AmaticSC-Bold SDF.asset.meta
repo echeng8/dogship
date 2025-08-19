@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c65990f5386ae4fbe922c2e7ce2bf5d9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Prefabs/Fonts/AmaticSC-Bold SDF.asset
+  uploadId: 767937

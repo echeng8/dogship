@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c7f07bd0854724a33a33ac7395552d2d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/BackgroundChatter/Prefabs/ChatterNPC.prefab
+  uploadId: 767937

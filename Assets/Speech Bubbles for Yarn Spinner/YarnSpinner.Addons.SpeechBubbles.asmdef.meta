@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 71c08673113bf476ea5bd945e1f4a23c
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/YarnSpinner.Addons.SpeechBubbles.asmdef
+  uploadId: 767937

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: db869203c87a84511b91b7e340d58f38
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Characters/Mouth/Parallax
+    Mouth.mat
+  uploadId: 767937

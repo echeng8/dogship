@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: efe2bc12ffa6d45dda98aa4998c34e99
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Materials/Skybox-Nebula.mat
+  uploadId: 767937

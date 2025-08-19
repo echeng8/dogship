@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e0265c031ffd24d1da83d59deefab028
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Animation/Interactable
+    Hidden.anim
+  uploadId: 767937

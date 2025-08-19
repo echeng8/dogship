@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9c2a43186a51d4664b6dedb3d0e1f2cd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Scripts/Editor/AnimationLayerPropertyDrawer.cs
+  uploadId: 767937

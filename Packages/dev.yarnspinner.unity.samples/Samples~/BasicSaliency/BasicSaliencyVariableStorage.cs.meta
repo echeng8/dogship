@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 034162ff888f344009fdf72cd3e6ee48
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/BasicSaliency/BasicSaliencyVariableStorage.cs
+  uploadId: 767937

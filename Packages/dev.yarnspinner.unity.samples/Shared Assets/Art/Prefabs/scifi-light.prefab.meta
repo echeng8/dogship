@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bf2ced14dd80a4495b2f4369610819bf
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Prefabs/scifi-light.prefab
+  uploadId: 767937

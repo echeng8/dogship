@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0143cd69314314598955b9ce440f8359
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 4305e56eff96e4a6488aaac183bde954, type: 3}
+  audioClip: {fileID: 8300000, guid: 1f5424b662fda4a50aade0f8ff774ba2, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/VoiceOver/Dialogue/assets-en/LipSync-en/tutorial-tom-05.lipsync
+  uploadId: 767937

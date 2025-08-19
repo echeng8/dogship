@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 28bebbf7f1bd34705b31f392395aab76
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Characters/Mouth/Data/FaceExpression-Smiling.asset
+  uploadId: 767937

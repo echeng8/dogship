@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 85371c738ccab46e7b928e1b22706210
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/ThemedLinePresenter/ThemedLinePresenter/LightingData.asset
+  uploadId: 767937

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a53ae1e4540dd41dabc340f5e6350c6f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Fonts/Montserrat/static/Montserrat-Regular
+    SDF.asset
+  uploadId: 767937

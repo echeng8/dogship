@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8894305108195487385}
   - component: {fileID: 3456753713122395223}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: Spot Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 2205717358056765571}
   - component: {fileID: 8362810714748207749}
   - component: {fileID: 8445149378463969739}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ MonoBehaviour:
   fixedDirection: 4
   fieldLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   acceleration: 10
   physicsSceneBoundaryScaleFactor: 1.1
   addChildColliders: 1
@@ -675,7 +675,7 @@ MonoBehaviour:
   - rid: 6818957093645320436
   - rid: 6818957093645320440
   - rid: 6818957093645320443
-  scenePrefabInstanceUUID: 
+  scenePrefabInstanceUUID: -1734
   coherenceUUID: 
   assetVersion: 
   coherenceTag: 
@@ -1231,7 +1231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 215051290736376593}
   - component: {fileID: 7904992027526949953}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1369,7 +1369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2205717357242311992}
   - component: {fileID: 2205717357242311994}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1995,7 +1995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7282666807106044328}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Camera Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2118,7 @@ GameObject:
   - component: {fileID: 5883792036610228436}
   - component: {fileID: 5883792036610228439}
   - component: {fileID: 5883792036610228438}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Ship Gravity Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2233,7 +2233,7 @@ GameObject:
   - component: {fileID: 5883792036667498410}
   - component: {fileID: 5883792036667498413}
   - component: {fileID: 6660505193662672401}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,7 +2335,7 @@ GameObject:
   - component: {fileID: 5883792036749940432}
   - component: {fileID: 5883792036749940463}
   - component: {fileID: 5883792036749940462}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2424,7 +2424,7 @@ GameObject:
   - component: {fileID: 5883792036989788091}
   - component: {fileID: 1488244256143390850}
   - component: {fileID: 1605447736368206905}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Spaceship Reset Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2494,7 +2494,7 @@ GameObject:
   - component: {fileID: 5883792037876832174}
   - component: {fileID: 5883792037876832145}
   - component: {fileID: 2801787139335433905}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Ship Stats Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

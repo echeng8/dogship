@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5d27be9ed06f347fea6b9afdece81302
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/VoiceOver/Dialogue/VoiceOver
+    - zh_Hans.csv
+  uploadId: 767937

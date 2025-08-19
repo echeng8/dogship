@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4de7d4cd1084b4b36b3ced1308bfe2e9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Materials/alien-headplate-red.mat
+  uploadId: 767937

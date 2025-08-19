@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 643f4e1252d3e4e4fbebc9d0cad129ef
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/PhoneChat/Sprites/PhoneChat-Design.afdesign
+  uploadId: 767937

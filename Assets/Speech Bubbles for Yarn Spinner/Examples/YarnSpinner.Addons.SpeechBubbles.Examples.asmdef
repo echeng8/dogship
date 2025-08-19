@@ -1,0 +1,36 @@
+{
+    "name": "YarnSpinner.AddOns.SpeechBubbles.Shared",
+    "rootNamespace": "",
+    "references": [
+        "GUID:34aa492b82754644eac2f903cd496268",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:71c08673113bf476ea5bd945e1f4a23c",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.inputsystem",
+            "expression": "1.0.0",
+            "define": "USE_INPUTSYSTEM"
+        },
+        {
+            "name": "com.unity.cinemachine",
+            "expression": "1.0.0",
+            "define": "USE_CINEMACHINE"
+        },
+        {
+            "name": "com.unity.cinemachine",
+            "expression": "3.0.0",
+            "define": "USE_CINEMACHINE_3"
+        }
+    ],
+    "noEngineReferences": false
+}

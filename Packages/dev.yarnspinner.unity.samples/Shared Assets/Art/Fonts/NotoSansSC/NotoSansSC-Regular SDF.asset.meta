@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c650173c60297416181ddf7a303a403a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Fonts/NotoSansSC/NotoSansSC-Regular
+    SDF.asset
+  uploadId: 767937

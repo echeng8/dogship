@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0c47edf8a9d8843a18e90245e6c62058
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Art/Fonts/Montserrat/static/Montserrat-Bold
+    SDF.asset
+  uploadId: 767937

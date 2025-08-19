@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 52ea7a5a3acfb4c399d1197a04431274
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/BackgroundChatter/Scripts/BackgroundChatterView.cs
+  uploadId: 767937

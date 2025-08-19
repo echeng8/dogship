@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 84aa77517bfe743eaa7c77c40cae04da
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Examples/2D Sidescroller/Character
+    Data/Blue Bubble Data.asset
+  uploadId: 767937

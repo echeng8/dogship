@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 37f2809848ac74a49898f04465fdd7b2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/ReplacementMarkup/Scripts/EntityColourer.cs
+  uploadId: 767937

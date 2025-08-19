@@ -1,0 +1,44 @@
+﻿title: Yellow
+---
+
+Player: Hey my man what's your whole deal
+Yellow: Hey what's up I'm a little yellow freak
+-> Nice
+    Yellow: 😎
+-> Whoa
+    Yellow: Yeah it's pretty sick
+-> Yeah
+    Yellow: I mean yeah
+===
+title: Background
+---
+// This node is run on the Background dialogue runner.
+Purple: Line 1
+Green: Line 2
+Purple: Line 1
+Green: Line 2
+Purple: Line 1
+Green: Line 2
+Purple: Line 1
+Green: Line 2
+<<jump Background>>
+===
+title: Platform
+---
+SkyBlue: I'm on a platform!!
+===
+title: Offscreen
+---
+Yellow: Hey!
+Player: What?
+Yellow: I'm off-screen! You should come back!
+Player: Okay!
+===
+title: Red
+---
+Red: I am a very prim and proper capsule.
+Player: I see that.
+Red: As such, I am very neat and tidy in my phrasing and mannerisms.
+Player: This I also see.
+Red: Wh-- why are you listening in on my daily affirmations?!
+===

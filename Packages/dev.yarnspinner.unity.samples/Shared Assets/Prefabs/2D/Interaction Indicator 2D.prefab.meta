@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5e7a44a8efa444e63aabafeebe26b168
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Shared Assets/Prefabs/2D/Interaction
+    Indicator 2D.prefab
+  uploadId: 767937

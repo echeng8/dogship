@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f7d34eaffea9f41f9b43964cae31b5ca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Assets/Speech Bubbles for Yarn Spinner/Examples/2D Sidescroller/Bubble
+    Prefabs/Sidescroller NPC Bubble.prefab
+  uploadId: 767937

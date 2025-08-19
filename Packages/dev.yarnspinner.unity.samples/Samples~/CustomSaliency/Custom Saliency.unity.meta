@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4f9134b9c4cd7445e96cce80e8ed90bd
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275933
+  packageName: Speech Bubbles for Yarn Spinner
+  packageVersion: 1.4.0
+  assetPath: Packages/dev.yarnspinner.unity.samples/Samples~/CustomSaliency/Custom
+    Saliency.unity
+  uploadId: 767937
