@@ -397,13 +397,11 @@ MonoBehaviour:
   bindings:
   - rid: 8677872618237329469
   - rid: 8677872618237329484
-  - rid: 8677872723473727611
   - rid: 8677872723473727613
   - rid: 8677872723473727615
   - rid: 8677872745804464252
   - rid: 8677872797709238378
   - rid: 8677872797709238379
-  - rid: 6818957093645320454
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -416,51 +414,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 6818957093645320454
-      type: {class: Vector3Binding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
-      data:
-        descriptor:
-          rid: 6818957093645320455
-        routing: 0
-        syncMode: 0
-        isPredicted: 0
-        predictionMode: 0
-        guid: 4beef8d2a240400c8c981f7577a31cd5
-        archetypeData:
-          type: 7
-          minRange: 0
-          maxRange: 0
-          sampleRate: 20
-          floatCompression: 0
-          fields:
-          - type: 7
-            bits: 32
-            precision: 0.001
-            floatCompression: 0
-        unityComponent: {fileID: 3136628078399885760}
-        coherenceSync: {fileID: 4501518518765730058}
-        interpolationSettings: {fileID: 0}
-    - rid: 6818957093645320455
-      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
-      data:
-        name: linearVelocity
-        monoAssemblyType: UnityEngine.Vector3, UnityEngine
-        required: 0
-        enforcesLODingWhenFieldsOverriden: 1
-        valueSyncCallbackName: 
-        memberType: 16
-        parameterAssemblyTypes: []
-        ownerType:
-          assemblyQualifiedName: UnityEngine.Rigidbody, UnityEngine.PhysicsModule,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        defaultSyncMode: 0
-        CustomData:
-          rid: -2
-        bindingType:
-          assemblyQualifiedName: Coherence.Toolkit.Bindings.ValueBindings.Vector3Binding,
-            Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        oldName: 
-        oldParameterAssemblyTypes: []
     - rid: 8677872618237329469
       type: {class: PositionBinding, ns: Coherence.Toolkit.Bindings.TransformBindings, asm: Coherence.Toolkit}
       data:
@@ -548,51 +501,6 @@ MonoBehaviour:
           rid: -2
         bindingType:
           assemblyQualifiedName: Coherence.Toolkit.Bindings.TransformBindings.RotationBinding,
-            Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        oldName: 
-        oldParameterAssemblyTypes: []
-    - rid: 8677872723473727611
-      type: {class: Vector3Binding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
-      data:
-        descriptor:
-          rid: 8677872723473727612
-        routing: 0
-        syncMode: 0
-        isPredicted: 0
-        predictionMode: 0
-        guid: 2d81804ed7cc4f82ae8b0ba6ef4d7875
-        archetypeData:
-          type: 7
-          minRange: 0
-          maxRange: 0
-          sampleRate: 20
-          floatCompression: 0
-          fields:
-          - type: 7
-            bits: 32
-            precision: 0.001
-            floatCompression: 0
-        unityComponent: {fileID: 3136628078399885760}
-        coherenceSync: {fileID: 4501518518765730058}
-        interpolationSettings: {fileID: 0}
-    - rid: 8677872723473727612
-      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
-      data:
-        name: angularVelocity
-        monoAssemblyType: UnityEngine.Vector3, UnityEngine
-        required: 0
-        enforcesLODingWhenFieldsOverriden: 1
-        valueSyncCallbackName: 
-        memberType: 16
-        parameterAssemblyTypes: []
-        ownerType:
-          assemblyQualifiedName: UnityEngine.Rigidbody, UnityEngine.PhysicsModule,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        defaultSyncMode: 0
-        CustomData:
-          rid: -2
-        bindingType:
-          assemblyQualifiedName: Coherence.Toolkit.Bindings.ValueBindings.Vector3Binding,
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
