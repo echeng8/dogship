@@ -124,6 +124,15 @@ namespace Coherence.Samples.RoomsDialog
             }
         }
 
+        private void Update()
+        {
+            // Quick development feature: Create room on local server with [ key
+            if (Input.GetKeyDown(KeyCode.LeftBracket))
+            {
+                CreateQuickLocalRoom();
+            }
+        }
+
         private void Start()
         {
             lanOnlineToggle.onValueChanged.AddListener(OnToggleChanged);
@@ -204,7 +213,7 @@ namespace Coherence.Samples.RoomsDialog
         {
             ShowLoadingState();
 
-            while (CloudRooms is not { IsLoggedIn : true })
+            while (CloudRooms is not { IsLoggedIn: true })
             {
                 yield return null;
             }
@@ -562,6 +571,23 @@ namespace Coherence.Samples.RoomsDialog
             RefreshRooms();
         }
         #endregion
+
+        private void CreateQuickLocalRoom()
+        {
+            if (replicationServerRoomsService != null)
+            {
+                var wasLanToggled = lanOnlineToggle.isOn;
+                if (!wasLanToggled)
+                {
+                    lanOnlineToggle.isOn = true;
+                    OnToggleChanged(true);
+                }
+
+                roomNameInputField.text = $"QuickRoom_{System.DateTime.Now:HHmmss}";
+                joinNextCreatedRoom = true;
+                CreateRoom();
+            }
+        }
     }
 
     internal class ListView

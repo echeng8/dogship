@@ -251,7 +251,7 @@ namespace Gravitas.Demo
                 interactableLayers,
                 QueryTriggerInteraction.Ignore))
             {
-                //Debug.Log($"Hit object: {hitInfo.collider.name}");
+                Debug.Log($"Hit object: {hitInfo.collider.name}");
                 HandleInteractableObject(hitInfo.collider);
             }
             else
@@ -261,83 +261,25 @@ namespace Gravitas.Demo
         }
 
         /// <summary>
-        /// Handles interaction with different types of interactable objects.
+        /// Handles interaction with any IInteractable object.
         /// </summary>
         /// <param name="collider">The collider of the object to interact with</param>
         private void HandleInteractableObject(Collider collider)
         {
-            // Interact with spaceship controls
-            if (collider.TryGetComponent(out GravitasSpaceshipControls spaceshipControls) && spaceshipControls.CanActivate)
+            if (collider.TryGetComponent(out IInteractable interactable))
             {
-                HandleSpaceshipControlsInteraction(spaceshipControls);
-            }
-            else if (collider.TryGetComponent(out GravitasSpaceshipControls controls))
-            {
-                Debug.Log($"Found spaceship controls but CanActivate is false. IsControlled: {controls.CanActivate}");
-            }
-            // Interact with field direction control
-            else if (collider.TryGetComponent(out GravitasFieldDirectionControl fieldDirectionControl))
-            {
-                HandleFieldDirectionControlInteraction(fieldDirectionControl);
-            }
-            // Interact with spaceship reset button
-            else if (collider.TryGetComponent(out GravitasSpaceshipResetButton spaceshipResetButton))
-            {
-                HandleSpaceshipResetButtonInteraction(spaceshipResetButton);
-            }
-        }
-
-        private void HandleSpaceshipControlsInteraction(GravitasSpaceshipControls spaceshipControls)
-        {
-            if (interact && _sync.HasInputAuthority)
-            {
-                Debug.Log($"Attempting to interact with spaceship: {spaceshipControls.SpaceshipName}");
-
-#if GRAVITAS_LOGGING
-                if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
-                    GravitasDebugLogger.Log($"Taking control of spaceship {spaceshipControls.SpaceshipName}");
-#endif
-
-                spaceshipControls.InteractWithSpaceshipControls(this);
-                OnInteractionTargetEvent?.Invoke(string.Empty);
-            }
-            else if (_sync.HasInputAuthority)
-            {
-                OnInteractionTargetEvent?.Invoke(spaceshipControls.SpaceshipName);
-            }
-        }
-
-        private void HandleFieldDirectionControlInteraction(GravitasFieldDirectionControl fieldDirectionControl)
-        {
-            if (interact)
-            {
-#if GRAVITAS_LOGGING
-                if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
-                    GravitasDebugLogger.Log($"Switching field direction to {fieldDirectionControl.DirectionName}");
-#endif
-
-                fieldDirectionControl.SwitchGravity();
-            }
-            else
-            {
-                OnInteractionTargetEvent?.Invoke(fieldDirectionControl.DirectionName);
-            }
-        }
-
-        private void HandleSpaceshipResetButtonInteraction(GravitasSpaceshipResetButton spaceshipResetButton)
-        {
-            if (interact)
-            {
-#if GRAVITAS_LOGGING
-                if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
-                    GravitasDebugLogger.Log("Resetting spaceship");
-#endif
-
-                spaceshipResetButton.ResetSpaceship();
-            }
-            else
-            {
-                OnInteractionTargetEvent?.Invoke("Reset Button");
+                if (interactable.CanInteract)
+                {
+                    if (interact && _sync.HasInputAuthority)
+                    {
+                        interactable.Interact(this);
+                        OnInteractionTargetEvent?.Invoke(string.Empty);
+                    }
+                    else if (_sync.HasInputAuthority)
+                    {
+                        OnInteractionTargetEvent?.Invoke(interactable.InteractionPrompt);
+                    }
+                }
             }
         }
         #endregion

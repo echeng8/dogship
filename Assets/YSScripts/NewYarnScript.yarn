@@ -1,11 +1,10 @@
-﻿title: Start
+﻿title: Orange
 ---
-Wow!
-My first ever Yarn script in Unity!
-
--> Gosh!
--> Incredible!
--> I'm amazed!
-
-Anyway, time to get writing!
+Orange: Hello!
+    -> Why Hello There!
+        Orange: You are a bold one.
+    -> Who are you?
+        Orange: I'm Orange.
+    -> You're orange.
+        Orange: Yep.
 ===

@@ -3,10 +3,13 @@ using Coherence.Toolkit;
 
 namespace Gravitas.Demo
 {
-    public class GravitasSpaceshipControls : MonoBehaviour
+    public class GravitasSpaceshipControls : MonoBehaviour, IInteractable
     {
         public string SpaceshipName => name;
         public bool CanActivate => spaceshipSubject && !spaceshipSubject.IsControlled && activeTimer >= ACTIVE_TIME;
+
+        public bool CanInteract => CanActivate;
+        public string InteractionPrompt => SpaceshipName;
 
         private const float ACTIVE_TIME = 0.5f;
 
@@ -42,6 +45,15 @@ namespace Gravitas.Demo
             {
                 Debug.Log($"Cannot activate spaceship. CanActivate: {CanActivate}, spaceshipSubject: {spaceshipSubject != null}, player: {player != null}");
             }
+        }
+
+        public void Interact(GravitasFirstPersonPlayerSubject player)
+        {
+#if GRAVITAS_LOGGING
+            if (GravitasDebugLogger.CanLog(GravitasDebugLoggingFlags.PlayerInteraction))
+                GravitasDebugLogger.Log($"Taking control of spaceship {SpaceshipName}");
+#endif
+            InteractWithSpaceshipControls(player);
         }
 
         private void LateUpdate()

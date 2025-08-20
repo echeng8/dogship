@@ -607,109 +607,13 @@ namespace Yarn.Unity.Samples
 
         public void SetupInteraction()
         {
-            interactables.Clear();
-
-            interactables.AddRange(FindObjectsByType<Interactable>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+            // Interaction setup not needed for FPS game - handled by player controller
         }
 
         protected void UpdateInteraction()
         {
-            if (isPlayerControlled == false)
-            {
-                // Only player-controlled characters can interact
-                return;
-            }
-
-            if (!CanInteract)
-            {
-                // We can only interact if we're allowed to move around.
-                return;
-            }
-
-            var previousInteractable = currentInteractable;
-
-            (float Distance, Interactable? Interactable) nearest = (float.PositiveInfinity, null);
-
-            for (int i = 0; i < interactables.Count; i++)
-            {
-                var interactable = interactables[i];
-
-                if (!interactable.isActiveAndEnabled)
-                {
-                    // We can't interact if the component or its gameobject
-                    // isn't enabled
-                    continue;
-                }
-
-                if (interactable.gameObject == gameObject)
-                {
-                    // We can't interact with ourselves
-                    continue;
-                }
-
-                if (interactable.gameObject.TryGetComponent<SimpleCharacter>(out var character) && !character.IsAlive)
-                {
-                    // We can't interact with characters that aren't alive
-                    continue;
-                }
-
-                var distance = Vector3.Distance(transform.TransformPoint(offset), interactable.transform.position);
-                if (distance > interactionRadius)
-                {
-                    continue;
-                }
-                if (distance < nearest.Distance)
-                {
-                    nearest = (distance, interactable);
-                }
-            }
-
-            if (previousInteractable != nearest.Interactable)
-            {
-                if (previousInteractable != null) { previousInteractable.IsCurrent = false; }
-                if (nearest.Interactable != null) { nearest.Interactable.IsCurrent = true; }
-                currentInteractable = nearest.Interactable;
-            }
-
-            if (interactInput.WasPressedThisFrame && currentInteractable != null)
-            {
-                async YarnTask RunInteraction(Interactable interactable, CancellationToken cancellationToken)
-                {
-                    var previousMode = Mode;
-                    Mode = CharacterMode.Interact;
-
-                    if (interactable.InteractorShouldTurnToFaceWhenInteracted)
-                    {
-                        lookTarget = interactable.transform;
-                    }
-
-                    interactable.IsCurrent = false;
-                    currentInteractable = null;
-
-                    onInteracting?.Invoke(interactable);
-                    await interactable.Interact(gameObject);
-
-                    // Wait a frame so that if 'advance dialogue' is the same
-                    // button as 'interact', we don't accidentally trigger a new
-                    // dialogue with the same input as leaving the previous
-                    // dialogue (i.e. we'd never leave dialogue)
-                    await YarnTask.Yield();
-
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        return;
-                    }
-
-                    if (interactable.InteractorShouldTurnToFaceWhenInteracted)
-                    {
-                        lookTarget = null;
-                    }
-
-                    Mode = previousMode;
-                }
-
-                RunInteraction(currentInteractable, this.destroyCancellationToken).Forget();
-            }
+            // Interaction is now handled by the FPS player controller via raycasting
+            // No proximity-based interaction needed for FPS game
         }
 
         #endregion
