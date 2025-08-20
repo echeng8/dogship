@@ -31,7 +31,7 @@ namespace Yarn.Unity.Samples
     public class DialogueInteractable : Interactable
     {
         [SerializeField] DialogueReference dialogue = new();
-        [SerializeField] DialogueRunner? dialogueRunner;
+        [SerializeField] public DialogueRunner? dialogueRunner;
 
         [SerializeField] bool turnsToInteractor = true;
 
@@ -60,6 +60,8 @@ namespace Yarn.Unity.Samples
         {
             set
             {
+                Debug.LogWarning($"[DialogueInteractable] IsCurrent setter called with value: {value}");
+
                 if (value == true)
                 {
                     // We've been told we're active. Double check that we
@@ -69,21 +71,20 @@ namespace Yarn.Unity.Samples
 
                     if (dialogue == null || dialogue.IsValid == false || dialogue.nodeName == null)
                     {
-                        // We have no dialogue reference, so we can't be interacted with.
+                        Debug.LogWarning($"[DialogueInteractable] Invalid dialogue: dialogue={dialogue != null}, IsValid={dialogue?.IsValid}, nodeName={dialogue?.nodeName}");
                         return;
                     }
 
                     if (dialogueRunner == null)
                     {
-                        // We have no dialogue runner, so we can't be interacted with.
+                        Debug.LogWarning($"[DialogueInteractable] No dialogue runner");
                         onActiveChanged?.Invoke(false);
                         return;
                     }
 
                     if (dialogueRunner.YarnProject == null)
                     {
-                        // The dialogue runner has no Yarn Project. We can't ask
-                        // it for saliency info.
+                        Debug.LogWarning($"[DialogueInteractable] Dialogue runner has no Yarn Project");
                         onActiveChanged?.Invoke(false);
                         return;
                     }
@@ -99,11 +100,12 @@ namespace Yarn.Unity.Samples
 
                     if (content == null)
                     {
-                        // We have no content we can run. Don't show the indicator.
+                        Debug.LogWarning($"[DialogueInteractable] No runnable content for node: {dialogue.nodeName}");
                         onActiveChanged?.Invoke(false);
                         return;
                     }
 
+                    Debug.LogWarning($"[DialogueInteractable] All validation passed, setting IsCurrent to true");
                 }
 
                 base.IsCurrent = value;
@@ -117,25 +119,30 @@ namespace Yarn.Unity.Samples
 
         public override async YarnTask Interact(GameObject interactor)
         {
+            Debug.LogWarning($"[DialogueInteractable] Interact called");
+
             if (dialogue == null)
             {
+                Debug.LogWarning($"[DialogueInteractable] dialogue is null");
                 return;
             }
             if (dialogueRunner == null)
             {
-                Debug.LogError($"Can't run dialogue {dialogue}: dialogue runner not set");
+                Debug.LogWarning($"Can't run dialogue {dialogue}: dialogue runner not set");
                 return;
             }
             if (!dialogue.IsValid || dialogue.nodeName == null)
             {
-                Debug.LogError($"Can't run dialogue {dialogue}: not a valid dialogue reference");
+                Debug.LogWarning($"Can't run dialogue {dialogue}: not a valid dialogue reference");
                 return;
             }
             if (dialogueRunner.IsDialogueRunning)
             {
-                Debug.LogError($"Can't run dialogue {dialogue}: dialogue runner is already running");
+                Debug.LogWarning($"Can't run dialogue {dialogue}: dialogue runner is already running");
                 return;
             }
+
+            Debug.LogWarning($"[DialogueInteractable] Starting dialogue: {dialogue.nodeName}");
 
             onInteractionStarted?.Invoke();
 

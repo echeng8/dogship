@@ -607,13 +607,12 @@ namespace Yarn.Unity.Samples
 
         public void SetupInteraction()
         {
-            // Interaction setup not needed for FPS game - handled by player controller
+            // FPS interaction handled by player controller raycasting
         }
 
         protected void UpdateInteraction()
         {
-            // Interaction is now handled by the FPS player controller via raycasting
-            // No proximity-based interaction needed for FPS game
+            // FPS interaction handled by player controller raycasting  
         }
 
         #endregion
