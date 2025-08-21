@@ -1,10 +1,35 @@
 ﻿title: Orange
 ---
-Orange: Hello!
-    -> Why Hello There!
-        Orange: You are a bold one.
-    -> Who are you?
-        Orange: I'm Orange.
-    -> You're orange.
-        Orange: Yep.
+<<set $telepathy_response to "">>
+Orange: Do you believe in telepathy? 
+    -> Yes
+        Orange: Receive my thoughts. What am I thinking? 
+        -> Fuck 
+            <<set $telepathy_response to "inappropriate">>
+        -> Dick
+            <<set $telepathy_response to "inappropriate">>
+        -> Pussy
+            <<set $telepathy_response to "inappropriate">>
+        
+        Orange: you're fucking disgusting
+    -> No
+        <<set $telepathy_response to "nonbeliever">>
+        Orange: You're no fun. I can't imagine what it must be like for you.
+    Orange: Go that cube over there. I've been telepathing to my friend over there.
+    Orange: They'll show you what's up.
+===
+
+title: Red
+---
+<<if $telepathy_response == "inappropriate">>
+    Red: Orange told me what you said... seriously? That's what you think about?
+    Red: This cube planet has standards, you know. Maybe think cleaner thoughts next time.
+<<elseif $telepathy_response == "nonbeliever">>
+    Red: So you don't believe in telepathy, huh? 
+    Red: Well, I already know everything Orange told you. Still think it's not real?
+    Red: This cube planet runs on mental connections. You'll learn.
+<<else>>
+    Red: Welcome to the cube planet, traveler. Something seems... incomplete about our connection.
+<<endif>>
+Red: Anyway, what brings you to our geometric world?
 ===
