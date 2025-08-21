@@ -5,11 +5,11 @@ Orange: Do you believe in telepathy?
     -> Yes
         Orange: Receive my thoughts. What am I thinking? 
         -> Fuck 
-            <<set $telepathy_response to "inappropriate">>
+            <<set $telepathy_response to "fuck">>
         -> Dick
-            <<set $telepathy_response to "inappropriate">>
+            <<set $telepathy_response to "dick">>
         -> Pussy
-            <<set $telepathy_response to "inappropriate">>
+            <<set $telepathy_response to "vag">>
         
         Orange: you're fucking disgusting
     -> No
@@ -21,15 +21,16 @@ Orange: Do you believe in telepathy?
 
 title: Red
 ---
-<<if $telepathy_response == "inappropriate">>
-    Red: Orange told me what you said... seriously? That's what you think about?
-    Red: This cube planet has standards, you know. Maybe think cleaner thoughts next time.
+<<if $telepathy_response == "fuck">>
+    Red: get off this planet i dont talk to people who cuss
+<<elseif $telepathy_response == "dick">>
+    Red: is your name richard
+<<elseif $telepathy_response == "vag">>
+    Red: ina
 <<elseif $telepathy_response == "nonbeliever">>
-    Red: So you don't believe in telepathy, huh? 
-    Red: Well, I already know everything Orange told you. Still think it's not real?
-    Red: This cube planet runs on mental connections. You'll learn.
+    Red: you are gay
 <<else>>
-    Red: Welcome to the cube planet, traveler. Something seems... incomplete about our connection.
+    Red: i dont know u
 <<endif>>
-Red: Anyway, what brings you to our geometric world?
+Red: look att the suyn with me
 ===
