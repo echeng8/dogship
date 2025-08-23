@@ -13,7 +13,10 @@ namespace Gravitas.Demo
     {
         #region Constants
         private const float MAX_GROUND_SPEED = 8f;
+        private const float SPRINT_SPEED_MULTIPLIER = 1.5f;
         private const float INTERACTION_DISTANCE = 2.75f;
+        private const float STAMINA_DRAIN_RATE = 20f;
+        private const float STAMINA_REGEN_RATE = 15f;
         #endregion
 
         #region Events
@@ -22,6 +25,8 @@ namespace Gravitas.Demo
 
         #region Public Properties
         public Camera PlayerCamera => playerCamera;
+        public float CurrentStamina => currentStamina;
+        public float MaxStamina => maxStamina;
         #endregion
 
         #region SerializeField Variables
@@ -35,6 +40,10 @@ namespace Gravitas.Demo
         [SerializeField] private float jumpForce = 10f;
         [SerializeField] private float moveSpeed = 20f;
         [SerializeField] private float turnSpeed = 5f;
+
+        [Header("Stamina")]
+        [SerializeField] private float maxStamina = 100f;
+        [SerializeField] private float currentStamina = 100f;
         #endregion
 
         #region Private Variables
@@ -43,6 +52,7 @@ namespace Gravitas.Demo
         private float verticalInput; // Stored vertical input from jumping or jetpack thrust
         private bool interact;
         private bool isCursorLocked = true;
+        private bool isSprinting;
         private CoherenceSync _sync;
         #endregion
 
@@ -56,6 +66,9 @@ namespace Gravitas.Demo
                 Debug.Log($"Using main camera: {(playerCamera != null ? playerCamera.name : "null")}");
                 playerCamera.transform.SetParent(transform);
             }
+
+            // Initialize stamina
+            currentStamina = maxStamina;
         }
 
         protected override void OnSubjectAwake()
@@ -79,6 +92,7 @@ namespace Gravitas.Demo
                 return;
 
             HandleControlInputs();
+            UpdateStamina();
 
             if (isCursorLocked &&
                (!DebugLogManager.Instance?.IsLogWindowVisible ?? true))
@@ -127,6 +141,10 @@ namespace Gravitas.Demo
         private void ProcessMovementInput()
         {
             keyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            // Handle sprint input
+            bool sprintInput = Input.GetKey(KeyCode.LeftShift);
+            isSprinting = sprintInput && currentStamina > 0 && keyInput != Vector2.zero;
         }
 
         private void ProcessMouseLookInput()
@@ -153,6 +171,13 @@ namespace Gravitas.Demo
 
         private void ProcessVerticalInput()
         {
+            // Don't allow jetpack while sprinting (left shift is sprint)
+            if (isSprinting)
+            {
+                verticalInput = 0;
+                return;
+            }
+
             if (Input.GetKey(KeyCode.LeftShift))
                 verticalInput = 1; // Up
             else if (Input.GetKey(KeyCode.LeftControl))
@@ -218,10 +243,11 @@ namespace Gravitas.Demo
         private Vector3 GetInputVelocity(Transform t, bool isLanded)
         {
             Vector3 velocity = Vector3.zero;
+            float speedMultiplier = (isSprinting && isLanded) ? SPRINT_SPEED_MULTIPLIER : 1f;
 
             // Left-Right movement
             Vector3 right = t.right;
-            float xForce = isLanded ? moveSpeed : jetpackForce;
+            float xForce = isLanded ? moveSpeed * speedMultiplier : jetpackForce;
             velocity += keyInput.x * xForce * right;
 
             // Up-Down movement
@@ -230,7 +256,7 @@ namespace Gravitas.Demo
 
             // Forward-Back movement
             Vector3 forward = t.forward;
-            float zForce = isLanded ? moveSpeed : jetpackForce;
+            float zForce = isLanded ? moveSpeed * speedMultiplier : jetpackForce;
             velocity += keyInput.y * zForce * forward;
 
             return velocity;
@@ -281,6 +307,30 @@ namespace Gravitas.Demo
                     }
                 }
             }
+        }
+        #endregion
+
+        #region Stamina Methods
+        private void UpdateStamina()
+        {
+            if (isSprinting)
+            {
+                // Drain stamina when sprinting
+                currentStamina -= STAMINA_DRAIN_RATE * Time.deltaTime;
+                currentStamina = Mathf.Max(0, currentStamina);
+            }
+            else if (currentStamina < maxStamina)
+            {
+                // Regenerate stamina when not sprinting
+                currentStamina += STAMINA_REGEN_RATE * Time.deltaTime;
+                currentStamina = Mathf.Min(maxStamina, currentStamina);
+            }
+        }
+
+        public void IncreaseMaxStamina(float amount)
+        {
+            maxStamina += amount;
+            currentStamina = maxStamina; // Fill stamina when max increases
         }
         #endregion
 

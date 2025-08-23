@@ -51,6 +51,13 @@ component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "29"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
+component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "30"]
+  SyncedProxyPosition Vector3 [compression "None"]
+  SyncedProxyRotation Quaternion [bits "32"]
+
+component _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748 [id "31"]
+  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
+
 command _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 [id "6", routing "All"]
   playerGameObject Entity [client-type "GameObject"]
   localPos Vector3 [compression "None"]

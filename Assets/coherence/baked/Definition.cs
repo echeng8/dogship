@@ -20,7 +20,7 @@ namespace Coherence.Generated
 
     public class Definition : IDefinition
     {
-        public const string schemaId = "e2c5a94f636dd597db678fcb2bb81d245495f0d7";
+        public const string schemaId = "7d7123576147eccc8a566e5671d97213886a1061";
         public const uint InternalWorldPosition = 0;
         public const uint InternalWorldOrientation = 1;
         public const uint InternalLocalUserComponent = 2;
@@ -51,6 +51,8 @@ namespace Coherence.Generated
         public const uint Internal_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 = 27;
         public const uint Internal_76ed9974a395ce54087bcb395f26407a_6959148627032638732 = 28;
         public const uint Internal_76ed9974a395ce54087bcb395f26407a_6959148627032638734 = 29;
+        public const uint Internal_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 = 30;
+        public const uint Internal_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748 = 31;
         public const uint InternalAuthorityRequest = 0;
         public const uint InternalAuthorityTransfer = 1;
         public const uint InternalQuerySynced = 2;
@@ -92,6 +94,8 @@ namespace Coherence.Generated
             { 27, "_4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762" },
             { 28, "_76ed9974a395ce54087bcb395f26407a_6959148627032638732" },
             { 29, "_76ed9974a395ce54087bcb395f26407a_6959148627032638734" },
+            { 30, "_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374" },
+            { 31, "_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748" },
         };
 
         public static string ComponentNameForTypeId(uint typeId)
@@ -185,6 +189,10 @@ namespace Coherence.Generated
                     return _76ed9974a395ce54087bcb395f26407a_6959148627032638732.Deserialize(referenceSimulationFrame, inProtocolStream);
                 case Internal_76ed9974a395ce54087bcb395f26407a_6959148627032638734:
                     return _76ed9974a395ce54087bcb395f26407a_6959148627032638734.Deserialize(referenceSimulationFrame, inProtocolStream);
+                case Internal_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374:
+                    return _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.Deserialize(referenceSimulationFrame, inProtocolStream);
+                case Internal_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748:
+                    return _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.Deserialize(referenceSimulationFrame, inProtocolStream);
                 default:
                     throw new System.ArgumentOutOfRangeException(nameof(componentType),
                         $"Missing serialization implementation for a component: {componentType}");
@@ -256,6 +264,10 @@ namespace Coherence.Generated
                     return _76ed9974a395ce54087bcb395f26407a_6959148627032638732.Serialize((_76ed9974a395ce54087bcb395f26407a_6959148627032638732)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
                 case Internal_76ed9974a395ce54087bcb395f26407a_6959148627032638734:
                     return _76ed9974a395ce54087bcb395f26407a_6959148627032638734.Serialize((_76ed9974a395ce54087bcb395f26407a_6959148627032638734)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
+                case Internal_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374:
+                    return _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.Serialize((_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
+                case Internal_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748:
+                    return _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.Serialize((_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748)data, isRefSimFrameValid, referenceSimulationFrame, protocolStream, logger);
                 default:
                     logger.Error(Coherence.Log.Error.DefinitionMissingComponentImplementation, ("component", data.GetComponentType()));
                     return 0;

@@ -54,6 +54,8 @@ namespace Coherence.Generated
                 case 27: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 28: return _76ed9974a395ce54087bcb395f26407a_6959148627032638732.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 29: return _76ed9974a395ce54087bcb395f26407a_6959148627032638734.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 30: return _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 31: return _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.FromInterop(data, dataSize, simFrames, simFramesCount);
             }
 
             throw new ArgumentException($"Unkown component type {type}", nameof(type));
@@ -412,6 +414,29 @@ namespace Coherence.Generated
                     val.SyncedProxyRotation = orig.SyncedProxyRotation;
 
                     updater.UpdateComponent(entity, componentType, val, 28, component.FieldsMask, component.StoppedMask, frames);
+
+                    return;
+                }
+                case 30:
+                {
+                    var orig = (_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374)component;
+                    var val = new _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.Interop();
+
+                    val.SyncedProxyPosition = orig.SyncedProxyPosition;
+                    val.SyncedProxyRotation = orig.SyncedProxyRotation;
+
+                    updater.UpdateComponent(entity, componentType, val, 28, component.FieldsMask, component.StoppedMask, frames);
+
+                    return;
+                }
+                case 31:
+                {
+                    var orig = (_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748)component;
+                    var val = new _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.Interop();
+
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
+
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
 
                     return;
                 }
