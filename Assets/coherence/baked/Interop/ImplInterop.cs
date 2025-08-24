@@ -424,8 +424,12 @@ namespace Coherence.Generated
 
                     val.SyncedProxyPosition = orig.SyncedProxyPosition;
                     val.SyncedProxyRotation = orig.SyncedProxyRotation;
+                    val.Velocity = orig.Velocity;
+                    val.AngularVelocity = orig.AngularVelocity;
+                    val.IsLanded = orig.IsLanded ? (System.Byte)1 : (System.Byte)0;
+                    val.enabled = orig.enabled ? (System.Byte)1 : (System.Byte)0;
 
-                    updater.UpdateComponent(entity, componentType, val, 28, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 54, component.FieldsMask, component.StoppedMask, frames);
 
                     return;
                 }
@@ -457,6 +461,8 @@ namespace Coherence.Generated
                   case 5: return SceneIndexChanged.FromInterop(data, dataSize);
                   case 6: return _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64.FromInterop(data, dataSize);
                   case 7: return _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0.FromInterop(data, dataSize);
+                  case 8: return _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f.FromInterop(data, dataSize);
+                  case 9: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
             }
 
             throw new ArgumentException($"Unkown command type {type}", nameof(type));
@@ -552,6 +558,26 @@ namespace Coherence.Generated
 
 
                     return sender.SendCommand(entity, target, type, val, 0);
+
+                }
+                case 8:
+                {
+                    var orig = (_090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f)command;
+                    var val = new _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f.Interop();
+
+                    val.amount = orig.amount;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 9:
+                {
+                    var orig = (_ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847)command;
+                    var val = new _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
 
                 }
             }

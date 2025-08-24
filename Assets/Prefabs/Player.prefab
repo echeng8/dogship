@@ -5000,6 +5000,7 @@ GameObject:
   - component: {fileID: 3543296725183664748}
   - component: {fileID: 3543296725183664750}
   - component: {fileID: 2683227246358131983}
+  - component: {fileID: 5161193730284425696}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5263,6 +5264,8 @@ MonoBehaviour:
       lodStepsActive: 1
     - component: {fileID: 467019684}
       lodStepsActive: 1
+    - component: {fileID: 5161193730284425696}
+      lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
   interpolationLocation: 4
   RigidbodyUpdateMode: 1
@@ -5288,6 +5291,7 @@ MonoBehaviour:
   - rid: 8677872745804464250
   - rid: 8677872797709238374
   - rid: 8677872797709238375
+  - rid: 8677872996106895669
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -5705,3 +5709,59 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
+    - rid: 8677872996106895669
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8677872996106895670
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: b931ee7092e449b09ff7fa62d5a2588f
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 5161193730284425696}
+        coherenceSync: {fileID: 2683227246358131983}
+        interpolationSettings: {fileID: 0}
+    - rid: 8677872996106895670
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: NetworkIncreaseMaxStamina
+        monoAssemblyType: 
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 0
+        valueSyncCallbackName: 
+        memberType: 8
+        parameterAssemblyTypes:
+        - System.Single, mscorlib
+        ownerType:
+          assemblyQualifiedName: Gravitas.PlayerStats, gravitas-main, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.CommandBinding, Coherence.Toolkit,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
+--- !u!114 &5161193730284425696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543296725183664761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bbb129009ef1d64c86495212b874bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  maxStamina: 100
+  currentStamina: 100

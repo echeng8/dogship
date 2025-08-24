@@ -194,8 +194,8 @@ namespace Gravitas
         {
             if (coherenceSync == null) return true; // No networking, assume local authority
 
-            // If not connected, assume local authority
-            if (!coherenceSync.CoherenceBridge.IsConnected)
+            // Check if CoherenceBridge is null or not connected, assume local authority
+            if (coherenceSync.CoherenceBridge == null || !coherenceSync.CoherenceBridge.IsConnected)
                 return true;
 
             // In coherence, check if we have state authority over this entity
@@ -250,7 +250,7 @@ namespace Gravitas
             }
 
             // Search all active GravitasField components for matching Transform
-            foreach (var gravField in FindObjectsOfType<GravitasField>())
+            foreach (var gravField in FindObjectsByType<GravitasField>(FindObjectsSortMode.None))
             {
                 if (gravField.GameObject.transform == fieldTransform)
                 {

@@ -52,7 +52,7 @@ namespace Gravitas
 
         public virtual void AddSubjectToField(IGravitasSubject subject)
         {
-            if (subject != null && !ContainsSubject(subject))
+            if (subject != null && (subject as UnityEngine.Object) && !ContainsSubject(subject))
             {
                 if (!gravitasPhysicsScene)
                     gravitasPhysicsScene = GravitasPhysicsScene.CreateGravitasPhysicsScene(this, addChildColliders);
@@ -99,6 +99,10 @@ namespace Gravitas
             }
         }
 
+        /// <summary>
+        /// Removes a subject from the field and cleans up its physics proxy.
+        /// </summary>
+        /// <param name="subject">The subject to remove.</param>
         public virtual void DestroySubjectFromField(IGravitasSubject subject)
         {
             if (subject != null && ContainsSubject(subject))
@@ -134,7 +138,8 @@ namespace Gravitas
 
         public virtual void EnqueueSubjectChange(IGravitasSubject subject, bool add)
         {
-            if (subject != null)
+            // Check if the subject is valid using Unity's null check
+            if (subject != null && (subject as UnityEngine.Object))
             {
                 subjectChangeQueue.Enqueue((subject, add));
 
@@ -147,6 +152,12 @@ namespace Gravitas
         {
             while (subjectChangeQueue.TryDequeue(out (IGravitasSubject subject, bool add) result))
             {
+                // Check if the subject is destroyed using Unity's null check for MonoBehaviour
+                if (result.subject == null || !(result.subject as UnityEngine.Object))
+                {
+                    continue;
+                }
+
                 if (result.add)
                     AddSubjectToField(result.subject);
                 else
@@ -223,11 +234,20 @@ namespace Gravitas
                 Vector3 localFieldCenter = LocalFieldCenter;
                 float acceleration = Acceleration;
 
-                for (int i = 0; i < subjects.Count; i++)
+                // Use reverse iteration to safely remove destroyed subjects during iteration
+                for (int i = subjects.Count - 1; i >= 0; i--)
                 {
                     IGravitasSubject subject = subjects[i];
+
+                    // Remove destroyed subjects from the list
+                    if (subject == null || !(subject as UnityEngine.Object))
+                    {
+                        subjects.RemoveAt(i);
+                        continue;
+                    }
+
                     IGravitasBody subjectBody = subject.GravitasBody;
-                    if (subject == null || subjectBody == null) { continue; }
+                    if (subjectBody == null) { continue; }
 
                     float distanceMultiplier = GetDistanceMultiplier(subjectBody.ProxyPosition);
 
@@ -306,10 +326,20 @@ namespace Gravitas
 
         public void UpdateSubjectPositions()
         {
-            int length = subjects?.Count ?? 0;
-            for (int i = 0; i < length; i++)
+            if (subjects == null) return;
+
+            // Use reverse iteration to safely remove destroyed subjects during iteration
+            for (int i = subjects.Count - 1; i >= 0; i--)
             {
                 IGravitasSubject subject = subjects[i];
+
+                // Remove destroyed subjects from the list
+                if (subject == null || !(subject as UnityEngine.Object))
+                {
+                    subjects.RemoveAt(i);
+                    continue;
+                }
+
                 subject.GravitasBody?.UpdatePosition(transform);
             }
         }
@@ -338,6 +368,7 @@ namespace Gravitas
         {
             return
                 subject != null &&
+                (subject as UnityEngine.Object) &&
                 subjects != null &&
                 subjects.Contains(subject);
         }

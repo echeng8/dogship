@@ -7,7 +7,7 @@ namespace Gravitas.Demo
 {
     /// <summary>
     /// Implementation of a first person player controller that interacts with Gravitas systems.
-    /// Handles player movement, camera control, and interaction with game objects.
+    /// Handles player movement, camera control, and interaction with any IInteractable objects.
     /// </summary>
     public class GravitasFirstPersonPlayerSubject : GravitasSubject
     {
@@ -15,8 +15,6 @@ namespace Gravitas.Demo
         private const float MAX_GROUND_SPEED = 8f;
         private const float SPRINT_SPEED_MULTIPLIER = 1.5f;
         private const float INTERACTION_DISTANCE = 2.75f;
-        private const float STAMINA_DRAIN_RATE = 20f;
-        private const float STAMINA_REGEN_RATE = 15f;
         #endregion
 
         #region Events
@@ -25,8 +23,7 @@ namespace Gravitas.Demo
 
         #region Public Properties
         public Camera PlayerCamera => playerCamera;
-        public float CurrentStamina => currentStamina;
-        public float MaxStamina => maxStamina;
+        public PlayerStats PlayerStats => playerStats;
         #endregion
 
         #region SerializeField Variables
@@ -40,10 +37,6 @@ namespace Gravitas.Demo
         [SerializeField] private float jumpForce = 10f;
         [SerializeField] private float moveSpeed = 20f;
         [SerializeField] private float turnSpeed = 5f;
-
-        [Header("Stamina")]
-        [SerializeField] private float maxStamina = 100f;
-        [SerializeField] private float currentStamina = 100f;
         #endregion
 
         #region Private Variables
@@ -54,6 +47,7 @@ namespace Gravitas.Demo
         private bool isCursorLocked = true;
         private bool isSprinting;
         private CoherenceSync _sync;
+        private PlayerStats playerStats;
         #endregion
 
         #region Unity Lifecycle Methods
@@ -67,8 +61,13 @@ namespace Gravitas.Demo
                 playerCamera.transform.SetParent(transform);
             }
 
-            // Initialize stamina
-            currentStamina = maxStamina;
+            // Get or add PlayerStats component
+            playerStats = GetComponent<PlayerStats>();
+            if (playerStats == null)
+            {
+                playerStats = gameObject.AddComponent<PlayerStats>();
+                Debug.Log("Added PlayerStats component to player");
+            }
         }
 
         protected override void OnSubjectAwake()
@@ -92,7 +91,6 @@ namespace Gravitas.Demo
                 return;
 
             HandleControlInputs();
-            UpdateStamina();
 
             if (isCursorLocked &&
                (!DebugLogManager.Instance?.IsLogWindowVisible ?? true))
@@ -144,7 +142,13 @@ namespace Gravitas.Demo
 
             // Handle sprint input
             bool sprintInput = Input.GetKey(KeyCode.LeftShift);
-            isSprinting = sprintInput && currentStamina > 0 && keyInput != Vector2.zero;
+            isSprinting = sprintInput && playerStats.CanSprint && keyInput != Vector2.zero;
+
+            // Update PlayerStats with sprinting state
+            if (playerStats != null)
+            {
+                playerStats.SetSprinting(isSprinting);
+            }
         }
 
         private void ProcessMouseLookInput()
@@ -266,6 +270,7 @@ namespace Gravitas.Demo
         #region Interaction Methods
         /// <summary>
         /// Processes raycast-based interactions with world objects.
+        /// Handles any object that implements IInteractable.
         /// </summary>
         private void ProcessInteractionRaycast()
         {
@@ -277,8 +282,8 @@ namespace Gravitas.Demo
                 interactableLayers,
                 QueryTriggerInteraction.Ignore))
             {
-                Debug.Log($"Hit object: {hitInfo.collider.name}");
-                HandleInteractableObject(hitInfo.collider);
+                //Debug.Log($"Hit object: {hitInfo.collider.name}");
+                HandleInteraction(hitInfo.collider);
             }
             else
             {
@@ -287,11 +292,12 @@ namespace Gravitas.Demo
         }
 
         /// <summary>
-        /// Handles interaction with any IInteractable object.
+        /// Handles interaction with any object that implements IInteractable.
         /// </summary>
         /// <param name="collider">The collider of the object to interact with</param>
-        private void HandleInteractableObject(Collider collider)
+        private void HandleInteraction(Collider collider)
         {
+            // Check if the object implements IInteractable
             if (collider.TryGetComponent(out IInteractable interactable))
             {
                 if (interactable.CanInteract)
@@ -308,34 +314,6 @@ namespace Gravitas.Demo
                 }
             }
         }
-        #endregion
-
-        #region Stamina Methods
-        private void UpdateStamina()
-        {
-            if (isSprinting)
-            {
-                // Drain stamina when sprinting
-                currentStamina -= STAMINA_DRAIN_RATE * Time.deltaTime;
-                currentStamina = Mathf.Max(0, currentStamina);
-            }
-            else if (currentStamina < maxStamina)
-            {
-                // Regenerate stamina when not sprinting
-                currentStamina += STAMINA_REGEN_RATE * Time.deltaTime;
-                currentStamina = Mathf.Min(maxStamina, currentStamina);
-            }
-        }
-
-        public void IncreaseMaxStamina(float amount)
-        {
-            maxStamina += amount;
-            currentStamina = maxStamina; // Fill stamina when max increases
-        }
-        #endregion
-
-        #region Utility Methods
-
         #endregion
 
         #region Utility Methods

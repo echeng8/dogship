@@ -9,9 +9,9 @@ namespace Gravitas
     [DisallowMultipleComponent]
     public class GravitasBody : MonoBehaviour, IGravitasBody
     {
-        public Rigidbody CurrentRigidbody => IsProxied ? currentProxy.ProxyRigidbody : gravitasBodyRigidbody;
+        public Rigidbody CurrentRigidbody => IsProxied && currentProxy ? currentProxy.ProxyRigidbody : gravitasBodyRigidbody;
         public Rigidbody Rigidbody => gravitasBodyRigidbody;
-        public Transform CurrentTransform => IsProxied ? currentProxy.transform : transform;
+        public Transform CurrentTransform => IsProxied && currentProxy ? currentProxy.transform : transform;
         private CoherenceSync _sync;
 
         public Vector3 AngularVelocity
@@ -31,7 +31,7 @@ namespace Gravitas
                     rb.angularVelocity = value;
             }
         }
-        public Vector3 ProxyPosition => IsProxied ? currentProxy.transform.localPosition : Vector3.zero;
+        public Vector3 ProxyPosition => IsProxied && currentProxy && currentProxy.transform ? currentProxy.transform.localPosition : Vector3.zero;
         public Vector3 Velocity
         {
             get
@@ -135,6 +135,11 @@ namespace Gravitas
         public virtual void Orient(Vector3 up, float orientSpeed)
         {
             Transform currentTransform = CurrentTransform;
+
+            // Exit gracefully if transform is destroyed
+            if (!currentTransform || !transform)
+                return;
+
             float angle = Vector3.Angle(transform.up, up);
 
             if (angle > 0.05f)
@@ -155,7 +160,15 @@ namespace Gravitas
         {
             if (IsProxied && fieldTransform)
             {
+                // Exit gracefully if proxy or its transform was destroyed
+                if (!currentProxy || !currentProxy.transform)
+                    return;
+
                 Transform proxyTransform = currentProxy.transform;
+
+                // Exit gracefully if this transform was destroyed
+                if (!transform)
+                    return;
 
                 // Synchronize proxy transform if we have authority
                 if (_sync && _sync.HasStateAuthority)
@@ -251,6 +264,15 @@ namespace Gravitas
             {
                 Debug.LogWarning($@"Gravitas: No Colliders assigned to subject ""{gameObject.name}"", attempting to find");
                 AutoFindBodyColliders();
+            }
+        }
+
+        protected void OnDestroy()
+        {
+            // Clean up proxy if it exists
+            if (IsProxied)
+            {
+                DestroyProxy();
             }
         }
     }

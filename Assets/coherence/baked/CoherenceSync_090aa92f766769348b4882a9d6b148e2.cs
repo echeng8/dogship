@@ -490,6 +490,7 @@ namespace Coherence.Generated
         private Entity entityId;
         private Logger logger = Coherence.Log.Log.GetLogger<CoherenceSync_090aa92f766769348b4882a9d6b148e2>();
         
+        private global::Gravitas.PlayerStats _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f_CommandTarget;
         
         
         private IClient client;
@@ -512,6 +513,7 @@ namespace Coherence.Generated
         
         public CoherenceSync_090aa92f766769348b4882a9d6b148e2()
         {
+            bakedCommandBindings.Add("b931ee7092e449b09ff7fa62d5a2588f", BakeCommandBinding__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f);
         }
         
         public override Binding BakeValueBinding(Binding valueBinding)
@@ -532,11 +534,46 @@ namespace Coherence.Generated
                 commandBindingBaker.Invoke(commandBinding, commandsHandler);
             }
         }
+        private void BakeCommandBinding__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f_CommandTarget = (global::Gravitas.PlayerStats)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.PlayerStats.NetworkIncreaseMaxStamina", "(System.Single)", SendCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f, ReceiveLocalCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f, MessageTarget.All, _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f_CommandTarget, false);
+        }
+        
+        private void SendCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f();
+            
+            int i = 0;
+            command.amount = (System.Single)args[i++];
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f();
+            
+            int i = 0;
+            command.amount = (System.Single)args[i++];
+            
+            ReceiveCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(command);
+        }
+
+        private void ReceiveCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(_090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f command)
+        {
+            var target = _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f_CommandTarget;
+            
+            target.NetworkIncreaseMaxStamina((System.Single)(command.amount));
+        }
         
         public override void ReceiveCommand(IEntityCommand command)
         {
             switch (command)
             {
+                case _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f castedCommand:
+                    ReceiveCommand__090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(castedCommand);
+                    break;
                 default:
                     logger.Warning(Coherence.Log.Warning.ToolkitBakedSyncReceiveCommandUnhandled,
                         $"CoherenceSync_090aa92f766769348b4882a9d6b148e2 Unhandled command: {command.GetType()}.");
