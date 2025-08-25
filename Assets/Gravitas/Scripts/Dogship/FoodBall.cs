@@ -43,6 +43,8 @@ namespace Gravitas
         [Command]
         public void NetworkEatFoodBall(GameObject playerGameObject)
         {
+            Debug.Log($"NetworkEatFoodBall called for player: {playerGameObject?.name}");
+
             if (playerGameObject != null)
             {
                 // Get PlayerStats component from the player
@@ -50,6 +52,7 @@ namespace Gravitas
 
                 if (playerStats != null)
                 {
+                    Debug.Log($"Found PlayerStats, increasing stamina by {maxStaminaDelta}");
                     // The PlayerStats component will handle the network command to its own authority
                     playerStats.IncreaseMaxStamina(maxStaminaDelta);
                     Debug.Log($"Food ball consumed! Stamina boost of {maxStaminaDelta} sent to player.");
@@ -62,8 +65,13 @@ namespace Gravitas
                 // Destroy the food ball after eating (only authority can do this)
                 if (_sync != null && _sync.HasStateAuthority)
                 {
+                    Debug.Log("Destroying food ball after consumption");
                     Destroy(gameObject);
                 }
+            }
+            else
+            {
+                Debug.LogError("NetworkEatFoodBall: playerGameObject is null!");
             }
         }
     }

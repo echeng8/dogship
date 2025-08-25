@@ -45,7 +45,6 @@ namespace Gravitas.Demo
         private float verticalInput; // Stored vertical input from jumping or jetpack thrust
         private bool interact;
         private bool isCursorLocked = true;
-        private bool isSprinting;
         private CoherenceSync _sync;
         private PlayerStats playerStats;
         #endregion
@@ -142,12 +141,13 @@ namespace Gravitas.Demo
 
             // Handle sprint input
             bool sprintInput = Input.GetKey(KeyCode.LeftShift);
-            isSprinting = sprintInput && playerStats.CanSprint && keyInput != Vector2.zero;
 
             // Update PlayerStats with sprinting state
             if (playerStats != null)
             {
-                playerStats.SetSprinting(isSprinting);
+                // Only sprint if player is moving and on the ground
+                bool wantsToSprint = sprintInput && keyInput != Vector2.zero && gravitasBody.IsLanded;
+                playerStats.UpdateSprinting(wantsToSprint);
             }
         }
 
@@ -175,14 +175,9 @@ namespace Gravitas.Demo
 
         private void ProcessVerticalInput()
         {
-            // Don't allow jetpack while sprinting (left shift is sprint)
-            if (isSprinting)
-            {
-                verticalInput = 0;
-                return;
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift))
+            // Use different keys for jetpack - Q for up, LeftControl for down
+            // This prevents conflict with sprint (LeftShift)
+            if (Input.GetKey(KeyCode.Q))
                 verticalInput = 1; // Up
             else if (Input.GetKey(KeyCode.LeftControl))
                 verticalInput = -1; // Down
@@ -247,7 +242,7 @@ namespace Gravitas.Demo
         private Vector3 GetInputVelocity(Transform t, bool isLanded)
         {
             Vector3 velocity = Vector3.zero;
-            float speedMultiplier = (isSprinting && isLanded) ? SPRINT_SPEED_MULTIPLIER : 1f;
+            float speedMultiplier = (playerStats != null && playerStats.IsSprinting && isLanded) ? SPRINT_SPEED_MULTIPLIER : 1f;
 
             // Left-Right movement
             Vector3 right = t.right;

@@ -23,6 +23,7 @@ namespace Gravitas
         public float CurrentStamina => currentStamina;
         public float MaxStamina => maxStamina;
         public bool CanSprint => currentStamina > 0;
+        public bool IsSprinting => isSprinting;
         #endregion
 
         #region SerializeField Variables
@@ -33,6 +34,7 @@ namespace Gravitas
 
         #region Private Variables
         private bool isSprinting = false;
+        private bool previousFrameSprinting = false;
         private CoherenceSync _sync;
         #endregion
 
@@ -59,6 +61,15 @@ namespace Gravitas
 
         #region Public Methods
         /// <summary>
+        /// Updates the sprinting state based on input and stamina availability.
+        /// </summary>
+        /// <param name="wantsToSprint">Whether the player wants to sprint (input + movement)</param>
+        public void UpdateSprinting(bool wantsToSprint)
+        {
+            isSprinting = wantsToSprint && CanSprint;
+        }
+
+        /// <summary>
         /// Sets the sprinting state for stamina consumption.
         /// </summary>
         /// <param name="sprinting">Whether the player is currently sprinting</param>
@@ -74,13 +85,17 @@ namespace Gravitas
         /// <param name="amount">Amount to increase max stamina by</param>
         public void IncreaseMaxStamina(float amount)
         {
+            Debug.Log($"IncreaseMaxStamina called with amount: {amount}");
+
             if (_sync != null && _sync.HasStateAuthority)
             {
+                Debug.Log("Has state authority, applying change directly");
                 // We have authority, apply the change directly
                 NetworkIncreaseMaxStamina(amount);
             }
             else if (_sync != null)
             {
+                Debug.Log("Sending command to authority");
                 // Send command to authority
                 _sync.SendCommand<PlayerStats>(
                     nameof(NetworkIncreaseMaxStamina),
@@ -90,6 +105,7 @@ namespace Gravitas
             }
             else
             {
+                Debug.Log("No networking, applying directly (single player fallback)");
                 // No networking, apply directly (fallback for single player)
                 NetworkIncreaseMaxStamina(amount);
             }
@@ -104,8 +120,10 @@ namespace Gravitas
         {
             maxStamina += amount;
             currentStamina = maxStamina; // Fill stamina when max increases
+
+            // Force UI update
             OnStaminaChanged?.Invoke(currentStamina, maxStamina);
-            Debug.Log($"Player max stamina increased by {amount}. New max: {maxStamina}");
+            Debug.Log($"Player max stamina increased by {amount}. New max: {maxStamina}, Current: {currentStamina}");
         }
 
         /// <summary>
@@ -132,7 +150,8 @@ namespace Gravitas
         #region Private Methods
         private void UpdateStamina()
         {
-            bool previousSprinting = isSprinting;
+            bool sprintingAtStart = previousFrameSprinting;
+            float previousStamina = currentStamina;
 
             if (isSprinting)
             {
@@ -154,10 +173,13 @@ namespace Gravitas
             }
 
             // Notify if stamina changed or sprinting state changed
-            if (previousSprinting != isSprinting || Mathf.Abs(currentStamina - maxStamina) > 0.01f)
+            if (sprintingAtStart != isSprinting || Mathf.Abs(currentStamina - previousStamina) > 0.1f)
             {
                 OnStaminaChanged?.Invoke(currentStamina, maxStamina);
             }
+
+            // Store current sprinting state for next frame
+            previousFrameSprinting = isSprinting;
         }
         #endregion
     }
