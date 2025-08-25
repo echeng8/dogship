@@ -11,6 +11,11 @@ namespace Gravitas.Demo
         public bool CanInteract => CanActivate;
         public string InteractionPrompt => SpaceshipName;
 
+        /// <summary>
+        /// Access to the spaceship's stamina drain rate
+        /// </summary>
+        public float StaminaDrainRate => spaceshipSubject ? spaceshipSubject.staminaDrainRate : 0f;
+
         private const float ACTIVE_TIME = 0.5f;
 
         [SerializeField] private GravitasSpaceshipSubject spaceshipSubject;

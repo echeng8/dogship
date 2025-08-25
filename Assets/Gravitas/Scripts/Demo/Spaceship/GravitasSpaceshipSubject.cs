@@ -27,6 +27,11 @@ namespace Gravitas.Demo
         [SerializeField] private float turnSpeed = 5f;
         [SerializeField] private float rollSpeed = 2.5f;
         [SerializeField] private float verticalMoveMultiplier = 3f;
+
+        [Header("Stamina Settings")]
+        [Tooltip("Rate at which the spaceship drains stamina per second from the controlling player")]
+        public float staminaDrainRate = 25f;
+
         private float rollInput, verticalInput;
         private CoherenceSync _sync;
 
@@ -181,6 +186,13 @@ namespace Gravitas.Demo
             // Only process input if we have both a controlling player AND authority
             if (PlayerSubject && _sync && _sync.HasInputAuthority && _sync.HasStateAuthority)
             {
+                // Drain stamina from the controlling player
+                var playerStats = PlayerSubject.GetComponent<Gravitas.PlayerStats>();
+                if (playerStats != null)
+                {
+                    playerStats.DrainStamina(staminaDrainRate * Time.deltaTime);
+                }
+
                 Transform t = gravitasBody.CurrentTransform;
 
                 if (Input.GetKeyDown(KeyCode.E))
