@@ -7,6 +7,7 @@ namespace Gravitas
 {
     /// <summary>
     /// A food ball that increases the player's max stamina when eaten.
+    /// Now harvested from trees rather than spawned automatically.
     /// </summary>
     public class FoodBall : MonoBehaviour, IInteractable
     {

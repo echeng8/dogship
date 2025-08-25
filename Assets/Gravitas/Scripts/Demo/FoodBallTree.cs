@@ -1,14 +1,23 @@
 using UnityEngine;
 using Coherence.Toolkit;
+using Coherence;
 using System.Collections.Generic;
+using Gravitas.Demo;
 
 namespace Gravitas
 {
+    public enum FoodBallState
+    {
+        Growing,
+        Ripe,
+        Empty
+    }
+
     /// <summary>
-    /// Manages food ball growth and spawning on a tree.
+    /// Manages food ball growth on a tree. Players can harvest ripe food balls.
     /// Uses coherence for networking - only authority runs game logic.
     /// </summary>
-    public class FoodBallTree : MonoBehaviour
+    public class FoodBallTree : MonoBehaviour, IInteractable
     {
         [Header("Food Ball Tree Settings")]
         [SerializeField] private GameObject foodBallPrefab;
@@ -19,6 +28,11 @@ namespace Gravitas
         private IGravitasField gravitasField;
         private FoodBallGrowing[] foodBallGrowingObjects;
         private Dictionary<FoodBallGrowing, float> respawnTimers = new Dictionary<FoodBallGrowing, float>();
+        private Dictionary<FoodBallGrowing, FoodBallState> foodBallStates = new Dictionary<FoodBallGrowing, FoodBallState>();
+
+        // IInteractable implementation
+        public bool CanInteract => GetRipeFoodBallCount() > 0;
+        public string InteractionPrompt => CanInteract ? $"Harvest Food Balls ({GetRipeFoodBallCount()})" : "Not Harvestable";
 
         private void Awake()
         {
@@ -34,13 +48,16 @@ namespace Gravitas
             if (gravitasField == null)
             {
                 Debug.LogError($"FoodBallTree {name} requires a GravitasField component on same GameObject or parent!");
-            }            // Get all FoodBallGrowing children
+            }
+
+            // Get all FoodBallGrowing children
             foodBallGrowingObjects = GetComponentsInChildren<FoodBallGrowing>();
 
-            // Set parent reference for each growing object
+            // Set parent reference and initialize states for each growing object
             foreach (var growingObj in foodBallGrowingObjects)
             {
                 growingObj.parentTree = this;
+                foodBallStates[growingObj] = FoodBallState.Empty;
             }
         }
 
@@ -80,10 +97,11 @@ namespace Gravitas
                 }
             }
 
-            // Update growing objects
+            // Update growing objects - only grow if not ripe
             foreach (var growingObj in foodBallGrowingObjects)
             {
-                if (growingObj != null && !respawnTimers.ContainsKey(growingObj))
+                if (growingObj != null && !respawnTimers.ContainsKey(growingObj) &&
+                    foodBallStates[growingObj] == FoodBallState.Growing)
                 {
                     growingObj.UpdateGrowth(1f / secondsToGrow * Time.deltaTime);
                 }
@@ -94,8 +112,59 @@ namespace Gravitas
         {
             if (!HasAuthority()) return;
 
-            Debug.Log($"[FoodBallTree] {growingObj.name} is fully grown, harvesting");
-            HarvestFoodBall(growingObj);
+            Debug.Log($"[FoodBallTree] {growingObj.name} is fully grown, setting to ripe state");
+            foodBallStates[growingObj] = FoodBallState.Ripe;
+            // Don't harvest automatically anymore - wait for player interaction
+        }
+
+        public void Interact(GravitasFirstPersonPlayerSubject player)
+        {
+            if (player != null && planetSync != null && CanInteract)
+            {
+                // Send command to authority to handle harvesting
+                planetSync.SendCommand<FoodBallTree>(
+                    nameof(NetworkHarvestFoodBalls),
+                    MessageTarget.AuthorityOnly,
+                    player.gameObject
+                );
+            }
+        }
+
+        [Command]
+        public void NetworkHarvestFoodBalls(GameObject playerGameObject)
+        {
+            if (!HasAuthority() || !CanInteract) return;
+
+            Debug.Log($"[FoodBallTree] Player {playerGameObject?.name} is harvesting food balls");
+            HarvestAllRipeFoodBalls();
+        }
+
+        private int GetRipeFoodBallCount()
+        {
+            int count = 0;
+            foreach (var state in foodBallStates.Values)
+            {
+                if (state == FoodBallState.Ripe)
+                    count++;
+            }
+            return count;
+        }
+
+        private void HarvestAllRipeFoodBalls()
+        {
+            var ripeFoodBalls = new List<FoodBallGrowing>();
+            foreach (var kvp in foodBallStates)
+            {
+                if (kvp.Value == FoodBallState.Ripe)
+                {
+                    ripeFoodBalls.Add(kvp.Key);
+                }
+            }
+
+            foreach (var growingObj in ripeFoodBalls)
+            {
+                HarvestFoodBall(growingObj);
+            }
         }
 
         private void HarvestFoodBall(FoodBallGrowing growingObj)
@@ -147,7 +216,8 @@ namespace Gravitas
             // Hide and reset the growing object
             growingObj.Reset();
 
-            // Set respawn timer
+            // Set state to empty and start respawn timer
+            foodBallStates[growingObj] = FoodBallState.Empty;
             respawnTimers[growingObj] = respawnDelay;
             Debug.Log($"[FoodBallTree] Set respawn timer for {growingObj.name}: {respawnDelay} seconds");
         }
@@ -156,6 +226,7 @@ namespace Gravitas
         {
             if (growingObj == null) return;
 
+            foodBallStates[growingObj] = FoodBallState.Growing;
             growingObj.StartGrowing();
         }
 

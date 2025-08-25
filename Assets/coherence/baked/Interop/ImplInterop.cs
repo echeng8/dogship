@@ -462,7 +462,8 @@ namespace Coherence.Generated
                   case 6: return _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64.FromInterop(data, dataSize);
                   case 7: return _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0.FromInterop(data, dataSize);
                   case 8: return _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f.FromInterop(data, dataSize);
-                  case 9: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
+                  case 9: return _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73.FromInterop(data, dataSize);
+                  case 10: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
             }
 
             throw new ArgumentException($"Unkown command type {type}", nameof(type));
@@ -571,6 +572,16 @@ namespace Coherence.Generated
 
                 }
                 case 9:
+                {
+                    var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73)command;
+                    var val = new _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 10:
                 {
                     var orig = (_ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847)command;
                     var val = new _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.Interop();
