@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581f87f90a1de9947bbb3ec06c3317e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallTree
-  foodBallPrefab: {fileID: 0}
-  growRate: 1
+  foodBallPrefab: {fileID: 3763076689838674114, guid: ff0eb699ebf32684891c45f672adc3ae, type: 3}
+  secondsToGrow: 10
   respawnDelay: 5
 --- !u!1 &3136628078279194168
 GameObject:
@@ -344,6 +344,9 @@ MonoBehaviour:
   SyncedProxyRotation: {x: 0, y: 0, z: 0, w: 0}
   bodyColliders:
   - {fileID: 3136628078279194171}
+  - {fileID: 5563931079946949923}
+  - {fileID: 593957096267220478}
+  - {fileID: 5014146220355224771}
   gravitasBodyRigidbody: {fileID: 3136628078399885760}
 --- !u!114 &3136628078399885821
 MonoBehaviour:
@@ -386,7 +389,7 @@ MonoBehaviour:
   fieldLayerMask:
     serializedVersion: 2
     m_Bits: 55
-  acceleration: 20
+  acceleration: 40
   physicsSceneBoundaryScaleFactor: 1.1
   addChildColliders: 1
   priority: 2
@@ -624,8 +627,6 @@ MonoBehaviour:
     - component: {fileID: 7766460476850088101}
       lodStepsActive: 1
     - component: {fileID: 7238396129675512801}
-      lodStepsActive: 1
-    - component: {fileID: 5740384078856191543}
       lodStepsActive: 1
     - component: {fileID: 2132626565866200257}
       lodStepsActive: 1
@@ -990,7 +991,6 @@ GameObject:
   - component: {fileID: 3192635372314427739}
   - component: {fileID: 7766460476850088101}
   - component: {fileID: 7238396129675512801}
-  - component: {fileID: 5740384078856191543}
   - component: {fileID: 2132626565866200257}
   m_Layer: 0
   m_Name: FoodBallGrowing
@@ -1009,7 +1009,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -3.436813e-24, y: -0, z: -0.000000010244548, w: 1}
   m_LocalPosition: {x: -0.023507647, y: 0.455, z: -0.6306267}
-  m_LocalScale: {x: 0.48391595, y: 0.10814038, z: 0.740827}
+  m_LocalScale: {x: 0.36460513, y: 0.08147807, z: 0.5581741}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2949879920285294525}
@@ -1070,27 +1070,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5740384078856191543
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6969144879927091857}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2132626565866200257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,8 +1083,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallGrowing
   targetScale: {x: 1, y: 1, z: 1}
-  growthRate: 0.05
   parentTree: {fileID: 2711908864903804098}
+  debugWorldScale: {x: 0, y: 0, z: 0}
+  debugLocalScale: {x: 0, y: 0, z: 0}
+  debugCurrentScale: {x: 0, y: 0, z: 0}
+  debugIsGrowing: 0
 --- !u!1001 &3079974565094864875
 PrefabInstance:
   m_ObjectHideFlags: 0
