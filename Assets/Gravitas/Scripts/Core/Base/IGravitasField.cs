@@ -82,5 +82,12 @@ namespace Gravitas
         /// <param name="subject">The subject to check.</param>
         /// <returns><c>bool</c> Whether or not this field is simulating the given subject.</returns>
         bool ContainsSubject(IGravitasSubject subject);
+
+        /// <summary>Spawns an object and adds it to this field with synchronized velocity.</summary>
+        /// <param name="prefab">The prefab to spawn.</param>
+        /// <param name="position">The spawn position.</param>
+        /// <param name="rotation">The spawn rotation.</param>
+        /// <returns>The spawned GameObject, or null if spawning failed.</returns>
+        GameObject SpawnAndAddToField(GameObject prefab, Vector3 position, Quaternion rotation);
     }
 }

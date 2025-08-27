@@ -179,33 +179,21 @@ namespace Gravitas
                 Vector3 spawnPosition = growingObj.transform.position;
                 Quaternion spawnRotation = growingObj.transform.rotation;
 
-                GameObject spawnedFoodBall = Instantiate(foodBallPrefab, spawnPosition, spawnRotation);
-                Debug.Log($"[FoodBallTree] Spawned food ball: {spawnedFoodBall.name}");
+                GameObject spawnedFoodBall = gravitasField?.SpawnAndAddToField(foodBallPrefab, spawnPosition, spawnRotation);
 
-                // Ensure spawned food ball has coherence sync
-                if (spawnedFoodBall.GetComponent<CoherenceSync>() == null)
+                if (spawnedFoodBall != null)
                 {
-                    Debug.LogWarning($"Spawned food ball prefab should have CoherenceSync component for networking!");
-                }
+                    Debug.Log($"[FoodBallTree] Spawned and added food ball: {spawnedFoodBall.name}");
 
-                // Add the spawned food ball to the same field as the tree
-                if (gravitasField != null && spawnedFoodBall.TryGetComponent<IGravitasSubject>(out var foodBallSubject))
-                {
-                    // Set velocity to match the planet before adding to field
-                    IGravitasBody foodBallBody = foodBallSubject.GravitasBody;
-                    if (foodBallBody != null)
+                    // Ensure spawned food ball has coherence sync
+                    if (spawnedFoodBall.GetComponent<CoherenceSync>() == null)
                     {
-                        foodBallBody.AngularVelocity = gravitasField.FieldAngularVelocity;
-                        foodBallBody.Velocity = gravitasField.FieldVelocity;
-                        Debug.Log($"[FoodBallTree] Set food ball velocity to match field - Linear: {gravitasField.FieldVelocity}, Angular: {gravitasField.FieldAngularVelocity}");
+                        Debug.LogWarning($"Spawned food ball prefab should have CoherenceSync component for networking!");
                     }
-
-                    gravitasField.EnqueueSubjectChange(foodBallSubject, true);
-                    Debug.Log($"[FoodBallTree] Enqueued food ball {spawnedFoodBall.name} to enter field {gravitasField.GameObject.name}");
                 }
                 else
                 {
-                    Debug.LogWarning($"[FoodBallTree] Could not add food ball to field - gravitasField: {gravitasField != null}, hasSubject: {spawnedFoodBall.GetComponent<IGravitasSubject>() != null}");
+                    Debug.LogWarning($"[FoodBallTree] Failed to spawn food ball - gravitasField: {gravitasField != null}");
                 }
             }
             else

@@ -28,30 +28,10 @@ component _090aa92f766769348b4882a9d6b148e2_3543296725183664748 [id "22"]
 component _090aa92f766769348b4882a9d6b148e2_3543296725183664750 [id "23"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
-component _362fd1a7edeb85c48bb39119604133c5_7385481098666009946 [id "24"]
+component _0d0b3f2e44c5edc4c99c0a57d5674ec4_3938401364376064788 [id "24"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
-component _362fd1a7edeb85c48bb39119604133c5_7385481098666009951 [id "25"]
-  SyncedProxyPosition Vector3 [compression "None"]
-  SyncedProxyRotation Quaternion [bits "32"]
-
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761 [id "26"]
-  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
-
-component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 [id "27"]
-  AngularVelocity Vector3 [compression "None"]
-  Velocity Vector3 [compression "None"]
-  SyncedProxyPosition Vector3 [compression "None"]
-  SyncedProxyRotation Quaternion [bits "32"]
-
-component _76ed9974a395ce54087bcb395f26407a_6959148627032638732 [id "28"]
-  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
-
-component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "29"]
-  SyncedProxyPosition Vector3 [compression "None"]
-  SyncedProxyRotation Quaternion [bits "32"]
-
-component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "30"]
+component _0d0b3f2e44c5edc4c99c0a57d5674ec4_5433512961855453101 [id "25"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
   Velocity Vector3 [compression "None"]
@@ -59,7 +39,38 @@ component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "30"]
   IsLanded Bool [bits "1"]
   enabled Bool [bits "1"]
 
-component _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748 [id "31"]
+component _362fd1a7edeb85c48bb39119604133c5_7385481098666009946 [id "26"]
+  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
+
+component _362fd1a7edeb85c48bb39119604133c5_7385481098666009951 [id "27"]
+  SyncedProxyPosition Vector3 [compression "None"]
+  SyncedProxyRotation Quaternion [bits "32"]
+
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885761 [id "28"]
+  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
+
+component _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762 [id "29"]
+  AngularVelocity Vector3 [compression "None"]
+  Velocity Vector3 [compression "None"]
+  SyncedProxyPosition Vector3 [compression "None"]
+  SyncedProxyRotation Quaternion [bits "32"]
+
+component _76ed9974a395ce54087bcb395f26407a_6959148627032638732 [id "30"]
+  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
+
+component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "31"]
+  SyncedProxyPosition Vector3 [compression "None"]
+  SyncedProxyRotation Quaternion [bits "32"]
+
+component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "32"]
+  SyncedProxyPosition Vector3 [compression "None"]
+  SyncedProxyRotation Quaternion [bits "32"]
+  Velocity Vector3 [compression "None"]
+  AngularVelocity Vector3 [compression "None"]
+  IsLanded Bool [bits "1"]
+  enabled Bool [bits "1"]
+
+component _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748 [id "33"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
 command _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 [id "6", routing "All"]
@@ -68,12 +79,14 @@ command _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 [id "
 
 command _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0 [id "7", routing "All"]
 
-command _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f [id "8", routing "All"]
+command _090aa92f766769348b4882a9d6b148e2_738c73e4710e44b4bc915802f2893ed2 [id "8", routing "All"]
+
+command _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f [id "9", routing "All"]
   amount Float [compression "None"]
 
-command _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73 [id "9", routing "All"]
+command _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73 [id "10", routing "All"]
   playerGameObject Entity [client-type "GameObject"]
 
-command _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 [id "10", routing "All"]
+command _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 [id "11", routing "All"]
   playerGameObject Entity [client-type "GameObject"]
 

@@ -373,6 +373,29 @@ namespace Gravitas
                 subjects.Contains(subject);
         }
 
+        public GameObject SpawnAndAddToField(GameObject prefab, Vector3 position, Quaternion rotation)
+        {
+            if (prefab == null) return null;
+
+            GameObject spawnedObject = Instantiate(prefab, position, rotation);
+
+            if (spawnedObject.TryGetComponent<IGravitasSubject>(out var subject))
+            {
+                // Set velocity to match the field before adding to field
+                IGravitasBody subjectBody = subject.GravitasBody;
+                if (subjectBody != null)
+                {
+                    subjectBody.AngularVelocity = FieldAngularVelocity;
+                    subjectBody.Velocity = FieldVelocity;
+                }
+
+                EnqueueSubjectChange(subject, true);
+                return spawnedObject;
+            }
+
+            return spawnedObject;
+        }
+
 #if UNITY_EDITOR
         /// <summary>Checks and reports any issues with this field for display in the inspector.</summary>
         /// <param name="errorMessage">The error message result.</param>

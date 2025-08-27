@@ -24,18 +24,27 @@ namespace Gravitas
         public float MaxStamina => maxStamina;
         public bool CanSprint => currentStamina > 0;
         public bool IsSprinting => isSprinting;
+        public bool CanPoop => Time.time >= lastPoopTime + poopCooldown && poopPrefab != null;
         #endregion
 
         #region SerializeField Variables
         [Header("Stamina Settings")]
         public float maxStamina = 100f;
         public float currentStamina = 100f;
+
+        [Header("Poop Settings")]
+        [SerializeField] private GameObject poopPrefab;
+        [SerializeField] private float poopThrowForce = 5f;
+        [SerializeField] private float poopCooldown = 2f;
         #endregion
 
         #region Private Variables
         private bool isSprinting = false;
         private bool previousFrameSprinting = false;
         private CoherenceSync _sync;
+        private GravitasSubject _gravitasSubject;
+        private float lastPoopTime = 0f;
+        private Camera playerCamera;
         #endregion
 
         #region Unity Lifecycle Methods
@@ -46,6 +55,20 @@ namespace Gravitas
             if (_sync == null)
             {
                 Debug.LogWarning($"PlayerStats on {name} does not have a CoherenceSync component. Some functionality may not work in multiplayer.");
+            }
+
+            // Verify GravitasSubject exists for poop spawning
+            _gravitasSubject = GetComponent<GravitasSubject>();
+            if (_gravitasSubject == null)
+            {
+                Debug.LogWarning($"PlayerStats on {name} could not find a GravitasSubject component. Poop spawning may not work correctly!");
+            }
+
+            // Get player camera for poop direction
+            playerCamera = GetComponentInChildren<Camera>();
+            if (playerCamera == null)
+            {
+                playerCamera = Camera.main; // Fallback to main camera
             }
 
             // Initialize stamina
@@ -127,6 +150,22 @@ namespace Gravitas
         }
 
         /// <summary>
+        /// Network command to spawn poop. Only executed by authority.
+        /// </summary>
+        [Command]
+        public void NetworkPoop()
+        {
+            if (!CanPoop || poopPrefab == null)
+            {
+                Debug.LogWarning($"Cannot poop: CanPoop={CanPoop}, poopPrefab={poopPrefab != null}");
+                return;
+            }
+
+            lastPoopTime = Time.time;
+            SpawnPoop();
+        }
+
+        /// <summary>
         /// Restores stamina by the specified amount.
         /// </summary>
         /// <param name="amount">Amount of stamina to restore</param>
@@ -144,6 +183,37 @@ namespace Gravitas
         {
             currentStamina = Mathf.Max(0, currentStamina - amount);
             OnStaminaChanged?.Invoke(currentStamina, maxStamina);
+        }
+
+        /// <summary>
+        /// Attempts to poop, spawning a poop prefab in the direction the player is looking.
+        /// </summary>
+        public void Poop()
+        {
+            if (!CanPoop)
+            {
+                Debug.Log($"Cannot poop yet. Cooldown remaining: {(lastPoopTime + poopCooldown - Time.time):F1}s");
+                return;
+            }
+
+            if (_sync != null && _sync.HasStateAuthority)
+            {
+                // We have authority, apply the change directly
+                NetworkPoop();
+            }
+            else if (_sync != null)
+            {
+                // Send command to authority
+                _sync.SendCommand<PlayerStats>(
+                    nameof(NetworkPoop),
+                    MessageTarget.AuthorityOnly
+                );
+            }
+            else
+            {
+                // No networking, apply directly (fallback for single player)
+                NetworkPoop();
+            }
         }
         #endregion
 
@@ -180,6 +250,48 @@ namespace Gravitas
 
             // Store current sprinting state for next frame
             previousFrameSprinting = isSprinting;
+        }
+
+        private void SpawnPoop()
+        {
+            if (poopPrefab == null || playerCamera == null)
+            {
+                Debug.LogWarning("Cannot spawn poop: missing prefab or camera");
+                return;
+            }
+
+            // Calculate spawn position and direction
+            Vector3 spawnPosition = transform.position + transform.forward * 1f;
+            Vector3 throwDirection = playerCamera.transform.forward;
+            Quaternion spawnRotation = Quaternion.LookRotation(throwDirection);
+
+            // Get current field from GravitasSubject
+            IGravitasField currentField = _gravitasSubject?.CurrentField;
+
+            // Spawn poop using gravitas field if available
+            GameObject spawnedPoop = null;
+            if (currentField != null)
+            {
+                print("Spawning poop in gravitas field");
+                spawnedPoop = currentField.SpawnAndAddToField(poopPrefab, spawnPosition, spawnRotation);
+            }
+            else
+            {
+                print("Spawning poop outside of gravitas field");
+                spawnedPoop = Instantiate(poopPrefab, spawnPosition, spawnRotation);
+            }
+
+            if (spawnedPoop != null)
+            {
+                // Add initial velocity
+                Rigidbody poopRb = spawnedPoop.GetComponent<Rigidbody>();
+                if (poopRb != null)
+                {
+                    //poopRb.linearVelocity = throwDirection * poopThrowForce;
+                }
+
+                Debug.Log($"Spawned poop: {spawnedPoop.name}");
+            }
         }
         #endregion
     }
