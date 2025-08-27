@@ -17,6 +17,7 @@ namespace Gravitas
 
         #region Events
         public event Action<float, float> OnStaminaChanged; // current, max
+        public event Action<int> OnPoopAmmoChanged; // current poop ammo
         #endregion
 
         #region Public Properties
@@ -24,7 +25,8 @@ namespace Gravitas
         public float MaxStamina => maxStamina;
         public bool CanSprint => currentStamina > 0;
         public bool IsSprinting => isSprinting;
-        public bool CanPoop => Time.time >= lastPoopTime + poopCooldown && poopPrefab != null;
+        public bool CanPoop => Time.time >= lastPoopTime + poopCooldown && poopPrefab != null && poopAmmo > 0;
+        public int PoopAmmo => poopAmmo;
         #endregion
 
         #region SerializeField Variables
@@ -45,6 +47,7 @@ namespace Gravitas
         private GravitasSubject _gravitasSubject;
         private float lastPoopTime = 0f;
         private Camera playerCamera;
+        private int poopAmmo = 0;
         #endregion
 
         #region Unity Lifecycle Methods
@@ -74,6 +77,7 @@ namespace Gravitas
             // Initialize stamina
             currentStamina = maxStamina;
             OnStaminaChanged?.Invoke(currentStamina, maxStamina);
+            OnPoopAmmoChanged?.Invoke(poopAmmo);
         }
 
         void Update()
@@ -144,9 +148,13 @@ namespace Gravitas
             maxStamina += amount;
             currentStamina = maxStamina; // Fill stamina when max increases
 
+            // Increase poop ammo by 1 when eating
+            poopAmmo++;
+            OnPoopAmmoChanged?.Invoke(poopAmmo);
+
             // Force UI update
             OnStaminaChanged?.Invoke(currentStamina, maxStamina);
-            Debug.Log($"Player max stamina increased by {amount}. New max: {maxStamina}, Current: {currentStamina}");
+            Debug.Log($"Player max stamina increased by {amount}. New max: {maxStamina}, Current: {currentStamina}, Poop ammo: {poopAmmo}");
         }
 
         /// <summary>
@@ -157,11 +165,13 @@ namespace Gravitas
         {
             if (!CanPoop || poopPrefab == null)
             {
-                Debug.LogWarning($"Cannot poop: CanPoop={CanPoop}, poopPrefab={poopPrefab != null}");
+                Debug.LogWarning($"Cannot poop: CanPoop={CanPoop}, poopPrefab={poopPrefab != null}, poopAmmo={poopAmmo}");
                 return;
             }
 
             lastPoopTime = Time.time;
+            poopAmmo--;
+            OnPoopAmmoChanged?.Invoke(poopAmmo);
             SpawnPoop();
         }
 

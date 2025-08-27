@@ -18,6 +18,9 @@ namespace Gravitas
         [Tooltip("Optional separate TextMeshPro UI component to display max stamina only")]
         public TextMeshProUGUI maxStaminaText;
 
+        [Tooltip("TextMeshPro UI component to display poop ammo")]
+        public TextMeshProUGUI poopAmmoText;
+
         [Header("Player References")]
         [Tooltip("PlayerStats component to get stamina data from")]
         public PlayerStats playerStats;
@@ -28,6 +31,9 @@ namespace Gravitas
 
         [Tooltip("Format string for max stamina display. Use {0} for max value")]
         public string maxStaminaFormat = "Max Stamina: {0:F0}";
+
+        [Tooltip("Format string for poop ammo display. Use {0} for ammo count")]
+        public string poopAmmoFormat = "Poop: {0}";
 
         private void Start()
         {
@@ -41,8 +47,10 @@ namespace Gravitas
             if (playerStats != null)
             {
                 playerStats.OnStaminaChanged += OnStaminaChanged;
+                playerStats.OnPoopAmmoChanged += OnPoopAmmoChanged;
                 // Initialize display with current values
                 OnStaminaChanged(playerStats.CurrentStamina, playerStats.MaxStamina);
+                OnPoopAmmoChanged(playerStats.PoopAmmo);
             }
             else
             {
@@ -67,6 +75,7 @@ namespace Gravitas
             if (playerStats != null)
             {
                 playerStats.OnStaminaChanged -= OnStaminaChanged;
+                playerStats.OnPoopAmmoChanged -= OnPoopAmmoChanged;
             }
         }
 
@@ -91,6 +100,18 @@ namespace Gravitas
         }
 
         /// <summary>
+        /// Called when poop ammo changes in PlayerStats
+        /// </summary>
+        /// <param name="poopAmmo">Current poop ammo count</param>
+        private void OnPoopAmmoChanged(int poopAmmo)
+        {
+            if (poopAmmoText != null)
+            {
+                poopAmmoText.text = string.Format(poopAmmoFormat, poopAmmo);
+            }
+        }
+
+        /// <summary>
         /// Manually update the display (useful for testing)
         /// </summary>
         public void UpdateDisplay()
@@ -98,6 +119,7 @@ namespace Gravitas
             if (playerStats != null)
             {
                 OnStaminaChanged(playerStats.CurrentStamina, playerStats.MaxStamina);
+                OnPoopAmmoChanged(playerStats.PoopAmmo);
             }
         }
     }
