@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallTree
   foodBallPrefab: {fileID: 3763076689838674114, guid: ff0eb699ebf32684891c45f672adc3ae, type: 3}
-  secondsToGrow: 10
+  secondsToGrow: 60
   respawnDelay: 5
 --- !u!114 &9089289321668348579
 MonoBehaviour:
