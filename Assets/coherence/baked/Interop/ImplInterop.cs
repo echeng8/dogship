@@ -492,8 +492,14 @@ namespace Coherence.Generated
                   case 7: return _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0.FromInterop(data, dataSize);
                   case 8: return _090aa92f766769348b4882a9d6b148e2_738c73e4710e44b4bc915802f2893ed2.FromInterop(data, dataSize);
                   case 9: return _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f.FromInterop(data, dataSize);
-                  case 10: return _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73.FromInterop(data, dataSize);
-                  case 11: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
+                  case 10: return _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708.FromInterop(data, dataSize);
+                  case 11: return _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39.FromInterop(data, dataSize);
+                  case 12: return _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1.FromInterop(data, dataSize);
+                  case 13: return _4452a7764deb5654580ba23565e59e56_05c87585ce1a4602823f38746d382092.FromInterop(data, dataSize);
+                  case 14: return _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73.FromInterop(data, dataSize);
+                  case 15: return _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b.FromInterop(data, dataSize);
+                  case 16: return _4d7f86b504afd6f419f3d65f80c82f8f_d14b47d79b424ee1a065ca3924190c44.FromInterop(data, dataSize);
+                  case 17: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
             }
 
             throw new ArgumentException($"Unkown command type {type}", nameof(type));
@@ -612,6 +618,46 @@ namespace Coherence.Generated
                 }
                 case 10:
                 {
+                    var orig = (_362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708)command;
+                    var val = new _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 11:
+                {
+                    var orig = (_362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39)command;
+                    var val = new _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 12:
+                {
+                    var orig = (_362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1)command;
+                    var val = new _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 13:
+                {
+                    var orig = (_4452a7764deb5654580ba23565e59e56_05c87585ce1a4602823f38746d382092)command;
+                    var val = new _4452a7764deb5654580ba23565e59e56_05c87585ce1a4602823f38746d382092.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 14:
+                {
                     var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73)command;
                     var val = new _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73.Interop();
 
@@ -620,7 +666,27 @@ namespace Coherence.Generated
                     return sender.SendCommand(entity, target, type, val, 4);
 
                 }
-                case 11:
+                case 15:
+                {
+                    var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b)command;
+                    var val = new _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 16:
+                {
+                    var orig = (_4d7f86b504afd6f419f3d65f80c82f8f_d14b47d79b424ee1a065ca3924190c44)command;
+                    var val = new _4d7f86b504afd6f419f3d65f80c82f8f_d14b47d79b424ee1a065ca3924190c44.Interop();
+
+                    val.playerGameObject = orig.playerGameObject;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 17:
                 {
                     var orig = (_ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847)command;
                     var val = new _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.Interop();

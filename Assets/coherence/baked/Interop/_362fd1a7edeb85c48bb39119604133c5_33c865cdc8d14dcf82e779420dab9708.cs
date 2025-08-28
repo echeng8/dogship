@@ -16,7 +16,7 @@ namespace Coherence.Generated
     using System.Runtime.InteropServices;
     using UnityEngine;
 
-    public struct _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73 : IEntityCommand
+    public struct _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 : IEntityCommand
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
@@ -25,14 +25,14 @@ namespace Coherence.Generated
             public Entity playerGameObject;
         }
 
-        public static unsafe _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73 FromInterop(System.IntPtr data, System.Int32 dataSize) 
+        public static unsafe _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 FromInterop(System.IntPtr data, System.Int32 dataSize) 
         {
             if (dataSize != 4) {
                 throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 4) " +
-                    "for command with ID 14");
+                    "for command with ID 10");
             }
 
-            var orig = new _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73();
+            var orig = new _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708();
             var comp = (Interop*)data;
             orig.playerGameObject = comp->playerGameObject;
             return orig;
@@ -44,7 +44,7 @@ namespace Coherence.Generated
         public Coherence.ChannelID ChannelID { get; set; }
         public MessageTarget Routing { get; set; }
         public uint Sender { get; set; }
-        public uint GetComponentType() => 14;
+        public uint GetComponentType() => 10;
         
         public IEntityMessage Clone()
         {
@@ -101,7 +101,7 @@ namespace Coherence.Generated
             }
         }
         
-        public _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73(
+        public _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(
         Entity entity,
         Entity playerGameObject
 )
@@ -114,16 +114,16 @@ namespace Coherence.Generated
             this.playerGameObject = playerGameObject; 
         }
         
-        public static void Serialize(_4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73 commandData, IOutProtocolBitStream bitStream)
+        public static void Serialize(_362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 commandData, IOutProtocolBitStream bitStream)
         {
             bitStream.WriteEntity(commandData.playerGameObject);
         }
         
-        public static _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73 Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
+        public static _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
         {
             var dataplayerGameObject = bitStream.ReadEntity();
     
-            return new _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73()
+            return new _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708()
             {
                 Entity = entity,
                 Routing = target,

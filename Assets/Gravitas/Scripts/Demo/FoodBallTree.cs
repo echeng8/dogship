@@ -37,7 +37,7 @@ namespace Gravitas
         private void Awake()
         {
             // Get planet's CoherenceSync from parent
-            planetSync = GetComponentInParent<CoherenceSync>();
+            planetSync = GetComponent<CoherenceSync>();
             if (planetSync == null)
             {
                 Debug.LogError($"FoodBallTree {name} requires a CoherenceSync component on parent planet!");

@@ -286,6 +286,9 @@ namespace Coherence.Generated
         private Entity entityId;
         private Logger logger = Coherence.Log.Log.GetLogger<CoherenceSync_362fd1a7edeb85c48bb39119604133c5>();
         
+        private global::Gravitas.FoodBallTree _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39_CommandTarget;
+        private global::Gravitas.FoodBallTree _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708_CommandTarget;
+        private global::Gravitas.FoodBallTree _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1_CommandTarget;
         
         
         private IClient client;
@@ -304,6 +307,9 @@ namespace Coherence.Generated
         
         public CoherenceSync_362fd1a7edeb85c48bb39119604133c5()
         {
+            bakedCommandBindings.Add("5f7ece0daa0c4c91a021a802c3f47f39", BakeCommandBinding__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39);
+            bakedCommandBindings.Add("33c865cdc8d14dcf82e779420dab9708", BakeCommandBinding__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708);
+            bakedCommandBindings.Add("a385adf88dc64bb493660ec8bcbed6d1", BakeCommandBinding__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1);
         }
         
         public override Binding BakeValueBinding(Binding valueBinding)
@@ -324,11 +330,116 @@ namespace Coherence.Generated
                 commandBindingBaker.Invoke(commandBinding, commandsHandler);
             }
         }
+        private void BakeCommandBinding__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39_CommandTarget = (global::Gravitas.FoodBallTree)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.FoodBallTree.NetworkHarvestFoodBalls", "(UnityEngine.GameObject)", SendCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39, ReceiveLocalCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39, MessageTarget.All, _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39_CommandTarget, false);
+        }
+        
+        private void SendCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39();
+            
+            int i = 0;
+            command.playerGameObject = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.GameObject);
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39();
+            
+            int i = 0;
+            command.playerGameObject = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.GameObject);
+            
+            ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39(command);
+        }
+
+        private void ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39(_362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39 command)
+        {
+            var target = _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39_CommandTarget;
+            
+            target.NetworkHarvestFoodBalls(bridge.EntityIdToGameObject(command.playerGameObject));
+        }
+        private void BakeCommandBinding__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708_CommandTarget = (global::Gravitas.FoodBallTree)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.FoodBallTree.NetworkHarvestFoodBalls", "(UnityEngine.GameObject)", SendCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708, ReceiveLocalCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708, MessageTarget.All, _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708_CommandTarget, false);
+        }
+        
+        private void SendCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708();
+            
+            int i = 0;
+            command.playerGameObject = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.GameObject);
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708();
+            
+            int i = 0;
+            command.playerGameObject = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.GameObject);
+            
+            ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(command);
+        }
+
+        private void ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(_362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 command)
+        {
+            var target = _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708_CommandTarget;
+            
+            target.NetworkHarvestFoodBalls(bridge.EntityIdToGameObject(command.playerGameObject));
+        }
+        private void BakeCommandBinding__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1_CommandTarget = (global::Gravitas.FoodBallTree)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.FoodBallTree.NetworkHarvestFoodBalls", "(UnityEngine.GameObject)", SendCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1, ReceiveLocalCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1, MessageTarget.All, _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1_CommandTarget, false);
+        }
+        
+        private void SendCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1();
+            
+            int i = 0;
+            command.playerGameObject = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.GameObject);
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1();
+            
+            int i = 0;
+            command.playerGameObject = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.GameObject);
+            
+            ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1(command);
+        }
+
+        private void ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1(_362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1 command)
+        {
+            var target = _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1_CommandTarget;
+            
+            target.NetworkHarvestFoodBalls(bridge.EntityIdToGameObject(command.playerGameObject));
+        }
         
         public override void ReceiveCommand(IEntityCommand command)
         {
             switch (command)
             {
+                case _362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39 castedCommand:
+                    ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_5f7ece0daa0c4c91a021a802c3f47f39(castedCommand);
+                    break;
+                case _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 castedCommand:
+                    ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708(castedCommand);
+                    break;
+                case _362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1 castedCommand:
+                    ReceiveCommand__362fd1a7edeb85c48bb39119604133c5_a385adf88dc64bb493660ec8bcbed6d1(castedCommand);
+                    break;
                 default:
                     logger.Warning(Coherence.Log.Warning.ToolkitBakedSyncReceiveCommandUnhandled,
                         $"CoherenceSync_362fd1a7edeb85c48bb39119604133c5 Unhandled command: {command.GetType()}.");

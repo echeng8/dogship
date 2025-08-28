@@ -148,6 +148,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7385481097685307102}
+  - {fileID: 7134426487997722709}
+  - {fileID: 3289968154723249079}
+  - {fileID: 2280690116432561564}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7385481098666009940
@@ -379,6 +382,60 @@ MonoBehaviour:
       lodStepsActive: 1
     - component: {fileID: 7385481097685307097}
       lodStepsActive: 1
+    - component: {fileID: 7134426487997722709}
+      lodStepsActive: 1
+    - component: {fileID: 1169878749568032917}
+      lodStepsActive: 1
+    - component: {fileID: 7410705640352174908}
+      lodStepsActive: 1
+    - component: {fileID: 1037890959350721323}
+      lodStepsActive: 1
+    - component: {fileID: 7948894579569629994}
+      lodStepsActive: 1
+    - component: {fileID: 7474853653949607603}
+      lodStepsActive: 1
+    - component: {fileID: 2322315447813719885}
+      lodStepsActive: 1
+    - component: {fileID: 3423146737174012937}
+      lodStepsActive: 1
+    - component: {fileID: 6226819876557714217}
+      lodStepsActive: 1
+    - component: {fileID: 3289968154723249079}
+      lodStepsActive: 1
+    - component: {fileID: 6815913305997736823}
+      lodStepsActive: 1
+    - component: {fileID: 2914636036710680798}
+      lodStepsActive: 1
+    - component: {fileID: 4669555343799218377}
+      lodStepsActive: 1
+    - component: {fileID: 2376464697199886536}
+      lodStepsActive: 1
+    - component: {fileID: 2960765216925676881}
+      lodStepsActive: 1
+    - component: {fileID: 7966944793182559407}
+      lodStepsActive: 1
+    - component: {fileID: 7001890562648768491}
+      lodStepsActive: 1
+    - component: {fileID: 1783663099875551435}
+      lodStepsActive: 1
+    - component: {fileID: 2280690116432561564}
+      lodStepsActive: 1
+    - component: {fileID: 7825019757661197660}
+      lodStepsActive: 1
+    - component: {fileID: 1908449822967604981}
+      lodStepsActive: 1
+    - component: {fileID: 8269564187952848610}
+      lodStepsActive: 1
+    - component: {fileID: 1365739701604871907}
+      lodStepsActive: 1
+    - component: {fileID: 1952366856924470138}
+      lodStepsActive: 1
+    - component: {fileID: 6673970833949340292}
+      lodStepsActive: 1
+    - component: {fileID: 5991271117753651648}
+      lodStepsActive: 1
+    - component: {fileID: 3084450259604637408}
+      lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
   interpolationLocation: 1
   RigidbodyUpdateMode: 0
@@ -400,6 +457,9 @@ MonoBehaviour:
   - rid: 8677872745804464246
   - rid: 8677872797709238358
   - rid: 8677872797709238359
+  - rid: 8677873067299438703
+  - rid: 8677873067299438704
+  - rid: 8677873067299438705
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -644,3 +704,427 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
+    - rid: 8677873067299438703
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8677873067299438706
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: 5f7ece0daa0c4c91a021a802c3f47f39
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 7948894579569629994}
+        coherenceSync: {fileID: 0}
+        interpolationSettings: {fileID: 0}
+    - rid: 8677873067299438704
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8677873067299438706
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: 33c865cdc8d14dcf82e779420dab9708
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 2376464697199886536}
+        coherenceSync: {fileID: 0}
+        interpolationSettings: {fileID: 0}
+    - rid: 8677873067299438705
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8677873067299438706
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: a385adf88dc64bb493660ec8bcbed6d1
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 1365739701604871907}
+        coherenceSync: {fileID: 0}
+        interpolationSettings: {fileID: 0}
+    - rid: 8677873067299438706
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: NetworkHarvestFoodBalls
+        monoAssemblyType: 
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 0
+        valueSyncCallbackName: 
+        memberType: 8
+        parameterAssemblyTypes:
+        - UnityEngine.GameObject, UnityEngine
+        ownerType:
+          assemblyQualifiedName: Gravitas.FoodBallTree, gravitas-main, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.CommandBinding, Coherence.Toolkit,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
+--- !u!1001 &1289260216447748549
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7385481098666009947}
+    m_Modifications:
+    - target: {fileID: 361442688313154444, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_Name
+      value: FoodBall Tree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+--- !u!114 &1783663099875551435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 658800384556704014, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68dcee6c2f130e4a8b0162a71591204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallGrowing
+--- !u!114 &2376464697199886536 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3539470158084065549, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581f87f90a1de9947bbb3ec06c3317e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallTree
+--- !u!23 &2914636036710680798 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4149646349439598875, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2960765216925676881 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4103517106426264724, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3289968154723249079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4669555343799218377 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5848426104641337612, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &6815913305997736823 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 5724816592759632562, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7001890562648768491 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8128972074988320302, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &7966944793182559407 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 9183993312156194154, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 1289260216447748549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2588070459102472174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7385481098666009947}
+    m_Modifications:
+    - target: {fileID: 361442688313154444, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_Name
+      value: FoodBall Tree (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+--- !u!114 &1365739701604871907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3539470158084065549, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581f87f90a1de9947bbb3ec06c3317e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallTree
+--- !u!23 &1908449822967604981 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4149646349439598875, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1952366856924470138 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4103517106426264724, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2280690116432561564 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3084450259604637408 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 658800384556704014, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68dcee6c2f130e4a8b0162a71591204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallGrowing
+--- !u!23 &5991271117753651648 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8128972074988320302, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &6673970833949340292 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 9183993312156194154, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &7825019757661197660 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 5724816592759632562, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8269564187952848610 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5848426104641337612, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 2588070459102472174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6867598943345496615
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7385481098666009947}
+    m_Modifications:
+    - target: {fileID: 361442688313154444, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_Name
+      value: FoodBall Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.3823853
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.9043293
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+--- !u!65 &1037890959350721323 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5848426104641337612, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &1169878749568032917 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 5724816592759632562, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &2322315447813719885 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 9183993312156194154, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3423146737174012937 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8128972074988320302, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6226819876557714217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 658800384556704014, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68dcee6c2f130e4a8b0162a71591204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallGrowing
+--- !u!4 &7134426487997722709 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4344865114064233074, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7410705640352174908 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4149646349439598875, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7474853653949607603 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4103517106426264724, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7948894579569629994 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3539470158084065549, guid: 4452a7764deb5654580ba23565e59e56, type: 3}
+  m_PrefabInstance: {fileID: 6867598943345496615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581f87f90a1de9947bbb3ec06c3317e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: gravitas-main::Gravitas.FoodBallTree
