@@ -82,6 +82,7 @@ namespace Coherence.Generated
         private Entity entityId;
         private Logger logger = Coherence.Log.Log.GetLogger<CoherenceSync_8b463149d5f8b1c4dab027c2c3ec2ad2>();
         
+        private global::Gravitas.CryptidManager _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569_CommandTarget;
         
         
         private IClient client;
@@ -96,6 +97,7 @@ namespace Coherence.Generated
         
         public CoherenceSync_8b463149d5f8b1c4dab027c2c3ec2ad2()
         {
+            bakedCommandBindings.Add("19099d1fae894e0c8fff3ff89dde0569", BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569);
         }
         
         public override Binding BakeValueBinding(Binding valueBinding)
@@ -116,11 +118,46 @@ namespace Coherence.Generated
                 commandBindingBaker.Invoke(commandBinding, commandsHandler);
             }
         }
+        private void BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569_CommandTarget = (global::Gravitas.CryptidManager)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.CryptidManager.NetworkSpawnCryptid", "(UnityEngine.Transform)", SendCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569, ReceiveLocalCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569, MessageTarget.All, _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569_CommandTarget, false);
+        }
+        
+        private void SendCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569();
+            
+            int i = 0;
+            command.spawnTransform = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.Transform);
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569();
+            
+            int i = 0;
+            command.spawnTransform = (Entity)bridge.UnityObjectToEntityId(args[i++] as UnityEngine.Transform);
+            
+            ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(command);
+        }
+
+        private void ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(_8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 command)
+        {
+            var target = _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569_CommandTarget;
+            
+            target.NetworkSpawnCryptid(bridge.EntityIdToTransform(command.spawnTransform));
+        }
         
         public override void ReceiveCommand(IEntityCommand command)
         {
             switch (command)
             {
+                case _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 castedCommand:
+                    ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(castedCommand);
+                    break;
                 default:
                     logger.Warning(Coherence.Log.Warning.ToolkitBakedSyncReceiveCommandUnhandled,
                         $"CoherenceSync_8b463149d5f8b1c4dab027c2c3ec2ad2 Unhandled command: {command.GetType()}.");

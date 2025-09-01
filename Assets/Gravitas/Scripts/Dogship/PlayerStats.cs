@@ -225,6 +225,21 @@ namespace Gravitas
                 NetworkPoop();
             }
         }
+
+        /// <summary>
+        /// Attempts to spawn a cryptid near the player.
+        /// </summary>
+        public void SpawnCryptid()
+        {
+            CryptidManager cryptidManager = FindFirstObjectByType<CryptidManager>();
+            if (cryptidManager == null)
+            {
+                Debug.LogError("CryptidManager not found in scene!");
+                return;
+            }
+
+            cryptidManager.SpawnCryptid(transform);
+        }
         #endregion
 
         #region Private Methods
@@ -303,6 +318,7 @@ namespace Gravitas
                 Debug.Log($"Spawned poop: {spawnedPoop.name}");
             }
         }
+
         #endregion
     }
 }

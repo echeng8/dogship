@@ -62,7 +62,14 @@ component _76ed9974a395ce54087bcb395f26407a_6959148627032638734 [id "31"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
 
-component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "32"]
+component _e4bb2c0a78594ec42b6f43fae72c7a33_7251299098702113893 [id "32"]
+  networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
+
+component _e4bb2c0a78594ec42b6f43fae72c7a33_7552079822175223462 [id "33"]
+  SyncedProxyPosition Vector3 [compression "None"]
+  SyncedProxyRotation Quaternion [bits "32"]
+
+component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "34"]
   SyncedProxyPosition Vector3 [compression "None"]
   SyncedProxyRotation Quaternion [bits "32"]
   Velocity Vector3 [compression "None"]
@@ -70,7 +77,7 @@ component _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374 [id "32"]
   IsLanded Bool [bits "1"]
   enabled Bool [bits "1"]
 
-component _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748 [id "33"]
+component _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748 [id "35"]
   networkedCurrentFieldTransform Entity [bits "20", client-type "Transform"]
 
 command _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 [id "6", routing "All"]
@@ -105,6 +112,9 @@ command _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b [id "
 command _4d7f86b504afd6f419f3d65f80c82f8f_d14b47d79b424ee1a065ca3924190c44 [id "16", routing "All"]
   playerGameObject Entity [client-type "GameObject"]
 
-command _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 [id "17", routing "All"]
+command _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 [id "17", routing "All"]
+  spawnTransform Entity [client-type "Transform"]
+
+command _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 [id "18", routing "All"]
   playerGameObject Entity [client-type "GameObject"]
 

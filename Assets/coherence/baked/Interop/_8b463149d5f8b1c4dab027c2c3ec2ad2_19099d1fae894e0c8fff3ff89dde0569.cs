@@ -16,35 +16,35 @@ namespace Coherence.Generated
     using System.Runtime.InteropServices;
     using UnityEngine;
 
-    public struct _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 : IEntityCommand
+    public struct _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 : IEntityCommand
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
         {
             [FieldOffset(0)]
-            public Entity playerGameObject;
+            public Entity spawnTransform;
         }
 
-        public static unsafe _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 FromInterop(System.IntPtr data, System.Int32 dataSize) 
+        public static unsafe _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 FromInterop(System.IntPtr data, System.Int32 dataSize) 
         {
             if (dataSize != 4) {
                 throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 4) " +
-                    "for command with ID 18");
+                    "for command with ID 17");
             }
 
-            var orig = new _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847();
+            var orig = new _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569();
             var comp = (Interop*)data;
-            orig.playerGameObject = comp->playerGameObject;
+            orig.spawnTransform = comp->spawnTransform;
             return orig;
         }
 
-        public Entity playerGameObject;
+        public Entity spawnTransform;
         
         public Entity Entity { get; set; }
         public Coherence.ChannelID ChannelID { get; set; }
         public MessageTarget Routing { get; set; }
         public uint Sender { get; set; }
-        public uint GetComponentType() => 18;
+        public uint GetComponentType() => 17;
         
         public IEntityMessage Clone()
         {
@@ -61,12 +61,12 @@ namespace Coherence.Generated
                 return err;
             }
             Entity = absoluteEntity;
-            err = mapper.MapToAbsoluteEntity(playerGameObject, false, out absoluteEntity);
+            err = mapper.MapToAbsoluteEntity(spawnTransform, false, out absoluteEntity);
             if (err != IEntityMapper.Error.None)
             {
                 return err;
             }
-            this.playerGameObject = absoluteEntity;
+            this.spawnTransform = absoluteEntity;
             
             return IEntityMapper.Error.None;
         }
@@ -79,31 +79,31 @@ namespace Coherence.Generated
                 return err;
             }
             Entity = relativeEntity;
-            err = mapper.MapToRelativeEntity(playerGameObject, false, out relativeEntity);
+            err = mapper.MapToRelativeEntity(spawnTransform, false, out relativeEntity);
             if (err != IEntityMapper.Error.None)
             {
                 return err;
             }
-            this.playerGameObject = relativeEntity;
+            this.spawnTransform = relativeEntity;
             
             return IEntityMapper.Error.None;
         }
 
         public HashSet<Entity> GetEntityRefs() {
             return new HashSet<Entity> {
-                this.playerGameObject,
+                this.spawnTransform,
             };
         }
 
         public void NullEntityRefs(Entity entity) {
-            if (this.playerGameObject == entity) {
-                this.playerGameObject = Entity.InvalidRelative;
+            if (this.spawnTransform == entity) {
+                this.spawnTransform = Entity.InvalidRelative;
             }
         }
         
-        public _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847(
+        public _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(
         Entity entity,
-        Entity playerGameObject
+        Entity spawnTransform
 )
         {
             Entity = entity;
@@ -111,23 +111,23 @@ namespace Coherence.Generated
             Routing = MessageTarget.All;
             Sender = 0;
             
-            this.playerGameObject = playerGameObject; 
+            this.spawnTransform = spawnTransform; 
         }
         
-        public static void Serialize(_ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 commandData, IOutProtocolBitStream bitStream)
+        public static void Serialize(_8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 commandData, IOutProtocolBitStream bitStream)
         {
-            bitStream.WriteEntity(commandData.playerGameObject);
+            bitStream.WriteEntity(commandData.spawnTransform);
         }
         
-        public static _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847 Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
+        public static _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
         {
-            var dataplayerGameObject = bitStream.ReadEntity();
+            var dataspawnTransform = bitStream.ReadEntity();
     
-            return new _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847()
+            return new _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569()
             {
                 Entity = entity,
                 Routing = target,
-                playerGameObject = dataplayerGameObject
+                spawnTransform = dataspawnTransform
             };   
         }
     }

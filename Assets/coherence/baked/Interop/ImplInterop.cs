@@ -56,8 +56,10 @@ namespace Coherence.Generated
                 case 29: return _4d7f86b504afd6f419f3d65f80c82f8f_3136628078399885762.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 30: return _76ed9974a395ce54087bcb395f26407a_6959148627032638732.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 31: return _76ed9974a395ce54087bcb395f26407a_6959148627032638734.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 32: return _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 33: return _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 32: return _e4bb2c0a78594ec42b6f43fae72c7a33_7251299098702113893.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 33: return _e4bb2c0a78594ec42b6f43fae72c7a33_7552079822175223462.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 34: return _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 35: return _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.FromInterop(data, dataSize, simFrames, simFramesCount);
             }
 
             throw new ArgumentException($"Unkown component type {type}", nameof(type));
@@ -448,6 +450,29 @@ namespace Coherence.Generated
                 }
                 case 32:
                 {
+                    var orig = (_e4bb2c0a78594ec42b6f43fae72c7a33_7251299098702113893)component;
+                    var val = new _e4bb2c0a78594ec42b6f43fae72c7a33_7251299098702113893.Interop();
+
+                    val.networkedCurrentFieldTransform = orig.networkedCurrentFieldTransform;
+
+                    updater.UpdateComponent(entity, componentType, val, 4, component.FieldsMask, component.StoppedMask, frames);
+
+                    return;
+                }
+                case 33:
+                {
+                    var orig = (_e4bb2c0a78594ec42b6f43fae72c7a33_7552079822175223462)component;
+                    var val = new _e4bb2c0a78594ec42b6f43fae72c7a33_7552079822175223462.Interop();
+
+                    val.SyncedProxyPosition = orig.SyncedProxyPosition;
+                    val.SyncedProxyRotation = orig.SyncedProxyRotation;
+
+                    updater.UpdateComponent(entity, componentType, val, 28, component.FieldsMask, component.StoppedMask, frames);
+
+                    return;
+                }
+                case 34:
+                {
                     var orig = (_ff0eb699ebf32684891c45f672adc3ae_7001076288282754374)component;
                     var val = new _ff0eb699ebf32684891c45f672adc3ae_7001076288282754374.Interop();
 
@@ -462,7 +487,7 @@ namespace Coherence.Generated
 
                     return;
                 }
-                case 33:
+                case 35:
                 {
                     var orig = (_ff0eb699ebf32684891c45f672adc3ae_8801456816483979748)component;
                     var val = new _ff0eb699ebf32684891c45f672adc3ae_8801456816483979748.Interop();
@@ -499,7 +524,8 @@ namespace Coherence.Generated
                   case 14: return _4d7f86b504afd6f419f3d65f80c82f8f_6017b84d51184667b22990811e41ee73.FromInterop(data, dataSize);
                   case 15: return _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b.FromInterop(data, dataSize);
                   case 16: return _4d7f86b504afd6f419f3d65f80c82f8f_d14b47d79b424ee1a065ca3924190c44.FromInterop(data, dataSize);
-                  case 17: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
+                  case 17: return _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569.FromInterop(data, dataSize);
+                  case 18: return _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.FromInterop(data, dataSize);
             }
 
             throw new ArgumentException($"Unkown command type {type}", nameof(type));
@@ -687,6 +713,16 @@ namespace Coherence.Generated
 
                 }
                 case 17:
+                {
+                    var orig = (_8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569)command;
+                    var val = new _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569.Interop();
+
+                    val.spawnTransform = orig.spawnTransform;
+
+                    return sender.SendCommand(entity, target, type, val, 4);
+
+                }
+                case 18:
                 {
                     var orig = (_ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847)command;
                     var val = new _ff0eb699ebf32684891c45f672adc3ae_658f49f164494f099ca2780d21d0a847.Interop();
