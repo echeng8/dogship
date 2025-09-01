@@ -6,8 +6,9 @@ using IngameDebugConsole;
 namespace Gravitas.Demo
 {
     /// <summary>
-    /// Implementation of a first person player controller that interacts with Gravitas systems.
-    /// Handles player movement, camera control, and interaction with any IInteractable objects.
+    /// Implementation of a third person player controller that interacts with Gravitas systems.
+    /// Handles player movement and interaction with any IInteractable objects.
+    /// Camera control is handled by Cinemachine.
     /// </summary>
     public class GravitasFirstPersonPlayerSubject : GravitasSubject
     {
@@ -41,7 +42,6 @@ namespace Gravitas.Demo
 
         #region Private Variables
         private Vector2 keyInput;
-        private float angleX; // Stored camera pitch value
         private float verticalInput; // Stored vertical input from jumping or jetpack thrust
         private bool interact;
         private bool isCursorLocked = true;
@@ -57,7 +57,6 @@ namespace Gravitas.Demo
             {
                 playerCamera = Camera.main;
                 Debug.Log($"Using main camera: {(playerCamera != null ? playerCamera.name : "null")}");
-                playerCamera.transform.SetParent(transform);
             }
 
             // Get or add PlayerStats component
@@ -156,21 +155,14 @@ namespace Gravitas.Demo
             Transform t = gravitasBody.CurrentTransform;
             Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-            // Player rotating
+            // Player rotation (Cinemachine will handle camera orbiting)
             t.rotation *= Quaternion.AngleAxis(mouseInput.x * turnSpeed, Vector3.up);
-
-            // Camera pitching
-            angleX += -mouseInput.y * turnSpeed;
 
             if (gravitasBody.IsLanded)
             {
-                angleX = Mathf.Clamp(angleX, -90f, 90f);
-
                 if (Input.GetKeyDown(KeyCode.Space)) // Jump input
                     gravitasBody.Velocity += t.up * jumpForce;
             }
-
-            playerCamera.transform.localRotation = Quaternion.Euler(angleX, 0, 0);
         }
 
         private void ProcessVerticalInput()
@@ -211,9 +203,7 @@ namespace Gravitas.Demo
             //gravitasBody.ProxyPosition = position;
             gravitasBody.Velocity = Vector3.zero;
 
-            // Setting rotation and stopping angular velocity
-            if (playerCamera != null)
-                playerCamera.transform.localRotation = Quaternion.identity;
+            // Setting rotation
             //SetProxyLookRotation(forward);
             gravitasBody.AngularVelocity = Vector3.zero;
         }
