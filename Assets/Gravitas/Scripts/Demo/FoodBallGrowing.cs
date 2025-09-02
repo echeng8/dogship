@@ -88,13 +88,13 @@ namespace Gravitas
             Vector3 oldScale = CurrentScale;
             CurrentScale = Vector3.MoveTowards(CurrentScale, targetScale, deltaTime);
 
-            Debug.Log($"[FoodBallGrowing] {name} growing: {oldScale} -> {CurrentScale} (delta: {deltaTime})");
+            //Debug.Log($"[FoodBallGrowing] {name} growing: {oldScale} -> {CurrentScale} (delta: {deltaTime})");
 
             if (Vector3.Distance(CurrentScale, targetScale) < 0.01f)
             {
                 CurrentScale = targetScale;
                 isGrowing = false;
-                Debug.Log($"[FoodBallGrowing] {name} fully grown! Notifying tree.");
+                //Debug.Log($"[FoodBallGrowing] {name} fully grown! Notifying tree.");
                 NotifyFullyGrown();
             }
         }

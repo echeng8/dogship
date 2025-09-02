@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Coherence.Toolkit;
 using Coherence;
+using Unity.Cinemachine;
 
 namespace Gravitas.Demo
 {
@@ -17,11 +18,8 @@ namespace Gravitas.Demo
         [Sync] public GameObject ControllingPlayerGameObject;
 
         [SerializeField] private ParticleSystem[] spaceshipParticles;
-        private Quaternion previousCameraRotation;
-        private Transform playerCameraTransform;
-        [SerializeField] private Transform spaceshipCameraPosition;
+        [SerializeField] private CinemachineCamera spaceshipCamera;
         [SerializeField] private UnityEvent onEnterShip, onExitShip;
-        private Vector3 previousCameraPosition;
         private Vector2 keyInput;
         [SerializeField] private float moveSpeed = 20f;
         [SerializeField] private float turnSpeed = 5f;
@@ -121,13 +119,10 @@ namespace Gravitas.Demo
             PlayerSubject.SetPlayerSubjectPositionAndRotation(localPos + new Vector3(0, 0.5f, -1f), Vector3.forward);
             PlayerSubject.enabled = false;
 
-            // Only handle camera for local player (PlayerCamera will be null on remote players)
-            if (spaceshipCameraPosition && PlayerSubject.PlayerCamera != null)
+            // Enable Cinemachine camera for local player only
+            if (spaceshipCamera && PlayerSubject.PlayerCamera != null)
             {
-                playerCameraTransform = PlayerSubject.PlayerCamera.transform;
-                playerCameraTransform.GetLocalPositionAndRotation(out previousCameraPosition, out previousCameraRotation);
-                playerCameraTransform.SetParent(spaceshipCameraPosition);
-                playerCameraTransform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                spaceshipCamera.enabled = true;
             }
 
             onEnterShip?.Invoke();
@@ -139,15 +134,13 @@ namespace Gravitas.Demo
             {
                 PlayerSubject.enabled = true;
 
-                // Only restore camera if we had moved it (local player only)
-                if (playerCameraTransform && PlayerSubject.PlayerCamera != null)
+                // Disable Cinemachine camera for local player only
+                if (spaceshipCamera && PlayerSubject.PlayerCamera != null)
                 {
-                    playerCameraTransform.SetParent(PlayerSubject.transform);
-                    playerCameraTransform.SetLocalPositionAndRotation(previousCameraPosition, previousCameraRotation);
+                    spaceshipCamera.enabled = false;
                 }
 
                 PlayerSubject = null;
-                playerCameraTransform = null;
                 onExitShip?.Invoke();
             }
         }

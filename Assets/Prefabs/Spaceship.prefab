@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8894305108195487385}
   - component: {fileID: 3456753713122395223}
+  - component: {fileID: 3596089759514550028}
   m_Layer: 0
   m_Name: Spot Light (2)
   m_TagString: Untagged
@@ -97,6 +98,35 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &3596089759514550028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821028436721824538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &1323250775760029142
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +377,7 @@ MonoBehaviour:
   spaceshipParticles:
   - {fileID: 5883792037748913882}
   - {fileID: 6858520543458013555}
-  spaceshipCameraPosition: {fileID: 7282666807106044328}
+  spaceshipCamera: {fileID: 5048937526619953838}
   onEnterShip:
     m_PersistentCalls:
       m_Calls:
@@ -406,6 +436,7 @@ MonoBehaviour:
   turnSpeed: 4
   rollSpeed: 2.5
   verticalMoveMultiplier: 3
+  staminaDrainRate: 25
 --- !u!114 &8445149378463969739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,6 +677,14 @@ MonoBehaviour:
     - component: {fileID: 7628550797283010224}
       lodStepsActive: 1
     - component: {fileID: 6394556207720082805}
+      lodStepsActive: 1
+    - component: {fileID: 843925887290978138}
+      lodStepsActive: 1
+    - component: {fileID: 32605557957018943}
+      lodStepsActive: 1
+    - component: {fileID: 3596089759514550028}
+      lodStepsActive: 1
+    - component: {fileID: 5048937526619953838}
       lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
   interpolationLocation: -1
@@ -1231,6 +1270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 215051290736376593}
   - component: {fileID: 7904992027526949953}
+  - component: {fileID: 32605557957018943}
   m_Layer: 0
   m_Name: Spot Light (1)
   m_TagString: Untagged
@@ -1318,6 +1358,35 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &32605557957018943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740333120977845480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &2112777623019964498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2205717357242311992}
   - component: {fileID: 2205717357242311994}
+  - component: {fileID: 843925887290978138}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -1456,6 +1526,35 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &843925887290978138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205717357242311993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &2205717357475800617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,8 +2094,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7282666807106044328}
+  - component: {fileID: 5048937526619953838}
   m_Layer: 0
-  m_Name: Camera Position
+  m_Name: Ship Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2017,6 +2117,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1807897546062798700}
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+--- !u!114 &5048937526619953838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417399670755372535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &5334408384375516741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,7 +2226,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6264313bc9c1bce4f9b8465c1d8f96c7, type: 2}
+  - {fileID: 2100000, guid: 6f6a6ed1953f03147aacd5ffef5ac8fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

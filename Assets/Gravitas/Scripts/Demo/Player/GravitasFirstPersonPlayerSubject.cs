@@ -31,6 +31,7 @@ namespace Gravitas.Demo
         [Header("Components")]
         [SerializeField] private Camera playerCamera;
         [SerializeField] private ParticleSystem playerParticleSystem;
+        [SerializeField] private Transform aimCore;
 
         [Header("Settings")]
         [SerializeField] private LayerMask interactableLayers = Physics.DefaultRaycastLayers;
@@ -155,8 +156,14 @@ namespace Gravitas.Demo
             Transform t = gravitasBody.CurrentTransform;
             Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-            // Player rotation (Cinemachine will handle camera orbiting)
+            // Player rotation (horizontal - X axis)
             t.rotation *= Quaternion.AngleAxis(mouseInput.x * turnSpeed, Vector3.up);
+
+            // Aim core rotation (vertical - Y axis)
+            if (aimCore != null)
+            {
+                aimCore.localRotation *= Quaternion.AngleAxis(-mouseInput.y * turnSpeed, Vector3.right);
+            }
 
             if (gravitasBody.IsLanded)
             {
