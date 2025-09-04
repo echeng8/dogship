@@ -5034,7 +5034,7 @@ GameObject:
   - component: {fileID: 5161193730284425696}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5208,6 +5208,13 @@ MonoBehaviour:
   jumpForce: 10
   moveSpeed: 20
   turnSpeed: 4
+  maxGroundSpeed: 8
+  maxSprintSpeed: 30
+  dashForceMultiplier: 4
+  groundAcceleration: 50
+  groundDeceleration: 30
+  airAcceleration: 25
+  dashDuration: 0.2
 --- !u!114 &2683227246358131983
 MonoBehaviour:
   m_ObjectHideFlags: 0

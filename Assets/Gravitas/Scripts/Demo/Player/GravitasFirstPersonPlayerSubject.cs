@@ -13,8 +13,6 @@ namespace Gravitas.Demo
     public class GravitasFirstPersonPlayerSubject : GravitasSubject
     {
         #region Constants
-        private const float MAX_GROUND_SPEED = 8f;
-        private const float SPRINT_SPEED_MULTIPLIER = 1.5f;
         private const float INTERACTION_DISTANCE = 2.75f;
         #endregion
 
@@ -25,6 +23,7 @@ namespace Gravitas.Demo
         #region Public Properties
         public Camera PlayerCamera => playerCamera;
         public PlayerStats PlayerStats => playerStats;
+        public bool IsDashing => dashTimer > 0;
         #endregion
 
         #region SerializeField Variables
@@ -37,17 +36,38 @@ namespace Gravitas.Demo
         [SerializeField] private LayerMask interactableLayers = Physics.DefaultRaycastLayers;
         [SerializeField] private float jetpackForce = 15f;
         [SerializeField] private float jumpForce = 10f;
-        [SerializeField] private float moveSpeed = 20f;
+        [SerializeField, Tooltip("Target movement speed when walking/running on ground")]
+        private float moveSpeed = 20f;
         [SerializeField] private float turnSpeed = 5f;
+
+        [Header("Movement Limits")]
+        [SerializeField, Tooltip("Maximum speed when walking normally on ground")]
+        private float maxGroundSpeed = 8f;
+        [SerializeField, Tooltip("Maximum speed when dashing/sprinting on ground")]
+        private float maxSprintSpeed = 12f;
+        [SerializeField, Tooltip("Force multiplier applied when dashing")]
+        private float dashForceMultiplier = 3f;
+
+        [Header("Acceleration Control")]
+        [SerializeField, Tooltip("How quickly the player accelerates to moveSpeed when on ground")]
+        private float groundAcceleration = 50f;
+        [SerializeField, Tooltip("How quickly the player decelerates when no input on ground")]
+        private float groundDeceleration = 30f;
+        [SerializeField, Tooltip("How quickly the player accelerates in air (jetpack)")]
+        private float airAcceleration = 25f;
+        [SerializeField, Tooltip("How long dash speed boost lasts")]
+        private float dashDuration = 0.3f;
         #endregion
 
         #region Private Variables
         private Vector2 keyInput;
         private float verticalInput; // Stored vertical input from jumping or jetpack thrust
         private bool interact;
+        private bool dashInput;
         private bool isCursorLocked = true;
         private CoherenceSync _sync;
         private PlayerStats playerStats;
+        private float dashTimer; // Tracks remaining dash time
         #endregion
 
         #region Unity Lifecycle Methods
@@ -139,16 +159,9 @@ namespace Gravitas.Demo
         {
             keyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // Handle sprint input
-            bool sprintInput = Input.GetKey(KeyCode.LeftShift);
-
-            // Update PlayerStats with sprinting state
-            if (playerStats != null)
-            {
-                // Only sprint if player is moving and on the ground
-                bool wantsToSprint = sprintInput && keyInput != Vector2.zero && gravitasBody.IsLanded;
-                playerStats.UpdateSprinting(wantsToSprint);
-            }
+            // Handle dash input
+            if (!dashInput)
+                dashInput = Input.GetKeyDown(KeyCode.LeftShift);
         }
 
         private void ProcessMouseLookInput()
@@ -195,6 +208,7 @@ namespace Gravitas.Demo
             keyInput = Vector2.zero;
             verticalInput = 0;
             interact = false;
+            dashInput = false;
         }
         #endregion
 
@@ -221,42 +235,112 @@ namespace Gravitas.Demo
         {
             Transform t = gravitasBody.CurrentTransform;
             bool isLanded = gravitasBody.IsLanded;
-            Vector3 inputVelocity = GetInputVelocity(t, isLanded);
 
-            if (!isLanded && inputVelocity != Vector3.zero && playerParticleSystem != null)
+            // Handle dash input (works in air and on ground)
+            if (dashInput && keyInput != Vector2.zero && playerStats != null && playerStats.PerformDash())
+            {
+                dashTimer = dashDuration; // Start dash timer
+            }
+
+            // Update dash timer
+            if (dashTimer > 0)
+                dashTimer -= Time.deltaTime;
+
+            if (!isLanded && keyInput != Vector2.zero && playerParticleSystem != null)
                 playerParticleSystem.Play();
 
-            if (!isLanded || gravitasBody.Velocity.magnitude < MAX_GROUND_SPEED)
-                gravitasBody.AddForce(inputVelocity * Time.deltaTime, ForceMode.VelocityChange);
+            if (isLanded)
+            {
+                ApplyGroundMovement(t, dashTimer > 0);
+            }
+            else
+            {
+                ApplyAirMovement(t, dashTimer > 0);
+            }
+
+            // Reset dash input after processing
+            dashInput = false;
+        }
+
+        private void ApplyGroundMovement(Transform t, bool isDashing)
+        {
+            Vector3 currentVelocity = gravitasBody.Velocity;
+            Vector3 targetVelocity = GetTargetGroundVelocity(t, isDashing);
+            float currentSpeedLimit = isDashing ? maxSprintSpeed : maxGroundSpeed;
+
+            // Calculate desired velocity change
+            Vector3 velocityDifference = targetVelocity - currentVelocity;
+
+            // Apply acceleration or deceleration
+            Vector3 acceleration;
+            if (keyInput.magnitude > 0.1f)
+            {
+                // Player is giving input - accelerate toward target
+                float accel = isDashing ? groundAcceleration * dashForceMultiplier : groundAcceleration;
+                acceleration = velocityDifference.normalized * accel;
+            }
+            else
+            {
+                // No input - decelerate
+                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(currentVelocity, t.up);
+                acceleration = -horizontalVelocity.normalized * groundDeceleration;
+            }
+
+            // Clamp the resulting velocity to speed limits
+            Vector3 newVelocity = currentVelocity + acceleration * Time.deltaTime;
+            Vector3 horizontalNewVelocity = Vector3.ProjectOnPlane(newVelocity, t.up);
+
+            if (horizontalNewVelocity.magnitude > currentSpeedLimit)
+            {
+                horizontalNewVelocity = horizontalNewVelocity.normalized * currentSpeedLimit;
+                newVelocity = horizontalNewVelocity + Vector3.Project(newVelocity, t.up);
+            }
+
+            gravitasBody.AddForce((newVelocity - currentVelocity) / Time.deltaTime, ForceMode.Force);
+
+            // Handle jumping (separate from movement acceleration)
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gravitasBody.AddForce(t.up * jumpForce, ForceMode.VelocityChange);
+            }
+        }
+
+        private void ApplyAirMovement(Transform t, bool isDashing)
+        {
+            Vector3 inputDirection = Vector3.zero;
+
+            // Horizontal movement
+            inputDirection += keyInput.x * t.right;
+            inputDirection += keyInput.y * t.forward;
+
+            // Vertical movement (jetpack)
+            inputDirection += verticalInput * t.up;
+
+            if (inputDirection.magnitude > 0.1f)
+            {
+                float force = isDashing ? airAcceleration * dashForceMultiplier : airAcceleration;
+                gravitasBody.AddForce(inputDirection.normalized * force, ForceMode.Force);
+            }
+        }
+
+        private Vector3 GetTargetGroundVelocity(Transform t, bool isDashing)
+        {
+            Vector3 targetVelocity = Vector3.zero;
+            float speed = isDashing ? moveSpeed * dashForceMultiplier : moveSpeed;
+
+            // Calculate target velocity based on input
+            targetVelocity += keyInput.x * t.right * speed;
+            targetVelocity += keyInput.y * t.forward * speed;
+
+            return targetVelocity;
         }
 
         /// <summary>
-        /// Calculates movement velocity based on current input and player state.
+        /// Calculates target velocity for ground movement based on input and player state.
         /// </summary>
         /// <param name="t">Current transform reference</param>
-        /// <param name="isLanded">Whether the player is currently landed</param>
-        /// <returns>The calculated velocity vector</returns>
-        private Vector3 GetInputVelocity(Transform t, bool isLanded)
-        {
-            Vector3 velocity = Vector3.zero;
-            float speedMultiplier = (playerStats != null && playerStats.IsSprinting && isLanded) ? SPRINT_SPEED_MULTIPLIER : 1f;
-
-            // Left-Right movement
-            Vector3 right = t.right;
-            float xForce = isLanded ? moveSpeed * speedMultiplier : jetpackForce;
-            velocity += keyInput.x * xForce * right;
-
-            // Up-Down movement
-            float yForce = isLanded ? jumpForce : jetpackForce;
-            velocity += verticalInput * yForce * t.up;
-
-            // Forward-Back movement
-            Vector3 forward = t.forward;
-            float zForce = isLanded ? moveSpeed * speedMultiplier : jetpackForce;
-            velocity += keyInput.y * zForce * forward;
-
-            return velocity;
-        }
+        /// <param name="dashPerformed">Whether a dash was just performed</param>
+        /// <returns>The target velocity vector for ground movement</returns>
         #endregion
 
         #region Interaction Methods

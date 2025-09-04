@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Gravitas.Demo;
 
 namespace Gravitas
 {
@@ -290,7 +291,13 @@ namespace Gravitas
                             !ReferenceEquals(hitInfo.rigidbody, subjectBody.CurrentRigidbody)
                         );
 
-                    subjectBody.AddForce(force, ForceMode.Acceleration);
+                    // Skip gravity force if subject is a dashing player
+                    bool skipGravity = subject.GameObject.TryGetComponent<GravitasFirstPersonPlayerSubject>(out var player) && player.IsDashing;
+
+                    if (!skipGravity)
+                    {
+                        subjectBody.AddForce(force, ForceMode.Acceleration);
+                    }
 
                     //Debug.Log($"Object: {subject.GameObject.name}, IsLanded: {isLanded}, WillReorient: {subject.WillReorient}, AutoOrient: {subject.AutoOrient}");
 

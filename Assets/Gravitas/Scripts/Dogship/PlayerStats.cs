@@ -13,6 +13,8 @@ namespace Gravitas
         #region Constants
         public const float STAMINA_DRAIN_RATE = 20f;
         public const float STAMINA_REGEN_RATE = 15f;
+        public const float DASH_COST = 10f;
+        public const float DASH_COOLDOWN = 0.5f;
         #endregion
 
         #region Events
@@ -23,7 +25,7 @@ namespace Gravitas
         #region Public Properties
         public float CurrentStamina => currentStamina;
         public float MaxStamina => maxStamina;
-        public bool CanSprint => currentStamina > 0;
+        public bool CanDash => currentStamina >= DASH_COST && Time.time >= lastDashTime + DASH_COOLDOWN;
         public bool IsSprinting => isSprinting;
         public bool CanPoop => Time.time >= lastPoopTime + poopCooldown && poopPrefab != null && poopAmmo > 0;
         public int PoopAmmo => poopAmmo;
@@ -46,6 +48,7 @@ namespace Gravitas
         private CoherenceSync _sync;
         private GravitasSubject _gravitasSubject;
         private float lastPoopTime = 0f;
+        private float lastDashTime = 0f;
         private Camera playerCamera;
         private int poopAmmo = 0;
         #endregion
@@ -93,7 +96,24 @@ namespace Gravitas
         /// <param name="wantsToSprint">Whether the player wants to sprint (input + movement)</param>
         public void UpdateSprinting(bool wantsToSprint)
         {
-            isSprinting = wantsToSprint && CanSprint;
+            isSprinting = wantsToSprint && currentStamina > 0;
+        }
+
+        /// <summary>
+        /// Performs a dash if possible, consuming stamina and returning success.
+        /// </summary>
+        /// <returns>True if dash was performed, false otherwise</returns>
+        public bool PerformDash()
+        {
+            if (!CanDash)
+                return false;
+
+            currentStamina -= DASH_COST;
+            lastDashTime = Time.time;
+            OnStaminaChanged?.Invoke(currentStamina, maxStamina);
+
+            Debug.Log($"Dash performed! Stamina: {currentStamina}/{maxStamina}");
+            return true;
         }
 
         /// <summary>
@@ -245,36 +265,21 @@ namespace Gravitas
         #region Private Methods
         private void UpdateStamina()
         {
-            bool sprintingAtStart = previousFrameSprinting;
             float previousStamina = currentStamina;
 
-            if (isSprinting)
-            {
-                // Drain stamina when sprinting
-                currentStamina -= STAMINA_DRAIN_RATE * Time.deltaTime;
-                currentStamina = Mathf.Max(0, currentStamina);
-
-                // Stop sprinting if out of stamina
-                if (currentStamina <= 0)
-                {
-                    isSprinting = false;
-                }
-            }
-            else if (currentStamina < maxStamina)
+            // Only regenerate stamina when not at max
+            if (currentStamina < maxStamina)
             {
                 // Regenerate stamina when not sprinting
                 currentStamina += STAMINA_REGEN_RATE * Time.deltaTime;
                 currentStamina = Mathf.Min(maxStamina, currentStamina);
             }
 
-            // Notify if stamina changed or sprinting state changed
-            if (sprintingAtStart != isSprinting || Mathf.Abs(currentStamina - previousStamina) > 0.1f)
+            // Notify if stamina changed
+            if (Mathf.Abs(currentStamina - previousStamina) > 0.1f)
             {
                 OnStaminaChanged?.Invoke(currentStamina, maxStamina);
             }
-
-            // Store current sprinting state for next frame
-            previousFrameSprinting = isSprinting;
         }
 
         private void SpawnPoop()
