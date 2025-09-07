@@ -57,6 +57,12 @@ namespace Gravitas.Demo
         private float airAcceleration = 25f;
         [SerializeField, Tooltip("How long dash speed boost lasts")]
         private float dashDuration = 0.3f;
+
+        [Header("Camera/Look Controls")]
+        [SerializeField, Tooltip("Maximum upward look angle in degrees")]
+        private float maxLookUpAngle = 80f;
+        [SerializeField, Tooltip("Maximum downward look angle in degrees")]
+        private float maxLookDownAngle = 80f;
         #endregion
 
         #region Private Variables
@@ -68,6 +74,7 @@ namespace Gravitas.Demo
         private CoherenceSync _sync;
         private PlayerStats playerStats;
         private float dashTimer; // Tracks remaining dash time
+        private float currentVerticalRotation = 0f; // Track current vertical rotation for clamping
         #endregion
 
         #region Unity Lifecycle Methods
@@ -172,10 +179,21 @@ namespace Gravitas.Demo
             // Player rotation (horizontal - X axis)
             t.rotation *= Quaternion.AngleAxis(mouseInput.x * turnSpeed, Vector3.up);
 
-            // Aim core rotation (vertical - Y axis)
+            // Aim core rotation (vertical - Y axis) with limits
             if (aimCore != null)
             {
-                aimCore.localRotation *= Quaternion.AngleAxis(-mouseInput.y * turnSpeed, Vector3.right);
+                float verticalDelta = -mouseInput.y * turnSpeed;
+                float newVerticalRotation = currentVerticalRotation + verticalDelta;
+                
+                // Clamp the vertical rotation within the specified limits
+                newVerticalRotation = Mathf.Clamp(newVerticalRotation, -maxLookDownAngle, maxLookUpAngle);
+                
+                // Calculate the actual delta to apply (in case we hit the limits)
+                float clampedDelta = newVerticalRotation - currentVerticalRotation;
+                currentVerticalRotation = newVerticalRotation;
+                
+                // Apply the clamped rotation
+                aimCore.localRotation *= Quaternion.AngleAxis(clampedDelta, Vector3.right);
             }
 
             if (gravitasBody.IsLanded)
