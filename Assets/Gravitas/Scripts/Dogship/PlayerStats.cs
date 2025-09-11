@@ -15,6 +15,7 @@ namespace Gravitas
         public const float STAMINA_REGEN_RATE = 15f;
         public const float DASH_COST = 10f;
         public const float DASH_COOLDOWN = 0.5f;
+        public const float SHOOT_COST = 10f;
         #endregion
 
         #region Events
@@ -26,6 +27,7 @@ namespace Gravitas
         public float CurrentStamina => currentStamina;
         public float MaxStamina => maxStamina;
         public bool CanDash => currentStamina >= DASH_COST && Time.time >= lastDashTime + DASH_COOLDOWN;
+        public bool CanShoot => currentStamina >= SHOOT_COST;
         public bool IsSprinting => isSprinting;
         public bool CanPoop => Time.time >= lastPoopTime + poopCooldown && poopPrefab != null && poopAmmo > 0;
         public int PoopAmmo => poopAmmo;
@@ -113,6 +115,22 @@ namespace Gravitas
             OnStaminaChanged?.Invoke(currentStamina, maxStamina);
 
             Debug.Log($"Dash performed! Stamina: {currentStamina}/{maxStamina}");
+            return true;
+        }
+
+        /// <summary>
+        /// Performs a shoot if possible, consuming stamina and returning success.
+        /// </summary>
+        /// <returns>True if shoot was performed, false otherwise</returns>
+        public bool PerformShoot()
+        {
+            if (!CanShoot)
+                return false;
+
+            currentStamina -= SHOOT_COST;
+            OnStaminaChanged?.Invoke(currentStamina, maxStamina);
+
+            Debug.Log($"Shoot performed! Stamina: {currentStamina}/{maxStamina}");
             return true;
         }
 
