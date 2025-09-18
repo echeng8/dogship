@@ -30,8 +30,18 @@ namespace Gravitas.Demo
         [Tooltip("Rate at which the spaceship drains stamina per second from the controlling player")]
         public float staminaDrainRate = 25f;
 
+        [Header("Match Velocity Settings")]
+        [Tooltip("Layers to search for target subjects to match velocity with")]
+        [SerializeField] private LayerMask targetLayers = -1;
+        [Tooltip("Maximum detection range for finding target subjects")]
+        [SerializeField] private float detectionRange = 10000000f;
+        [Tooltip("Key to hold for match velocity mode")]
+        [SerializeField] private KeyCode matchVelocityKey = KeyCode.G;
+
         private float rollInput, verticalInput;
         private CoherenceSync _sync;
+        private bool isMatchingVelocity;
+        private GravitasSubject targetSubject;
 
         protected override void OnSubjectAwake()
         {
@@ -155,6 +165,40 @@ namespace Gravitas.Demo
             }
         }
 
+        private GravitasSubject FindNearestTargetSubject()
+        {
+            Vector3 shipPosition = gravitasBody.CurrentTransform.position;
+            GravitasSubject nearestTarget = null;
+            float nearestDistance = detectionRange;
+
+            // Find all colliders within detection range
+            Collider[] colliders = Physics.OverlapSphere(shipPosition, detectionRange, targetLayers);
+
+            foreach (Collider col in colliders)
+            {
+                // Skip self
+                if (col.transform == gravitasBody.CurrentTransform)
+                    continue;
+
+                // Look for GravitasSubject component
+                GravitasSubject subject = col.GetComponent<GravitasSubject>();
+                if (subject == null)
+                    subject = col.GetComponentInParent<GravitasSubject>();
+
+                if (subject != null && subject != this)
+                {
+                    float distance = Vector3.Distance(shipPosition, subject.GravitasBody.CurrentTransform.position);
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        nearestTarget = subject;
+                    }
+                }
+            }
+
+            return nearestTarget;
+        }
+
         protected override void OnSubjectUpdate()
         {
             base.OnSubjectUpdate();
@@ -194,6 +238,37 @@ namespace Gravitas.Demo
                     return;
                 }
 
+                // Match velocity input handling
+                isMatchingVelocity = Input.GetKey(matchVelocityKey);
+                if (isMatchingVelocity)
+                {
+                    // Find or update target
+                    if (targetSubject == null || Vector3.Distance(gravitasBody.CurrentTransform.position, targetSubject.GravitasBody.CurrentTransform.position) > detectionRange)
+                    {
+                        GravitasSubject newTarget = FindNearestTargetSubject();
+                        if (newTarget != targetSubject)
+                        {
+                            targetSubject = newTarget;
+                            if (targetSubject != null)
+                            {
+                                Debug.Log($"Match Velocity: Now targeting {targetSubject.name} at distance {Vector3.Distance(gravitasBody.CurrentTransform.position, targetSubject.GravitasBody.CurrentTransform.position):F1}m");
+                            }
+                            else
+                            {
+                                Debug.Log("Match Velocity: No target found within range");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (targetSubject != null)
+                    {
+                        Debug.Log("Match Velocity: Deactivated");
+                        targetSubject = null;
+                    }
+                }
+
                 // Movement input collection
                 keyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
@@ -227,10 +302,45 @@ namespace Gravitas.Demo
             {
                 Transform t = gravitasBody.CurrentTransform;
 
+                // Start with player input
+                Vector2 finalKeyInput = keyInput;
+                float finalVerticalInput = verticalInput;
+
+                // Add simulated input from match velocity system if active and we have a target
+                if (isMatchingVelocity && targetSubject != null)
+                {
+                    // Calculate velocity difference between our ship and the target
+                    Vector3 ourVelocity = AbsoluteVelocity;
+                    Vector3 targetVelocity = targetSubject.AbsoluteVelocity;
+                    Vector3 velocityDifference = targetVelocity - ourVelocity;
+
+                    // Only apply input if there's a meaningful velocity difference
+                    if (velocityDifference.magnitude > 0.01f)
+                    {
+                        // Convert velocity difference to local space input
+                        Vector3 localVelocityDiff = t.InverseTransformDirection(velocityDifference);
+
+                        // Calculate additional input based on velocity difference (precise, no scaling)
+                        // Normalize by move speed to convert from velocity units to input units
+                        Vector2 additionalInput = new Vector2(
+                            localVelocityDiff.x / moveSpeed,
+                            localVelocityDiff.z / moveSpeed
+                        );
+
+                        float additionalVerticalInput = localVelocityDiff.y / (moveSpeed * verticalMoveMultiplier);
+
+                        // Add simulated input to player input, clamping to realistic input ranges
+                        finalKeyInput.x = Mathf.Clamp(finalKeyInput.x + additionalInput.x, -1f, 1f);
+                        finalKeyInput.y = Mathf.Clamp(finalKeyInput.y + additionalInput.y, -1f, 1f);
+                        finalVerticalInput = Mathf.Clamp(finalVerticalInput + additionalVerticalInput, -1f, 1f);
+                    }
+                }
+
+                // Calculate movement forces using combined input (player + simulated)
                 Vector3 velocity = Vector3.zero;
-                velocity += keyInput.x * t.right;
-                velocity += verticalInput * verticalMoveMultiplier * t.up;
-                velocity += keyInput.y * t.forward;
+                velocity += finalKeyInput.x * t.right;
+                velocity += finalVerticalInput * verticalMoveMultiplier * t.up;
+                velocity += finalKeyInput.y * t.forward;
                 velocity *= moveSpeed * Time.deltaTime;
 
                 gravitasBody.AddForce(velocity, ForceMode.VelocityChange);
@@ -240,7 +350,7 @@ namespace Gravitas.Demo
 
                 gravitasBody.AddTorque(angularVelocity, ForceMode.VelocityChange);
 
-                // Spaceship movement particle playing
+                // Spaceship movement particle playing (based on combined input including match velocity)
                 if (spaceshipParticles != null && velocity != Vector3.zero)
                 {
                     for (int i = 0; i < spaceshipParticles.Length; i++)
@@ -267,6 +377,28 @@ namespace Gravitas.Demo
             {
                 _sync.OnStateAuthority.RemoveListener(OnGainedAuthority);
                 _sync.OnStateRemote.RemoveListener(OnLostAuthority);
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!Application.isPlaying || gravitasBody == null) return;
+
+            // Draw detection range when match velocity is active
+            if (isMatchingVelocity)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawWireSphere(gravitasBody.CurrentTransform.position, detectionRange);
+
+                // Draw line to target if we have one
+                if (targetSubject != null)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawLine(gravitasBody.CurrentTransform.position, targetSubject.GravitasBody.CurrentTransform.position);
+
+                    // Draw target indicator
+                    Gizmos.DrawWireSphere(targetSubject.GravitasBody.CurrentTransform.position, 2f);
+                }
             }
         }
     }
