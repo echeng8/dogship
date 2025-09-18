@@ -5209,7 +5209,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   jetpackForce: 20
-  jumpForce: 10
+  jumpForce: 20
   moveSpeed: 20
   turnSpeed: 4
   maxGroundSpeed: 8
@@ -5219,6 +5219,8 @@ MonoBehaviour:
   groundDeceleration: 30
   airAcceleration: 25
   dashDuration: 0.2
+  maxLookUpAngle: 80
+  maxLookDownAngle: 80
 --- !u!114 &2683227246358131983
 MonoBehaviour:
   m_ObjectHideFlags: 0
