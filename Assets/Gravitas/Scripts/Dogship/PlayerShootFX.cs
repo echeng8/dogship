@@ -96,9 +96,10 @@ namespace Gravitas
             bulletTrail.material = CreateTrailMaterial();
             bulletTrail.widthMultiplier = 0.05f;
             bulletTrail.widthCurve = trailWidthCurve;
-            bulletTrail.color = trailColor;
+            bulletTrail.startColor = trailColor;
+            bulletTrail.endColor = trailColor;
             bulletTrail.positionCount = 2;
-            bulletTrail.useWorldSpace = true;
+            bulletTrail.useWorldSpace = false;
             bulletTrail.enabled = false;
         }
 
@@ -194,9 +195,13 @@ namespace Gravitas
         {
             if (bulletTrail == null) yield break;
 
+            // Convert world positions to local positions relative to the player
+            Vector3 localStart = transform.InverseTransformPoint(startPos);
+            Vector3 localEnd = transform.InverseTransformPoint(endPos);
+
             bulletTrail.enabled = true;
-            bulletTrail.SetPosition(0, startPos);
-            bulletTrail.SetPosition(1, endPos);
+            bulletTrail.SetPosition(0, localStart);
+            bulletTrail.SetPosition(1, localEnd);
 
             yield return new WaitForSeconds(trailDuration);
 
