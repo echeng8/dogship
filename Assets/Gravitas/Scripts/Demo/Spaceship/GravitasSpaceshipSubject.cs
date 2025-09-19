@@ -26,6 +26,12 @@ namespace Gravitas.Demo
         [SerializeField] private float rollSpeed = 2.5f;
         [SerializeField] private float verticalMoveMultiplier = 3f;
 
+        [Header("Angular Velocity Settings")]
+        [Tooltip("If true, disables physics-based angular velocity and only allows player input control")]
+        [SerializeField] private bool disablePhysicsAngularVelocity = true;
+        [Tooltip("Current angular velocity controlled only by player input")]
+        private Vector3 playerControlledAngularVelocity = Vector3.zero;
+
         [Header("Stamina Settings")]
         [Tooltip("Rate at which the spaceship drains stamina per second from the controlling player")]
         public float staminaDrainRate = 25f;
@@ -47,6 +53,14 @@ namespace Gravitas.Demo
         {
             base.OnSubjectAwake();
             _sync = GetComponent<CoherenceSync>();
+
+            // Configure rigidbody for angular velocity control mode
+            if (disablePhysicsAngularVelocity && gravitasBody?.CurrentRigidbody != null)
+            {
+                // Increase angular damping to help dampen unwanted rotation
+                gravitasBody.CurrentRigidbody.angularDamping = 5f;
+                Debug.Log($"Spaceship {name}: Physics angular velocity disabled - using player input only");
+            }
 
             // Subscribe to authority events
             _sync.OnStateAuthority.AddListener(OnGainedAuthority);
@@ -159,7 +173,15 @@ namespace Gravitas.Demo
         {
             if (_sync && _sync.HasStateAuthority)
             {
-                gravitasBody.AngularVelocity = Vector3.zero;
+                if (disablePhysicsAngularVelocity)
+                {
+                    playerControlledAngularVelocity = Vector3.zero;
+                    gravitasBody.AngularVelocity = Vector3.zero;
+                }
+                else
+                {
+                    gravitasBody.AngularVelocity = Vector3.zero;
+                }
                 gravitasBody.Velocity = Vector3.zero;
                 gravitasBody.CurrentTransform.rotation = Quaternion.identity;
             }
@@ -287,7 +309,17 @@ namespace Gravitas.Demo
                     verticalInput = 0;
 
                 if (Input.GetKeyDown(KeyCode.R)) // Reset angular velocity
-                    gravitasBody.AngularVelocity = Vector3.zero;
+                {
+                    if (disablePhysicsAngularVelocity)
+                    {
+                        playerControlledAngularVelocity = Vector3.zero;
+                        gravitasBody.AngularVelocity = Vector3.zero;
+                    }
+                    else
+                    {
+                        gravitasBody.AngularVelocity = Vector3.zero;
+                    }
+                }
                 else if (Input.GetKeyDown(KeyCode.X)) // Reset velocity
                     gravitasBody.Velocity = Vector3.zero;
             }
@@ -296,6 +328,14 @@ namespace Gravitas.Demo
         protected override void OnSubjectFixedUpdate()
         {
             base.OnSubjectFixedUpdate();
+
+            // Ensure physics angular velocity is disabled when feature is active
+            if (disablePhysicsAngularVelocity && _sync && _sync.HasStateAuthority)
+            {
+                // Override any physics-applied angular velocity with our player-controlled value
+                // This ensures external forces/torques don't affect rotation
+                gravitasBody.AngularVelocity = playerControlledAngularVelocity;
+            }
 
             // Only apply forces if we have both a controlling player AND authority
             if (PlayerSubject && _sync && _sync.HasInputAuthority && _sync.HasStateAuthority)
@@ -345,10 +385,30 @@ namespace Gravitas.Demo
 
                 gravitasBody.AddForce(velocity, ForceMode.VelocityChange);
 
-                Vector3 angularVelocity = gravitasBody.CurrentTransform.forward * -rollInput;
-                angularVelocity *= rollSpeed * Time.fixedDeltaTime;
+                // Handle angular velocity based on physics mode
+                if (disablePhysicsAngularVelocity)
+                {
+                    // Player-controlled angular velocity only
+                    Vector3 rollTorque = gravitasBody.CurrentTransform.forward * -rollInput;
+                    rollTorque *= rollSpeed * Time.fixedDeltaTime;
 
-                gravitasBody.AddTorque(angularVelocity, ForceMode.VelocityChange);
+                    // Add to player-controlled angular velocity instead of using AddTorque
+                    playerControlledAngularVelocity += rollTorque;
+
+                    // Apply drag to prevent infinite acceleration
+                    float angularDrag = 0.95f; // Adjust this value to control roll responsiveness
+                    playerControlledAngularVelocity *= angularDrag;
+
+                    // Directly set the angular velocity, overriding any physics influences
+                    gravitasBody.AngularVelocity = playerControlledAngularVelocity;
+                }
+                else
+                {
+                    // Standard physics-based angular velocity
+                    Vector3 angularVelocity = gravitasBody.CurrentTransform.forward * -rollInput;
+                    angularVelocity *= rollSpeed * Time.fixedDeltaTime;
+                    gravitasBody.AddTorque(angularVelocity, ForceMode.VelocityChange);
+                }
 
                 // Spaceship movement particle playing (based on combined input including match velocity)
                 if (spaceshipParticles != null && velocity != Vector3.zero)
@@ -399,6 +459,17 @@ namespace Gravitas.Demo
                     // Draw target indicator
                     Gizmos.DrawWireSphere(targetSubject.GravitasBody.CurrentTransform.position, 2f);
                 }
+            }
+
+            // Visual indicator for physics angular velocity disabled mode
+            if (disablePhysicsAngularVelocity)
+            {
+                Gizmos.color = Color.red;
+                Vector3 pos = gravitasBody.CurrentTransform.position;
+                // Draw a small cross to indicate physics angular velocity is disabled
+                Gizmos.DrawLine(pos + Vector3.up * 3f, pos + Vector3.up * 5f);
+                Gizmos.DrawLine(pos + Vector3.right * 4f, pos + Vector3.right * 6f);
+                Gizmos.DrawLine(pos + Vector3.right * -4f, pos + Vector3.right * -6f);
             }
         }
     }
