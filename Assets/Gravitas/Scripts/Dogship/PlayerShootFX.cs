@@ -1,11 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using Coherence.Toolkit;
 
 namespace Gravitas
 {
     /// <summary>
     /// Handles visual effects for player shooting including bullet trails, muzzle flash, and hit effects.
     /// Hooks into PlayerShoot UnityEvents for clean separation of concerns.
+    /// 
+    /// Network Behavior:
+    /// - Responds to [Command] methods from PlayerShoot
+    /// - Commands automatically route to local calls when offline
+    /// - Works seamlessly in both online and offline modes
     /// </summary>
     public class PlayerShootFX : MonoBehaviour
     {
@@ -38,6 +44,7 @@ namespace Gravitas
         #region Private Variables
         private PlayerShoot playerShoot;
         private Camera playerCamera;
+        private CoherenceSync _sync;
         #endregion
 
         #region Unity Lifecycle Methods
@@ -51,6 +58,9 @@ namespace Gravitas
                 enabled = false;
                 return;
             }
+
+            // Get CoherenceSync component (optional for networking)
+            _sync = GetComponent<CoherenceSync>();
 
             playerCamera = GetComponentInChildren<Camera>();
             if (playerCamera == null)
@@ -74,7 +84,7 @@ namespace Gravitas
                 ConfigureBulletTrail();
             }
 
-            // Hook into PlayerShoot events
+            // Hook into PlayerShoot events - these are now networked
             HookIntoShootEvents();
         }
         #endregion
@@ -123,7 +133,8 @@ namespace Gravitas
 
         #region Event Handlers
         /// <summary>
-        /// Called when shooting starts - triggers muzzle flash and sound
+        /// Called when shooting starts - triggers muzzle flash and sound.
+        /// Networked via [Command] when online, local call when offline.
         /// </summary>
         public void OnShootStart()
         {
@@ -132,12 +143,12 @@ namespace Gravitas
         }
 
         /// <summary>
-        /// Called when a target is hit - shows bullet trail to hit point and impact effects
+        /// Called when a target is hit - shows bullet trail to hit point and impact effects.
+        /// Networked via [Command] when online, local call when offline.
         /// </summary>
         /// <param name="startPos">Where the shot started from</param>
         /// <param name="endPos">Where the shot hit</param>
-        /// <param name="hitTarget">The GameObject that was hit</param>
-        public void OnHitTarget(Vector3 startPos, Vector3 endPos, GameObject hitTarget)
+        public void OnHitTarget(Vector3 startPos, Vector3 endPos)
         {
             StartCoroutine(ShowBulletTrail(startPos, endPos));
 
@@ -148,7 +159,8 @@ namespace Gravitas
         }
 
         /// <summary>
-        /// Called when shot misses - shows bullet trail to max range
+        /// Called when shot misses - shows bullet trail to max range.
+        /// Networked via [Command] when online, local call when offline.
         /// </summary>
         /// <param name="startPos">Where the shot started from</param>
         /// <param name="endPos">Where the shot ended (max range)</param>
@@ -159,7 +171,8 @@ namespace Gravitas
         }
 
         /// <summary>
-        /// Called when shooting fails (no stamina) - plays fail sound
+        /// Called when shooting fails (no stamina) - plays fail sound.
+        /// Networked via [Command] when online, local call when offline.
         /// </summary>
         public void OnShootFailed()
         {

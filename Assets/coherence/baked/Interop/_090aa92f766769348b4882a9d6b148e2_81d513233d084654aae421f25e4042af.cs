@@ -16,35 +16,31 @@ namespace Coherence.Generated
     using System.Runtime.InteropServices;
     using UnityEngine;
 
-    public struct _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f : IEntityCommand
+    public struct _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af : IEntityCommand
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
         {
-            [FieldOffset(0)]
-            public System.Single amount;
         }
 
-        public static unsafe _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f FromInterop(System.IntPtr data, System.Int32 dataSize) 
+        public static unsafe _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af FromInterop(System.IntPtr data, System.Int32 dataSize) 
         {
-            if (dataSize != 4) {
-                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 4) " +
-                    "for command with ID 12");
+            if (dataSize != 0) {
+                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 0) " +
+                    "for command with ID 10");
             }
 
-            var orig = new _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f();
+            var orig = new _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af();
             var comp = (Interop*)data;
-            orig.amount = comp->amount;
             return orig;
         }
 
-        public System.Single amount;
         
         public Entity Entity { get; set; }
         public Coherence.ChannelID ChannelID { get; set; }
         public MessageTarget Routing { get; set; }
         public uint Sender { get; set; }
-        public uint GetComponentType() => 12;
+        public uint GetComponentType() => 10;
         
         public IEntityMessage Clone()
         {
@@ -82,33 +78,18 @@ namespace Coherence.Generated
         public void NullEntityRefs(Entity entity) {
         }
         
-        public _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f(
-        Entity entity,
-        System.Single amount
-)
+        
+        public static void Serialize(_090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af commandData, IOutProtocolBitStream bitStream)
         {
-            Entity = entity;
-            ChannelID = Coherence.ChannelID.Default;
-            Routing = MessageTarget.All;
-            Sender = 0;
-            
-            this.amount = amount; 
         }
         
-        public static void Serialize(_090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f commandData, IOutProtocolBitStream bitStream)
+        public static _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
         {
-            bitStream.WriteFloat(commandData.amount, FloatMeta.NoCompression());
-        }
-        
-        public static _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
-        {
-            var dataamount = bitStream.ReadFloat(FloatMeta.NoCompression());
     
-            return new _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f()
+            return new _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af()
             {
                 Entity = entity,
                 Routing = target,
-                amount = dataamount
             };   
         }
     }

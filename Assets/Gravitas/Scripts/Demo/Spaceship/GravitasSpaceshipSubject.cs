@@ -113,7 +113,7 @@ namespace Gravitas.Demo
                 }
             }
         }
-        
+
         private GravitasField FindEarthField()
         {
             // Find the earth position by tag

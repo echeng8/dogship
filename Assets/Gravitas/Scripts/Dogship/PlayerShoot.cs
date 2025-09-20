@@ -1,10 +1,19 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Coherence.Toolkit;
+using Coherence;
 
 namespace Gravitas
 {
     /// <summary>
     /// Handles player shooting mechanics with raycast hit detection and UnityEvents for animations.
+    /// 
+    /// Network Behavior:
+    /// - Uses SendCommand which automatically handles online/offline scenarios
+    /// - Online: Commands are sent over network to all clients  
+    /// - Offline: Commands are automatically routed to local method calls
+    /// - Authority handling: online respects HasInputAuthority, offline assumes local authority
+    /// - Requires CoherenceSync component for networking, gracefully handles when missing
     /// </summary>
     public class PlayerShoot : MonoBehaviour
     {
@@ -14,7 +23,7 @@ namespace Gravitas
         public UnityEvent OnShootStart;
 
         [Tooltip("Called when the player hits a target - passes hit info")]
-        public UnityEvent<Vector3, Vector3, GameObject> OnHitTarget; // startPos, endPos, hitObject
+        public UnityEvent<Vector3, Vector3> OnHitTarget; // startPos, endPos
 
         [Tooltip("Called when the shot misses (no hit) - passes shoot info")]
         public UnityEvent<Vector3, Vector3> OnShootMiss; // startPos, endPos
@@ -43,6 +52,7 @@ namespace Gravitas
         #region Private Variables
         private PlayerStats playerStats;
         private Camera playerCamera;
+        private CoherenceSync _sync;
         #endregion
 
         #region Unity Lifecycle Methods
@@ -56,6 +66,9 @@ namespace Gravitas
                 enabled = false;
                 return;
             }
+
+            // Get CoherenceSync component for networking (optional)
+            _sync = GetComponent<CoherenceSync>();
 
             // Get player camera
             playerCamera = GetComponentInChildren<Camera>();
@@ -81,6 +94,10 @@ namespace Gravitas
 
         void Update()
         {
+            // Only process input if we have authority (online) or if offline (authority assumed)
+            if (_sync != null && !_sync.HasInputAuthority)
+                return;
+
             if (Input.GetKeyDown(shootKey))
             {
                 TryShoot();
@@ -88,9 +105,48 @@ namespace Gravitas
         }
         #endregion
 
+        #region Network Commands
+        /// <summary>
+        /// Network command to trigger shoot start effects on all clients
+        /// </summary>
+        [Command]
+        public void NetworkShootStart()
+        {
+            OnShootStart?.Invoke();
+        }
+
+        /// <summary>
+        /// Network command to trigger hit target effects on all clients
+        /// </summary>
+        [Command]
+        public void NetworkShootHit(Vector3 startPos, Vector3 endPos)
+        {
+            OnHitTarget?.Invoke(startPos, endPos);
+        }
+
+        /// <summary>
+        /// Network command to trigger miss effects on all clients
+        /// </summary>
+        [Command]
+        public void NetworkShootMiss(Vector3 startPos, Vector3 endPos)
+        {
+            OnShootMiss?.Invoke(startPos, endPos);
+        }
+
+        /// <summary>
+        /// Network command to trigger shoot failed effects on all clients
+        /// </summary>
+        [Command]
+        public void NetworkShootFailed()
+        {
+            OnShootFailed?.Invoke();
+        }
+        #endregion
+
         #region Public Methods
         /// <summary>
         /// Attempts to shoot, checking stamina and performing raycast.
+        /// SendCommand automatically routes to local calls when offline.
         /// </summary>
         public void TryShoot()
         {
@@ -98,47 +154,53 @@ namespace Gravitas
             if (!playerStats.PerformShoot())
             {
                 Debug.Log("Cannot shoot - not enough stamina!");
-                OnShootFailed?.Invoke();
+                if (_sync != null)
+                {
+                    _sync.SendCommand<PlayerShoot>(nameof(NetworkShootFailed), MessageTarget.All);
+                }
                 return;
             }
 
-            // Trigger shoot start animation
-            OnShootStart?.Invoke();
+            // Send network command for shoot start effects
+            if (_sync != null)
+            {
+                _sync.SendCommand<PlayerShoot>(nameof(NetworkShootStart), MessageTarget.All);
+            }
 
             // Get shoot origin and direction
             Vector3 shootOrigin = shootPoint.position;
-            Vector3 shootDirection;
-
-            // Use camera aim direction for accuracy (crosshair aiming)
-            Ray aimRay = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-            shootDirection = aimRay.direction;
+            Vector3 shootDirection = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)).direction;
 
             if (Physics.Raycast(shootOrigin, shootDirection, out RaycastHit hit, shootRange, shootableLayers))
             {
                 // We hit something!
                 Debug.Log($"Shot hit: {hit.collider.name} at distance {hit.distance:F2}");
 
-                // Trigger hit animation with shoot info and target
-                OnHitTarget?.Invoke(shootOrigin, hit.point, hit.collider.gameObject);
+                if (_sync != null)
+                {
+                    _sync.SendCommand<PlayerShoot>(nameof(NetworkShootHit), MessageTarget.All,
+                       shootOrigin, hit.point);
+                }
 
                 // Show debug ray in green if enabled
                 if (showDebugRay)
-                {
                     Debug.DrawRay(shootOrigin, shootDirection * hit.distance, Color.green, debugRayDuration);
-                }
             }
             else
             {
                 // We missed
                 Debug.Log("Shot missed - no target hit");
                 Vector3 missEndPoint = shootOrigin + shootDirection * shootRange;
-                OnShootMiss?.Invoke(shootOrigin, missEndPoint);
+
+                if (_sync != null)
+                {
+                    _sync.SendCommand<PlayerShoot>(nameof(NetworkShootMiss), MessageTarget.All,
+                        shootOrigin, missEndPoint);
+                }
 
                 // Show debug ray in red if enabled
                 if (showDebugRay)
-                {
                     Debug.DrawRay(shootOrigin, shootDirection * shootRange, Color.red, debugRayDuration);
-                }
             }
         }
 

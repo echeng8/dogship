@@ -16,35 +16,39 @@ namespace Coherence.Generated
     using System.Runtime.InteropServices;
     using UnityEngine;
 
-    public struct _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b : IEntityCommand
+    public struct _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 : IEntityCommand
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
         {
             [FieldOffset(0)]
-            public Entity playerGameObject;
+            public Vector3 startPos;
+            [FieldOffset(12)]
+            public Vector3 endPos;
         }
 
-        public static unsafe _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b FromInterop(System.IntPtr data, System.Int32 dataSize) 
+        public static unsafe _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 FromInterop(System.IntPtr data, System.Int32 dataSize) 
         {
-            if (dataSize != 4) {
-                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 4) " +
-                    "for command with ID 20");
+            if (dataSize != 24) {
+                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 24) " +
+                    "for command with ID 11");
             }
 
-            var orig = new _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b();
+            var orig = new _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014();
             var comp = (Interop*)data;
-            orig.playerGameObject = comp->playerGameObject;
+            orig.startPos = comp->startPos;
+            orig.endPos = comp->endPos;
             return orig;
         }
 
-        public Entity playerGameObject;
+        public Vector3 startPos;
+        public Vector3 endPos;
         
         public Entity Entity { get; set; }
         public Coherence.ChannelID ChannelID { get; set; }
         public MessageTarget Routing { get; set; }
         public uint Sender { get; set; }
-        public uint GetComponentType() => 20;
+        public uint GetComponentType() => 11;
         
         public IEntityMessage Clone()
         {
@@ -61,13 +65,6 @@ namespace Coherence.Generated
                 return err;
             }
             Entity = absoluteEntity;
-            err = mapper.MapToAbsoluteEntity(playerGameObject, false, out absoluteEntity);
-            if (err != IEntityMapper.Error.None)
-            {
-                return err;
-            }
-            this.playerGameObject = absoluteEntity;
-            
             return IEntityMapper.Error.None;
         }
         
@@ -79,31 +76,20 @@ namespace Coherence.Generated
                 return err;
             }
             Entity = relativeEntity;
-            err = mapper.MapToRelativeEntity(playerGameObject, false, out relativeEntity);
-            if (err != IEntityMapper.Error.None)
-            {
-                return err;
-            }
-            this.playerGameObject = relativeEntity;
-            
             return IEntityMapper.Error.None;
         }
 
         public HashSet<Entity> GetEntityRefs() {
-            return new HashSet<Entity> {
-                this.playerGameObject,
-            };
+            return default;
         }
 
         public void NullEntityRefs(Entity entity) {
-            if (this.playerGameObject == entity) {
-                this.playerGameObject = Entity.InvalidRelative;
-            }
         }
         
-        public _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b(
+        public _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014(
         Entity entity,
-        Entity playerGameObject
+        Vector3 startPos,
+        Vector3 endPos
 )
         {
             Entity = entity;
@@ -111,23 +97,31 @@ namespace Coherence.Generated
             Routing = MessageTarget.All;
             Sender = 0;
             
-            this.playerGameObject = playerGameObject; 
+            this.startPos = startPos; 
+            this.endPos = endPos; 
         }
         
-        public static void Serialize(_4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b commandData, IOutProtocolBitStream bitStream)
+        public static void Serialize(_090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 commandData, IOutProtocolBitStream bitStream)
         {
-            bitStream.WriteEntity(commandData.playerGameObject);
+            var converted_startPos = commandData.startPos.ToCoreVector3();
+            bitStream.WriteVector3(converted_startPos, FloatMeta.NoCompression());
+            var converted_endPos = commandData.endPos.ToCoreVector3();
+            bitStream.WriteVector3(converted_endPos, FloatMeta.NoCompression());
         }
         
-        public static _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
+        public static _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
         {
-            var dataplayerGameObject = bitStream.ReadEntity();
+            var converted_startPos = bitStream.ReadVector3(FloatMeta.NoCompression());
+            var datastartPos = converted_startPos.ToUnityVector3();
+            var converted_endPos = bitStream.ReadVector3(FloatMeta.NoCompression());
+            var dataendPos = converted_endPos.ToUnityVector3();
     
-            return new _4d7f86b504afd6f419f3d65f80c82f8f_b7ee62b473624ec186543acb8b879c5b()
+            return new _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014()
             {
                 Entity = entity,
                 Routing = target,
-                playerGameObject = dataplayerGameObject
+                startPos = datastartPos,
+                endPos = dataendPos
             };   
         }
     }
