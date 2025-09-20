@@ -98,6 +98,42 @@ namespace Gravitas.Demo
             }
         }
 
+        [Command]
+        public void NetworkTeleportToEarth()
+        {
+            // Find the earth field and teleport the ship to its position
+            var earthField = FindEarthField();
+            if (earthField != null)
+            {
+                // Find the earth position by tag
+                GameObject earthPosition = GameObject.FindGameObjectWithTag("EarthPosition");
+                if (earthPosition != null)
+                {
+                    ScheduleTeleport(earthPosition.transform.position, earthField);
+                }
+            }
+        }
+        
+        private GravitasField FindEarthField()
+        {
+            // Find the earth position by tag
+            GameObject earthPosition = GameObject.FindGameObjectWithTag("EarthPosition");
+            if (earthPosition == null)
+            {
+                return null;
+            }
+
+            // Check if earth position or its parent has a GravitasField component
+            GravitasField earthField = earthPosition.GetComponent<GravitasField>();
+            if (earthField == null && earthPosition.transform.parent != null)
+            {
+                // Try to find field on parent
+                earthField = earthPosition.transform.parent.GetComponent<GravitasField>();
+            }
+
+            return earthField;
+        }
+
         public void SetPlayerController(GravitasFirstPersonPlayerSubject player, Vector3 localPos)
         {
             Debug.Log($"SetPlayerController called with player: {player?.name}");
@@ -134,6 +170,22 @@ namespace Gravitas.Demo
                     nameof(NetworkExitSpaceship),
                     MessageTarget.AuthorityOnly
                 );
+            }
+        }
+
+        public void TeleportToEarth()
+        {
+            if (_sync)
+            {
+                _sync.SendCommand<GravitasSpaceshipSubject>(
+                    nameof(NetworkTeleportToEarth),
+                    MessageTarget.AuthorityOnly
+                );
+            }
+            else
+            {
+                // Fallback for non-networked scenarios
+                NetworkTeleportToEarth();
             }
         }
 

@@ -278,6 +278,49 @@ namespace Gravitas
 
             cryptidManager.SpawnCryptid(transform);
         }
+
+        /// <summary>
+        /// Teleports the player to the ship and updates their Gravitas field.
+        /// </summary>
+        /// <param name="shipTransform">The transform of the ship to teleport to</param>
+        public void TeleportToShip(Transform shipTransform)
+        {
+            if (shipTransform == null)
+            {
+                Debug.LogError("Ship transform is null!");
+                return;
+            }
+
+            // Calculate teleport position slightly in front of or on the ship
+            Vector3 teleportPosition = shipTransform.position + shipTransform.forward * 2f;
+
+            // Use GravitasSubject's teleportation system if available
+            if (_gravitasSubject != null)
+            {
+                // Check if the ship has a GravitasField component
+                GravitasField shipField = shipTransform.GetComponent<GravitasField>();
+                if (shipField != null)
+                {
+                    // Schedule teleportation with field transfer via GravitasSubject
+                    _gravitasSubject.ScheduleTeleport(teleportPosition, shipField);
+                    Debug.Log("Scheduled deferred teleportation to ship with gravitas field transfer via GravitasSubject");
+                }
+                else
+                {
+                    // Schedule teleportation without field transfer
+                    _gravitasSubject.ScheduleTeleport(teleportPosition);
+                    Debug.Log("Scheduled deferred teleportation to ship (no gravitas field) via GravitasSubject");
+                }
+            }
+            else
+            {
+                // Fallback to immediate teleportation if no GravitasSubject
+                transform.position = teleportPosition;
+                Debug.LogWarning("Player does not have a GravitasSubject component - using immediate teleportation");
+            }
+
+            Debug.Log($"Queued teleportation to ship at position: {teleportPosition}");
+        }
         #endregion
 
         #region Private Methods

@@ -436,7 +436,13 @@ MonoBehaviour:
   turnSpeed: 4
   rollSpeed: 2.5
   verticalMoveMultiplier: 3
+  disablePhysicsAngularVelocity: 1
   staminaDrainRate: 25
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  detectionRange: 10000000
+  matchVelocityKey: 103
 --- !u!114 &8445149378463969739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +720,7 @@ MonoBehaviour:
   - rid: 6818957093645320436
   - rid: 6818957093645320440
   - rid: 6818957093645320443
+  - rid: 4912676680375205888
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -726,6 +733,47 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 4912676680375205888
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 4912676680375205889
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: dc3e6bab0e3843059bb6679b058fe398
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 8362810714748207749}
+        coherenceSync: {fileID: 8445149378463969739}
+        interpolationSettings: {fileID: 0}
+    - rid: 4912676680375205889
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: NetworkTeleportToEarth
+        monoAssemblyType: 
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 0
+        valueSyncCallbackName: 
+        memberType: 8
+        parameterAssemblyTypes: []
+        ownerType:
+          assemblyQualifiedName: Gravitas.Demo.GravitasSpaceshipSubject, gravitas-main,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.CommandBinding, Coherence.Toolkit,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
     - rid: 6818957093645320436
       type: {class: Vector3Binding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
       data:

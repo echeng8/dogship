@@ -543,6 +543,7 @@ namespace Coherence.Generated
         
         private global::Gravitas.Demo.GravitasSpaceshipSubject _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0_CommandTarget;
         private global::Gravitas.Demo.GravitasSpaceshipSubject _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64_CommandTarget;
+        private global::Gravitas.Demo.GravitasSpaceshipSubject _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398_CommandTarget;
         
         
         private IClient client;
@@ -568,6 +569,7 @@ namespace Coherence.Generated
         {
             bakedCommandBindings.Add("c71970d4b58a42738f53e2cd22aee1c0", BakeCommandBinding__006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0);
             bakedCommandBindings.Add("1ed269a9290d485ab7ad3dc6dd3b4b64", BakeCommandBinding__006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64);
+            bakedCommandBindings.Add("dc3e6bab0e3843059bb6679b058fe398", BakeCommandBinding__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398);
         }
         
         public override Binding BakeValueBinding(Binding valueBinding)
@@ -650,6 +652,34 @@ namespace Coherence.Generated
             
             target.NetworkSetPlayerController(bridge.EntityIdToGameObject(command.playerGameObject),(UnityEngine.Vector3)(command.localPos));
         }
+        private void BakeCommandBinding__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398_CommandTarget = (global::Gravitas.Demo.GravitasSpaceshipSubject)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.Demo.GravitasSpaceshipSubject.NetworkTeleportToEarth", "()", SendCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398, ReceiveLocalCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398, MessageTarget.All, _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398_CommandTarget, false);
+        }
+        
+        private void SendCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398();
+            
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398();
+            
+            
+            ReceiveCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398(command);
+        }
+
+        private void ReceiveCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398(_006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398 command)
+        {
+            var target = _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398_CommandTarget;
+            
+            target.NetworkTeleportToEarth();
+        }
         
         public override void ReceiveCommand(IEntityCommand command)
         {
@@ -660,6 +690,9 @@ namespace Coherence.Generated
                     break;
                 case _006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64 castedCommand:
                     ReceiveCommand__006c748d7f8085f4691d554734b27fe0_1ed269a9290d485ab7ad3dc6dd3b4b64(castedCommand);
+                    break;
+                case _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398 castedCommand:
+                    ReceiveCommand__006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398(castedCommand);
                     break;
                 default:
                     logger.Warning(Coherence.Log.Warning.ToolkitBakedSyncReceiveCommandUnhandled,

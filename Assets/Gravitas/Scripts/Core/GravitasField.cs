@@ -403,6 +403,31 @@ namespace Gravitas
             return spawnedObject;
         }
 
+        /// <summary>
+        /// Adds an existing subject to the field and resets their velocity to match the field.
+        /// Use this for teleporting existing objects into the field.
+        /// </summary>
+        /// <param name="subject">The existing subject to add to the field</param>
+        public void AddExistingSubjectToField(IGravitasSubject subject)
+        {
+            if (subject == null || !(subject as UnityEngine.Object))
+            {
+                Debug.LogWarning("Cannot add null or destroyed subject to field");
+                return;
+            }
+
+            // Set velocity to match the field before adding to field
+            IGravitasBody subjectBody = subject.GravitasBody;
+            if (subjectBody != null)
+            {
+                subjectBody.AngularVelocity = FieldAngularVelocity;
+                subjectBody.Velocity = FieldVelocity;
+                Debug.Log($"Reset velocities for {subject.GameObject.name}: Angular={FieldAngularVelocity}, Linear={FieldVelocity}");
+            }
+
+            EnqueueSubjectChange(subject, true);
+        }
+
 #if UNITY_EDITOR
         /// <summary>Checks and reports any issues with this field for display in the inspector.</summary>
         /// <param name="errorMessage">The error message result.</param>

@@ -54,12 +54,32 @@ namespace Gravitas
         [SerializeField] private bool willReorient;
         private bool isChangingField;
 
+        // Teleportation state
+        private bool hasPendingTeleport = false;
+        private Vector3 pendingTeleportPosition;
+        private GravitasField pendingTeleportField;
+
         public void EnqueueFieldChangeRequest(GravitasFieldChangeRequest fieldChangeRequest)
         {
             if (!fieldChangeRequests.Contains(fieldChangeRequest))
             {
                 fieldChangeRequests.Add(fieldChangeRequest);
             }
+        }
+
+        /// <summary>
+        /// Schedules a teleportation to be executed in LateUpdate after physics processing.
+        /// </summary>
+        /// <param name="position">The position to teleport to</param>
+        /// <param name="targetField">Optional field to add the subject to after teleportation</param>
+        public void ScheduleTeleport(Vector3 position, GravitasField targetField = null)
+        {
+            hasPendingTeleport = true;
+            pendingTeleportPosition = position;
+            pendingTeleportField = targetField;
+
+            Debug.Log($"Scheduled teleportation for {gameObject.name} to position: {position}" +
+                     (targetField != null ? $" with field transfer to {targetField.name}" : ""));
         }
 
         public virtual void EnterField(IGravitasField field)
@@ -319,6 +339,32 @@ namespace Gravitas
         protected void FixedUpdate()
         {
             OnSubjectFixedUpdate();
+        }
+
+        protected void LateUpdate()
+        {
+            // Handle deferred teleportation after physics processing
+            if (hasPendingTeleport)
+            {
+                // Apply the teleportation
+                transform.position = pendingTeleportPosition;
+
+                // Add to the gravitas field if specified
+                if (pendingTeleportField != null)
+                {
+                    pendingTeleportField.AddExistingSubjectToField(this);
+                    Debug.Log("Applied deferred teleportation and added to gravitas field via GravitasSubject");
+                }
+                else
+                {
+                    Debug.Log("Applied deferred teleportation via GravitasSubject");
+                }
+
+                // Clear the pending teleport
+                hasPendingTeleport = false;
+                pendingTeleportPosition = Vector3.zero;
+                pendingTeleportField = null;
+            }
         }
 
         protected bool CheckPositionForNewField(out IGravitasField field)

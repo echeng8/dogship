@@ -186,6 +186,7 @@ Transform:
   - {fileID: 7484515575701888915}
   - {fileID: 4396846192543713997}
   - {fileID: 7539706143080041187}
+  - {fileID: 3463937803455203778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3136628078399885760
@@ -583,6 +584,8 @@ MonoBehaviour:
     - component: {fileID: 7398990354672243864}
       lodStepsActive: 1
     - component: {fileID: 7539706143080041187}
+      lodStepsActive: 1
+    - component: {fileID: 3463937803455203778}
       lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
   interpolationLocation: 4
@@ -1105,6 +1108,37 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 582a6767e5bad2441a1882628052ed56, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &7109403774238154848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3463937803455203778}
+  m_Layer: 6
+  m_Name: Ship Spawn
+  m_TagString: EarthPosition
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3463937803455203778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7109403774238154848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 34.8, z: -3.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3136628078399885823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8452446170749007152
 GameObject:
   m_ObjectHideFlags: 0
