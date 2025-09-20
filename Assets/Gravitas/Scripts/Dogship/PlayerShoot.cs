@@ -117,20 +117,30 @@ namespace Gravitas
 
         /// <summary>
         /// Network command to trigger hit target effects on all clients
+        /// Sends direction so each client can calculate local hit from their own shoot point
         /// </summary>
         [Command]
-        public void NetworkShootHit(Vector3 startPos, Vector3 endPos)
+        public void NetworkShootHit(Vector3 shootDirection, float hitDistance)
         {
-            OnHitTarget?.Invoke(startPos, endPos);
+            // Calculate local positions from direction and distance
+            Vector3 localShootOrigin = shootPoint.position;
+            Vector3 localHitPoint = localShootOrigin + shootDirection * hitDistance;
+            
+            OnHitTarget?.Invoke(localShootOrigin, localHitPoint);
         }
 
         /// <summary>
         /// Network command to trigger miss effects on all clients
+        /// Sends direction so each client can calculate local miss point from their own shoot point
         /// </summary>
         [Command]
-        public void NetworkShootMiss(Vector3 startPos, Vector3 endPos)
+        public void NetworkShootMiss(Vector3 shootDirection)
         {
-            OnShootMiss?.Invoke(startPos, endPos);
+            // Calculate local positions from direction and max range
+            Vector3 localShootOrigin = shootPoint.position;
+            Vector3 localMissPoint = localShootOrigin + shootDirection * shootRange;
+            
+            OnShootMiss?.Invoke(localShootOrigin, localMissPoint);
         }
 
         /// <summary>
@@ -178,8 +188,9 @@ namespace Gravitas
 
                 if (_sync != null)
                 {
+                    // Send direction and hit distance instead of positions to avoid desync
                     _sync.SendCommand<PlayerShoot>(nameof(NetworkShootHit), MessageTarget.All,
-                       shootOrigin, hit.point);
+                       shootDirection, hit.distance);
                 }
 
                 // Show debug ray in green if enabled
@@ -194,8 +205,9 @@ namespace Gravitas
 
                 if (_sync != null)
                 {
+                    // Send direction only for miss (clients will use max range) to avoid desync
                     _sync.SendCommand<PlayerShoot>(nameof(NetworkShootMiss), MessageTarget.All,
-                        shootOrigin, missEndPoint);
+                        shootDirection);
                 }
 
                 // Show debug ray in red if enabled

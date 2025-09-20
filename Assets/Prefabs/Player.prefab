@@ -5352,9 +5352,9 @@ MonoBehaviour:
   - rid: 8677872996106895669
   - rid: 8677873051378122836
   - rid: 4912676680375205964
-  - rid: 4912676680375205966
   - rid: 4912676680375205967
-  - rid: 4912676682735288473
+  - rid: 4912676682735288502
+  - rid: 4912676682735288503
   scenePrefabInstanceUUID: 
   coherenceUUID: 
   assetVersion: 
@@ -5377,26 +5377,6 @@ MonoBehaviour:
         isPredicted: 0
         predictionMode: 0
         guid: 81d513233d084654aae421f25e4042af
-        archetypeData:
-          type: 0
-          minRange: 0
-          maxRange: 0
-          sampleRate: 0
-          floatCompression: 0
-          fields: []
-        unityComponent: {fileID: 3257901845551783619}
-        coherenceSync: {fileID: 2683227246358131983}
-        interpolationSettings: {fileID: 0}
-    - rid: 4912676680375205966
-      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
-      data:
-        descriptor:
-          rid: 4912676680375205970
-        routing: 1
-        syncMode: 0
-        isPredicted: 0
-        predictionMode: 0
-        guid: efa262ebd6154f7b801cc9ea94e56f33
         archetypeData:
           type: 0
           minRange: 0
@@ -5448,29 +5428,6 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 4912676680375205970
-      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
-      data:
-        name: NetworkShootMiss
-        monoAssemblyType: 
-        required: 1
-        enforcesLODingWhenFieldsOverriden: 0
-        valueSyncCallbackName: 
-        memberType: 8
-        parameterAssemblyTypes:
-        - UnityEngine.Vector3, UnityEngine
-        - UnityEngine.Vector3, UnityEngine
-        ownerType:
-          assemblyQualifiedName: Gravitas.PlayerShoot, gravitas-main, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        defaultSyncMode: 0
-        CustomData:
-          rid: -2
-        bindingType:
-          assemblyQualifiedName: Coherence.Toolkit.Bindings.CommandBinding, Coherence.Toolkit,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        oldName: 
-        oldParameterAssemblyTypes: []
     - rid: 4912676680375205971
       type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
@@ -5492,16 +5449,16 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 4912676682735288473
+    - rid: 4912676682735288502
       type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
         descriptor:
-          rid: 4912676682735288474
+          rid: 4912676682735288504
         routing: 1
         syncMode: 0
         isPredicted: 0
         predictionMode: 0
-        guid: 9b0aadf539ae4348b0df5c49c829e014
+        guid: 12cec6b3650e4d99b1275cda9ef317eb
         archetypeData:
           type: 0
           minRange: 0
@@ -5512,7 +5469,27 @@ MonoBehaviour:
         unityComponent: {fileID: 3257901845551783619}
         coherenceSync: {fileID: 2683227246358131983}
         interpolationSettings: {fileID: 0}
-    - rid: 4912676682735288474
+    - rid: 4912676682735288503
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 4912676682735288505
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: 9a46fadb59054bedb676fac4c0a5fbc7
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 3257901845551783619}
+        coherenceSync: {fileID: 2683227246358131983}
+        interpolationSettings: {fileID: 0}
+    - rid: 4912676682735288504
       type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
         name: NetworkShootHit
@@ -5523,6 +5500,28 @@ MonoBehaviour:
         memberType: 8
         parameterAssemblyTypes:
         - UnityEngine.Vector3, UnityEngine
+        - System.Single, mscorlib
+        ownerType:
+          assemblyQualifiedName: Gravitas.PlayerShoot, gravitas-main, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.CommandBinding, Coherence.Toolkit,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
+    - rid: 4912676682735288505
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: NetworkShootMiss
+        monoAssemblyType: 
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 0
+        valueSyncCallbackName: 
+        memberType: 8
+        parameterAssemblyTypes:
         - UnityEngine.Vector3, UnityEngine
         ownerType:
           assemblyQualifiedName: Gravitas.PlayerShoot, gravitas-main, Version=0.0.0.0,

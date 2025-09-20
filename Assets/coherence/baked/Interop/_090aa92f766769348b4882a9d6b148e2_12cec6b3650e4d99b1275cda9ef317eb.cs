@@ -16,39 +16,39 @@ namespace Coherence.Generated
     using System.Runtime.InteropServices;
     using UnityEngine;
 
-    public struct _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 : IEntityCommand
+    public struct _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb : IEntityCommand
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
         {
             [FieldOffset(0)]
-            public Vector3 startPos;
+            public Vector3 shootDirection;
             [FieldOffset(12)]
-            public Vector3 endPos;
+            public System.Single hitDistance;
         }
 
-        public static unsafe _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 FromInterop(System.IntPtr data, System.Int32 dataSize) 
+        public static unsafe _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb FromInterop(System.IntPtr data, System.Int32 dataSize) 
         {
-            if (dataSize != 24) {
-                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 24) " +
-                    "for command with ID 11");
+            if (dataSize != 16) {
+                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 16) " +
+                    "for command with ID 9");
             }
 
-            var orig = new _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014();
+            var orig = new _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb();
             var comp = (Interop*)data;
-            orig.startPos = comp->startPos;
-            orig.endPos = comp->endPos;
+            orig.shootDirection = comp->shootDirection;
+            orig.hitDistance = comp->hitDistance;
             return orig;
         }
 
-        public Vector3 startPos;
-        public Vector3 endPos;
+        public Vector3 shootDirection;
+        public System.Single hitDistance;
         
         public Entity Entity { get; set; }
         public Coherence.ChannelID ChannelID { get; set; }
         public MessageTarget Routing { get; set; }
         public uint Sender { get; set; }
-        public uint GetComponentType() => 11;
+        public uint GetComponentType() => 9;
         
         public IEntityMessage Clone()
         {
@@ -86,10 +86,10 @@ namespace Coherence.Generated
         public void NullEntityRefs(Entity entity) {
         }
         
-        public _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014(
+        public _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb(
         Entity entity,
-        Vector3 startPos,
-        Vector3 endPos
+        Vector3 shootDirection,
+        System.Single hitDistance
 )
         {
             Entity = entity;
@@ -97,31 +97,29 @@ namespace Coherence.Generated
             Routing = MessageTarget.All;
             Sender = 0;
             
-            this.startPos = startPos; 
-            this.endPos = endPos; 
+            this.shootDirection = shootDirection; 
+            this.hitDistance = hitDistance; 
         }
         
-        public static void Serialize(_090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 commandData, IOutProtocolBitStream bitStream)
+        public static void Serialize(_090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb commandData, IOutProtocolBitStream bitStream)
         {
-            var converted_startPos = commandData.startPos.ToCoreVector3();
-            bitStream.WriteVector3(converted_startPos, FloatMeta.NoCompression());
-            var converted_endPos = commandData.endPos.ToCoreVector3();
-            bitStream.WriteVector3(converted_endPos, FloatMeta.NoCompression());
+            var converted_shootDirection = commandData.shootDirection.ToCoreVector3();
+            bitStream.WriteVector3(converted_shootDirection, FloatMeta.NoCompression());
+            bitStream.WriteFloat(commandData.hitDistance, FloatMeta.NoCompression());
         }
         
-        public static _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
+        public static _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
         {
-            var converted_startPos = bitStream.ReadVector3(FloatMeta.NoCompression());
-            var datastartPos = converted_startPos.ToUnityVector3();
-            var converted_endPos = bitStream.ReadVector3(FloatMeta.NoCompression());
-            var dataendPos = converted_endPos.ToUnityVector3();
+            var converted_shootDirection = bitStream.ReadVector3(FloatMeta.NoCompression());
+            var datashootDirection = converted_shootDirection.ToUnityVector3();
+            var datahitDistance = bitStream.ReadFloat(FloatMeta.NoCompression());
     
-            return new _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014()
+            return new _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb()
             {
                 Entity = entity,
                 Routing = target,
-                startPos = datastartPos,
-                endPos = dataendPos
+                shootDirection = datashootDirection,
+                hitDistance = datahitDistance
             };   
         }
     }

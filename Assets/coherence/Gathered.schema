@@ -88,22 +88,21 @@ command _006c748d7f8085f4691d554734b27fe0_c71970d4b58a42738f53e2cd22aee1c0 [id "
 
 command _006c748d7f8085f4691d554734b27fe0_dc3e6bab0e3843059bb6679b058fe398 [id "8", routing "All"]
 
-command _090aa92f766769348b4882a9d6b148e2_738c73e4710e44b4bc915802f2893ed2 [id "9", routing "All"]
+command _090aa92f766769348b4882a9d6b148e2_12cec6b3650e4d99b1275cda9ef317eb [id "9", routing "All"]
+  shootDirection Vector3 [compression "None"]
+  hitDistance Float [compression "None"]
 
-command _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af [id "10", routing "All"]
+command _090aa92f766769348b4882a9d6b148e2_738c73e4710e44b4bc915802f2893ed2 [id "10", routing "All"]
 
-command _090aa92f766769348b4882a9d6b148e2_9b0aadf539ae4348b0df5c49c829e014 [id "11", routing "All"]
-  startPos Vector3 [compression "None"]
-  endPos Vector3 [compression "None"]
+command _090aa92f766769348b4882a9d6b148e2_81d513233d084654aae421f25e4042af [id "11", routing "All"]
 
-command _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f [id "12", routing "All"]
+command _090aa92f766769348b4882a9d6b148e2_9a46fadb59054bedb676fac4c0a5fbc7 [id "12", routing "All"]
+  shootDirection Vector3 [compression "None"]
+
+command _090aa92f766769348b4882a9d6b148e2_b931ee7092e449b09ff7fa62d5a2588f [id "13", routing "All"]
   amount Float [compression "None"]
 
-command _090aa92f766769348b4882a9d6b148e2_c135117e48634d00b5179bf0ab62dc12 [id "13", routing "All"]
-
-command _090aa92f766769348b4882a9d6b148e2_efa262ebd6154f7b801cc9ea94e56f33 [id "14", routing "All"]
-  startPos Vector3 [compression "None"]
-  endPos Vector3 [compression "None"]
+command _090aa92f766769348b4882a9d6b148e2_c135117e48634d00b5179bf0ab62dc12 [id "14", routing "All"]
 
 command _362fd1a7edeb85c48bb39119604133c5_33c865cdc8d14dcf82e779420dab9708 [id "15", routing "All"]
   playerGameObject Entity [client-type "GameObject"]
