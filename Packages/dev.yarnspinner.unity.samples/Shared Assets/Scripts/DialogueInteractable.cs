@@ -136,9 +136,16 @@ namespace Yarn.Unity.Samples
                 Debug.LogWarning($"Can't run dialogue {dialogue}: not a valid dialogue reference");
                 return;
             }
+
+            // If dialogue is already running, try to advance it instead of starting new dialogue
             if (dialogueRunner.IsDialogueRunning)
             {
-                Debug.LogWarning($"Can't run dialogue {dialogue}: dialogue runner is already running");
+                Debug.LogWarning($"[DialogueInteractable] Dialogue is running, attempting to advance");
+
+                // Try to advance the dialogue by requesting the next line
+                // This will work for both regular dialogue views and bubble views
+                dialogueRunner.RequestNextLine();
+                Debug.LogWarning($"[DialogueInteractable] Advanced dialogue line");
                 return;
             }
 

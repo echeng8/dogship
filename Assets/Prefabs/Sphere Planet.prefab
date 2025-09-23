@@ -587,6 +587,10 @@ MonoBehaviour:
       lodStepsActive: 1
     - component: {fileID: 3463937803455203778}
       lodStepsActive: 1
+    - component: {fileID: 2882159510805103487}
+      lodStepsActive: 1
+    - component: {fileID: 5060831536045374930}
+      lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
   interpolationLocation: 4
   RigidbodyUpdateMode: 1
@@ -1676,6 +1680,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39bc61f7676bf44b3878d791900f5347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2882159510805103487 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 955106453947610260, guid: 0b3eff3c7e4554fa9beeeed968894f36, type: 3}
+  m_PrefabInstance: {fileID: 3079974565094864875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3096451132799828011 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 19854337389131712, guid: 0b3eff3c7e4554fa9beeeed968894f36, type: 3}
@@ -1758,6 +1767,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1951e317240084d65816cdc642cb12fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5060831536045374930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7819915793879239225, guid: 0b3eff3c7e4554fa9beeeed968894f36, type: 3}
+  m_PrefabInstance: {fileID: 3079974565094864875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983e4636ae10b4609b3cf2244fb724db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: YarnSpinner.AddOns.SpeechBubbles::Yarn.Unity.Addons.SpeechBubbles.CharacterBubbleAnchor
 --- !u!4 &5176020674320662558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7884307531303073781, guid: 0b3eff3c7e4554fa9beeeed968894f36, type: 3}

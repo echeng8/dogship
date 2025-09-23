@@ -45,14 +45,6 @@ namespace Gravitas.Demo
 
             if (dialogueInteractable != null)
             {
-                // If dialogue is already running, stop it
-                if (dialogueInteractable.dialogueRunner != null && dialogueInteractable.dialogueRunner.IsDialogueRunning)
-                {
-                    Debug.LogWarning($"[DialogueAdapter] Stopping running dialogue");
-                    dialogueInteractable.dialogueRunner.Stop();
-                    return;
-                }
-
                 if (CanInteract)
                 {
                     Debug.LogWarning($"[DialogueAdapter] Starting dialogue interaction");

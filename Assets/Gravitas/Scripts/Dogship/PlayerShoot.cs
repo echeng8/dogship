@@ -125,7 +125,7 @@ namespace Gravitas
             // Calculate local positions from direction and distance
             Vector3 localShootOrigin = shootPoint.position;
             Vector3 localHitPoint = localShootOrigin + shootDirection * hitDistance;
-            
+
             OnHitTarget?.Invoke(localShootOrigin, localHitPoint);
         }
 
@@ -139,7 +139,7 @@ namespace Gravitas
             // Calculate local positions from direction and max range
             Vector3 localShootOrigin = shootPoint.position;
             Vector3 localMissPoint = localShootOrigin + shootDirection * shootRange;
-            
+
             OnShootMiss?.Invoke(localShootOrigin, localMissPoint);
         }
 

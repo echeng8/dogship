@@ -184,14 +184,14 @@ namespace Gravitas.Demo
             {
                 float verticalDelta = -mouseInput.y * turnSpeed;
                 float newVerticalRotation = currentVerticalRotation + verticalDelta;
-                
+
                 // Clamp the vertical rotation within the specified limits
                 newVerticalRotation = Mathf.Clamp(newVerticalRotation, -maxLookDownAngle, maxLookUpAngle);
-                
+
                 // Calculate the actual delta to apply (in case we hit the limits)
                 float clampedDelta = newVerticalRotation - currentVerticalRotation;
                 currentVerticalRotation = newVerticalRotation;
-                
+
                 // Apply the clamped rotation
                 aimCore.localRotation *= Quaternion.AngleAxis(clampedDelta, Vector3.right);
             }
@@ -218,7 +218,7 @@ namespace Gravitas.Demo
         private void ProcessInteractionInput()
         {
             if (!interact)
-                interact = Input.GetKeyDown(KeyCode.E);
+                interact = Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0);
         }
 
         private void ResetInputs()

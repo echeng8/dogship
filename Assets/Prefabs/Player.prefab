@@ -121,6 +121,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3543296725183664742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &999594660754341548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5377824563172630106}
+  - component: {fileID: 8637490087691817457}
+  m_Layer: 0
+  m_Name: Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5377824563172630106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999594660754341548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3543296725183664742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8637490087691817457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999594660754341548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983e4636ae10b4609b3cf2244fb724db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: YarnSpinner.AddOns.SpeechBubbles::Yarn.Unity.Addons.SpeechBubbles.CharacterBubbleAnchor
+  CharacterName: Player
+  bubblePosition: {fileID: 0}
+  characterBubbleData: {fileID: 0}
+  characterBubblePrefab: {fileID: 0}
 --- !u!1 &3543296724503700695
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,6 +5107,7 @@ Transform:
   - {fileID: 466474273631451590}
   - {fileID: 7950268967415635599}
   - {fileID: 5589454903338763030}
+  - {fileID: 5377824563172630106}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3543296725183664736
@@ -5323,6 +5372,10 @@ MonoBehaviour:
     - component: {fileID: 5589454903338763030}
       lodStepsActive: 1
     - component: {fileID: 2800806545214993979}
+      lodStepsActive: 1
+    - component: {fileID: 5377824563172630106}
+      lodStepsActive: 1
+    - component: {fileID: 8637490087691817457}
       lodStepsActive: 1
     GeneratesArchetypeDefinition: 0
   interpolationLocation: 4
