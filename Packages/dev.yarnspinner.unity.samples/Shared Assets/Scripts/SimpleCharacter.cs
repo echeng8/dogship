@@ -63,7 +63,9 @@ namespace Yarn.Unity.Samples
         private int currentDestinationPathIndex = -1;
         private float remainingPathWaitTime = 0f;
 
-        private Quaternion targetRotation;
+        // Store target direction relative to parent (planet) coordinate system
+        // This keeps the character's facing direction fixed relative to the planet surface
+        private Vector3 planetRelativeTargetForward = Vector3.forward;
 
         public float CurrentSpeedFactor { get; private set; } = 0f;
 
@@ -399,8 +401,8 @@ namespace Yarn.Unity.Samples
 
         private void SetupMovement()
         {
-            // Remember our initial facing rotation
-            targetRotation = transform.rotation;
+            // Initialize planet-relative target forward from current transform forward
+            SetPlanetRelativeTargetFromWorldDirection(transform.forward);
 
             if (!isPlayerControlled && followPath != null && followPath.Count >= 2)
             {
@@ -408,14 +410,21 @@ namespace Yarn.Unity.Samples
                 var startPoint = followPath.GetWorldPosition(0);
                 var nextPoint = followPath.GetWorldPosition(1);
                 transform.position = startPoint;
-                targetRotation = Quaternion.LookRotation(nextPoint - startPoint);
+                
+                // Set target direction toward next point, projected onto local plane
+                var pathDirection = nextPoint - startPoint;
+                var localUp = transform.up;
+                var pathDirectionOnLocalPlane = Vector3.ProjectOnPlane(pathDirection, localUp);
+                if (pathDirectionOnLocalPlane.sqrMagnitude > 0.0001f)
+                {
+                    SetPlanetRelativeTargetFromWorldDirection(pathDirectionOnLocalPlane.normalized);
+                }
+                
                 transform.rotation = GetCurrentLookDirection();
 
                 currentDestinationPathIndex = 0;
                 Mode = CharacterMode.PathMovement;
-            }
-
-            // Start facing our look target, if any
+            }            // Start facing our look target, if any
             if (lookTarget != null)
             {
                 transform.rotation = GetCurrentLookDirection();
@@ -502,8 +511,9 @@ namespace Yarn.Unity.Samples
             if (this.IsAlive)
             {
                 // Rotate towards our current look direction if we're alive
+                // Use the character's current rotation instead of reconstructing it with world Y-up
                 transform.rotation = Quaternion.RotateTowards(
-                    Quaternion.LookRotation(transform.forward),
+                    transform.rotation,
                     GetCurrentLookDirection(),
                     turnSpeed * Time.deltaTime
                 );
@@ -530,7 +540,14 @@ namespace Yarn.Unity.Samples
                 {
                     // If we're moving, update the direction we want to be looking
                     // at when we have no look target
-                    targetRotation = Quaternion.LookRotation(movement.normalized);
+                    // Project movement onto local horizontal plane to respect planet surface
+                    var localUp = transform.up;
+                    var movementOnLocalPlane = Vector3.ProjectOnPlane(movement, localUp);
+                    if (movementOnLocalPlane.sqrMagnitude > 0.0001f)
+                    {
+                        // Store the movement direction as our planet-relative target forward
+                        SetPlanetRelativeTargetFromWorldDirection(movementOnLocalPlane.normalized);
+                    }
                 }
 
                 movement = movement.normalized * dampedSpeed;
@@ -547,14 +564,70 @@ namespace Yarn.Unity.Samples
 
         private Quaternion GetCurrentLookDirection()
         {
-            Quaternion direction = this.targetRotation;
+            // Convert planet-relative forward direction to world rotation
+            Quaternion direction = GetWorldRotationFromPlanetRelativeForward();
             if (lookTarget != null)
             {
-                var lookDirectionOnSameY = lookTarget.position - transform.position;
-                lookDirectionOnSameY.y = 0;
-                direction = Quaternion.LookRotation(lookDirectionOnSameY);
+                var lookDirection = lookTarget.position - transform.position;
+                // Project the look direction onto the character's local horizontal plane
+                // (perpendicular to the character's up direction)
+                var localUp = transform.up;
+                var lookDirectionOnLocalPlane = Vector3.ProjectOnPlane(lookDirection, localUp);
+
+                // Only create the rotation if we have a valid direction
+                if (lookDirectionOnLocalPlane.sqrMagnitude > 0.0001f)
+                {
+                    direction = Quaternion.LookRotation(lookDirectionOnLocalPlane, localUp);
+                }
             }
             return direction;
+        }
+
+        // Helper method to convert planet-relative forward direction to world rotation
+        private Quaternion GetWorldRotationFromPlanetRelativeForward()
+        {
+            var localUp = transform.up;
+            
+            // Convert planet-relative forward to world coordinates
+            Vector3 worldForward;
+            if (transform.parent != null)
+            {
+                // Transform the planet-relative direction to world space through the parent
+                worldForward = transform.parent.TransformDirection(planetRelativeTargetForward);
+                // Project onto the character's current local horizontal plane
+                worldForward = Vector3.ProjectOnPlane(worldForward, localUp).normalized;
+            }
+            else
+            {
+                // No parent, fall back to using the stored direction directly
+                worldForward = Vector3.ProjectOnPlane(planetRelativeTargetForward, localUp).normalized;
+            }
+            
+            if (worldForward.sqrMagnitude < 0.0001f)
+            {
+                // If the forward direction is parallel to up, use transform forward as fallback
+                worldForward = Vector3.ProjectOnPlane(transform.forward, localUp).normalized;
+                if (worldForward.sqrMagnitude < 0.0001f)
+                {
+                    worldForward = Vector3.ProjectOnPlane(Vector3.forward, localUp).normalized;
+                }
+            }
+            return Quaternion.LookRotation(worldForward, localUp);
+        }
+
+        // Helper method to set target direction from world rotation
+        private void SetPlanetRelativeTargetFromWorldDirection(Vector3 worldDirection)
+        {
+            if (transform.parent != null)
+            {
+                // Convert world direction to parent (planet) relative coordinates
+                planetRelativeTargetForward = transform.parent.InverseTransformDirection(worldDirection).normalized;
+            }
+            else
+            {
+                // No parent, store in world coordinates
+                planetRelativeTargetForward = worldDirection.normalized;
+            }
         }
 
         public async YarnTask MoveTo(Vector3 position, CancellationToken cancellationToken)
@@ -566,8 +639,14 @@ namespace Yarn.Unity.Samples
             }
             // Look in the direction we're moving, not at any look target
             var lookDirection = position - transform.position;
-            lookDirection.y = 0;
-            targetRotation = Quaternion.LookRotation(lookDirection);
+            // Project look direction onto local horizontal plane to respect planet surface
+            var localUp = transform.up;
+            var lookDirectionOnLocalPlane = Vector3.ProjectOnPlane(lookDirection, localUp);
+            if (lookDirectionOnLocalPlane.sqrMagnitude > 0.0001f)
+            {
+                // Store the look direction as our planet-relative target forward
+                SetPlanetRelativeTargetFromWorldDirection(lookDirectionOnLocalPlane.normalized);
+            }
 
             var previousLookTarget = lookTarget;
             lookTarget = null;
@@ -594,7 +673,9 @@ namespace Yarn.Unity.Samples
 
         public void SetLookDirection(Quaternion rotation, bool immediate = false)
         {
-            targetRotation = rotation;
+            // Convert world rotation to planet-relative target forward
+            var worldForward = rotation * Vector3.forward;
+            SetPlanetRelativeTargetFromWorldDirection(worldForward);
 
             if (immediate)
             {
