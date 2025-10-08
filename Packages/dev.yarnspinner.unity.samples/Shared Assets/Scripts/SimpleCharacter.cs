@@ -410,7 +410,7 @@ namespace Yarn.Unity.Samples
                 var startPoint = followPath.GetWorldPosition(0);
                 var nextPoint = followPath.GetWorldPosition(1);
                 transform.position = startPoint;
-                
+
                 // Set target direction toward next point, projected onto local plane
                 var pathDirection = nextPoint - startPoint;
                 var localUp = transform.up;
@@ -419,7 +419,7 @@ namespace Yarn.Unity.Samples
                 {
                     SetPlanetRelativeTargetFromWorldDirection(pathDirectionOnLocalPlane.normalized);
                 }
-                
+
                 transform.rotation = GetCurrentLookDirection();
 
                 currentDestinationPathIndex = 0;
@@ -587,7 +587,7 @@ namespace Yarn.Unity.Samples
         private Quaternion GetWorldRotationFromPlanetRelativeForward()
         {
             var localUp = transform.up;
-            
+
             // Convert planet-relative forward to world coordinates
             Vector3 worldForward;
             if (transform.parent != null)
@@ -602,7 +602,7 @@ namespace Yarn.Unity.Samples
                 // No parent, fall back to using the stored direction directly
                 worldForward = Vector3.ProjectOnPlane(planetRelativeTargetForward, localUp).normalized;
             }
-            
+
             if (worldForward.sqrMagnitude < 0.0001f)
             {
                 // If the forward direction is parallel to up, use transform forward as fallback

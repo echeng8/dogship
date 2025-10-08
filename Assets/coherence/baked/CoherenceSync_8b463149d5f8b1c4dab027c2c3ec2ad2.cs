@@ -75,6 +75,210 @@ namespace Coherence.Generated
             return new WorldPosition();
         }    
     }
+    [UnityEngine.Scripting.Preserve]
+    public class Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_0158d81ea579421e801934a41b8a338e : IntBinding
+    {   
+        private global::Gravitas.FoodManager CastedUnityComponent;
+
+        protected override void OnBindingCloned()
+        {
+    	    CastedUnityComponent = (global::Gravitas.FoodManager)UnityComponent;
+        }
+
+        public override global::System.Type CoherenceComponentType => typeof(_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313);
+        public override string CoherenceComponentName => "_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313";
+        public override uint FieldMask => 0b00000000000000000000000000000001;
+
+        public override System.Int32 Value
+        {
+            get { return (System.Int32)(CastedUnityComponent.totalEatenCount); }
+            set { CastedUnityComponent.totalEatenCount = (System.Int32)(value); }
+        }
+
+        protected override (System.Int32 value, AbsoluteSimulationFrame simFrame) ReadComponentData(ICoherenceComponentData coherenceComponent, Vector3 floatingOriginDelta)
+        {
+            var value = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).totalEatenCount;
+
+            var simFrame = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).totalEatenCountSimulationFrame;
+            
+            return (value, simFrame);
+        }
+
+        public override ICoherenceComponentData WriteComponentData(ICoherenceComponentData coherenceComponent, AbsoluteSimulationFrame simFrame)
+        {
+            var update = (_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent;
+            if (Interpolator.IsInterpolationNone)
+            {
+                update.totalEatenCount = Value;
+            }
+            else
+            {
+                update.totalEatenCount = GetInterpolatedAt(simFrame / InterpolationSettings.SimulationFramesPerSecond);
+            }
+
+            update.totalEatenCountSimulationFrame = simFrame;
+            
+            return update;
+        }
+
+        public override ICoherenceComponentData CreateComponentData()
+        {
+            return new _8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313();
+        }    
+    }
+    [UnityEngine.Scripting.Preserve]
+    public class Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_b18e6a4f6fb5477e889ff921034c619a : BoolBinding
+    {   
+        private global::Gravitas.FoodManager CastedUnityComponent;
+
+        protected override void OnBindingCloned()
+        {
+    	    CastedUnityComponent = (global::Gravitas.FoodManager)UnityComponent;
+        }
+
+        public override global::System.Type CoherenceComponentType => typeof(_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313);
+        public override string CoherenceComponentName => "_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313";
+        public override uint FieldMask => 0b00000000000000000000000000000010;
+
+        public override System.Boolean Value
+        {
+            get { return (System.Boolean)(CastedUnityComponent.hasYellowBeenEaten); }
+            set { CastedUnityComponent.hasYellowBeenEaten = (System.Boolean)(value); }
+        }
+
+        protected override (System.Boolean value, AbsoluteSimulationFrame simFrame) ReadComponentData(ICoherenceComponentData coherenceComponent, Vector3 floatingOriginDelta)
+        {
+            var value = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).hasYellowBeenEaten;
+
+            var simFrame = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).hasYellowBeenEatenSimulationFrame;
+            
+            return (value, simFrame);
+        }
+
+        public override ICoherenceComponentData WriteComponentData(ICoherenceComponentData coherenceComponent, AbsoluteSimulationFrame simFrame)
+        {
+            var update = (_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent;
+            if (Interpolator.IsInterpolationNone)
+            {
+                update.hasYellowBeenEaten = Value;
+            }
+            else
+            {
+                update.hasYellowBeenEaten = GetInterpolatedAt(simFrame / InterpolationSettings.SimulationFramesPerSecond);
+            }
+
+            update.hasYellowBeenEatenSimulationFrame = simFrame;
+            
+            return update;
+        }
+
+        public override ICoherenceComponentData CreateComponentData()
+        {
+            return new _8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313();
+        }    
+    }
+    [UnityEngine.Scripting.Preserve]
+    public class Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_2ebb3969f6d54adfa0b134dcd0542796 : BoolBinding
+    {   
+        private global::Gravitas.FoodManager CastedUnityComponent;
+
+        protected override void OnBindingCloned()
+        {
+    	    CastedUnityComponent = (global::Gravitas.FoodManager)UnityComponent;
+        }
+
+        public override global::System.Type CoherenceComponentType => typeof(_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313);
+        public override string CoherenceComponentName => "_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313";
+        public override uint FieldMask => 0b00000000000000000000000000000100;
+
+        public override System.Boolean Value
+        {
+            get { return (System.Boolean)(CastedUnityComponent.hasGreenBeenEaten); }
+            set { CastedUnityComponent.hasGreenBeenEaten = (System.Boolean)(value); }
+        }
+
+        protected override (System.Boolean value, AbsoluteSimulationFrame simFrame) ReadComponentData(ICoherenceComponentData coherenceComponent, Vector3 floatingOriginDelta)
+        {
+            var value = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).hasGreenBeenEaten;
+
+            var simFrame = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).hasGreenBeenEatenSimulationFrame;
+            
+            return (value, simFrame);
+        }
+
+        public override ICoherenceComponentData WriteComponentData(ICoherenceComponentData coherenceComponent, AbsoluteSimulationFrame simFrame)
+        {
+            var update = (_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent;
+            if (Interpolator.IsInterpolationNone)
+            {
+                update.hasGreenBeenEaten = Value;
+            }
+            else
+            {
+                update.hasGreenBeenEaten = GetInterpolatedAt(simFrame / InterpolationSettings.SimulationFramesPerSecond);
+            }
+
+            update.hasGreenBeenEatenSimulationFrame = simFrame;
+            
+            return update;
+        }
+
+        public override ICoherenceComponentData CreateComponentData()
+        {
+            return new _8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313();
+        }    
+    }
+    [UnityEngine.Scripting.Preserve]
+    public class Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_341b322c387b48708da0f7b07b7a47b6 : BoolBinding
+    {   
+        private global::Gravitas.FoodManager CastedUnityComponent;
+
+        protected override void OnBindingCloned()
+        {
+    	    CastedUnityComponent = (global::Gravitas.FoodManager)UnityComponent;
+        }
+
+        public override global::System.Type CoherenceComponentType => typeof(_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313);
+        public override string CoherenceComponentName => "_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313";
+        public override uint FieldMask => 0b00000000000000000000000000001000;
+
+        public override System.Boolean Value
+        {
+            get { return (System.Boolean)(CastedUnityComponent.hasWon); }
+            set { CastedUnityComponent.hasWon = (System.Boolean)(value); }
+        }
+
+        protected override (System.Boolean value, AbsoluteSimulationFrame simFrame) ReadComponentData(ICoherenceComponentData coherenceComponent, Vector3 floatingOriginDelta)
+        {
+            var value = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).hasWon;
+
+            var simFrame = ((_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent).hasWonSimulationFrame;
+            
+            return (value, simFrame);
+        }
+
+        public override ICoherenceComponentData WriteComponentData(ICoherenceComponentData coherenceComponent, AbsoluteSimulationFrame simFrame)
+        {
+            var update = (_8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313)coherenceComponent;
+            if (Interpolator.IsInterpolationNone)
+            {
+                update.hasWon = Value;
+            }
+            else
+            {
+                update.hasWon = GetInterpolatedAt(simFrame / InterpolationSettings.SimulationFramesPerSecond);
+            }
+
+            update.hasWonSimulationFrame = simFrame;
+            
+            return update;
+        }
+
+        public override ICoherenceComponentData CreateComponentData()
+        {
+            return new _8b463149d5f8b1c4dab027c2c3ec2ad2_9074563940274071313();
+        }    
+    }
 
     [UnityEngine.Scripting.Preserve]
     public class CoherenceSync_8b463149d5f8b1c4dab027c2c3ec2ad2 : CoherenceSyncBaked
@@ -83,6 +287,8 @@ namespace Coherence.Generated
         private Logger logger = Coherence.Log.Log.GetLogger<CoherenceSync_8b463149d5f8b1c4dab027c2c3ec2ad2>();
         
         private global::Gravitas.CryptidManager _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569_CommandTarget;
+        private global::Gravitas.FoodManager _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5_CommandTarget;
+        private global::Gravitas.FoodManager _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39_CommandTarget;
         
         
         private IClient client;
@@ -91,6 +297,10 @@ namespace Coherence.Generated
         private readonly Dictionary<string, Binding> bakedValueBindings = new Dictionary<string, Binding>()
         {
 			["efdec6821903422a90002406d87efb14"] = new Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_efdec6821903422a90002406d87efb14(),
+			["0158d81ea579421e801934a41b8a338e"] = new Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_0158d81ea579421e801934a41b8a338e(),
+			["b18e6a4f6fb5477e889ff921034c619a"] = new Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_b18e6a4f6fb5477e889ff921034c619a(),
+			["2ebb3969f6d54adfa0b134dcd0542796"] = new Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_2ebb3969f6d54adfa0b134dcd0542796(),
+			["341b322c387b48708da0f7b07b7a47b6"] = new Binding_8b463149d5f8b1c4dab027c2c3ec2ad2_341b322c387b48708da0f7b07b7a47b6(),
         };
         
         private Dictionary<string, Action<CommandBinding, CommandsHandler>> bakedCommandBindings = new Dictionary<string, Action<CommandBinding, CommandsHandler>>();
@@ -98,6 +308,8 @@ namespace Coherence.Generated
         public CoherenceSync_8b463149d5f8b1c4dab027c2c3ec2ad2()
         {
             bakedCommandBindings.Add("19099d1fae894e0c8fff3ff89dde0569", BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569);
+            bakedCommandBindings.Add("d308afb07a204decae0628f55b2b1ff5", BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5);
+            bakedCommandBindings.Add("e8356f9054e940f1b66e83a6c0b6bc39", BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39);
         }
         
         public override Binding BakeValueBinding(Binding valueBinding)
@@ -150,6 +362,66 @@ namespace Coherence.Generated
             
             target.NetworkSpawnCryptid(bridge.EntityIdToTransform(command.spawnTransform));
         }
+        private void BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5_CommandTarget = (global::Gravitas.FoodManager)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.FoodManager.NetworkReset", "()", SendCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5, ReceiveLocalCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5, MessageTarget.All, _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5_CommandTarget, false);
+        }
+        
+        private void SendCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5();
+            
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5();
+            
+            
+            ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5(command);
+        }
+
+        private void ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5(_8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5 command)
+        {
+            var target = _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5_CommandTarget;
+            
+            target.NetworkReset();
+        }
+        private void BakeCommandBinding__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39(CommandBinding commandBinding, CommandsHandler commandsHandler)
+        {
+            _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39_CommandTarget = (global::Gravitas.FoodManager)commandBinding.UnityComponent;
+            commandsHandler.AddBakedCommand("Gravitas.FoodManager.NetworkRecordFoodBallEaten", "(System.Int32)", SendCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39, ReceiveLocalCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39, MessageTarget.All, _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39_CommandTarget, false);
+        }
+        
+        private void SendCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39(MessageTarget target, ChannelID channelID, object[] args)
+        {
+            var command = new _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39();
+            
+            int i = 0;
+            command.typeInt = (System.Int32)args[i++];
+        
+            client.SendCommand(command, target, entityId, channelID);
+        }
+        
+        private void ReceiveLocalCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39(MessageTarget target, ChannelID _, object[] args)
+        {
+            var command = new _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39();
+            
+            int i = 0;
+            command.typeInt = (System.Int32)args[i++];
+            
+            ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39(command);
+        }
+
+        private void ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39(_8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39 command)
+        {
+            var target = _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39_CommandTarget;
+            
+            target.NetworkRecordFoodBallEaten((System.Int32)(command.typeInt));
+        }
         
         public override void ReceiveCommand(IEntityCommand command)
         {
@@ -157,6 +429,12 @@ namespace Coherence.Generated
             {
                 case _8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569 castedCommand:
                     ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_19099d1fae894e0c8fff3ff89dde0569(castedCommand);
+                    break;
+                case _8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5 castedCommand:
+                    ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_d308afb07a204decae0628f55b2b1ff5(castedCommand);
+                    break;
+                case _8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39 castedCommand:
+                    ReceiveCommand__8b463149d5f8b1c4dab027c2c3ec2ad2_e8356f9054e940f1b66e83a6c0b6bc39(castedCommand);
                     break;
                 default:
                     logger.Warning(Coherence.Log.Warning.ToolkitBakedSyncReceiveCommandUnhandled,
